@@ -6,7 +6,7 @@ import cors = require('cors')
 import { json } from 'body-parser';
 import { Server } from 'http';
 import { log } from '../log';
-import {} from '../collections';
+import { clientsRouter } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -46,8 +46,8 @@ app.use(`${app.locals.BaseUri}/tests`, express.static('docs/tests/', { extension
  * Server routing (Application)
  */
 /////////////////////////////////////////////////////////////////////////////////////////////////
-
 app.use(json())
+app.use(`${app.locals.BaseUri}/clients`, clientsRouter());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -74,7 +74,7 @@ app.use(errorHandler)
  * Launch server
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
-export const SERVER_PORT = parseInt(process.env.PORT || '3010')
+export const SERVER_PORT = parseInt(process.env.PORT || '3020')
 export const server: Server = app.listen(SERVER_PORT, '', () => {
 	log.debug('Server is running on port ', SERVER_PORT)
 })
