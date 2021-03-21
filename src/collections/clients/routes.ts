@@ -29,7 +29,8 @@ export function clientsRouter(): Router {
                     zipcode: req.body.zipcode ? req.body.zipcode : null,
                     phone_number: req.body.phone_number ? req.body.phone_number : null,
                     email: req.body.email ? req.body.email : null,
-                    contact_person: req.body.contact_person ? req.body.contact_person : null
+                    contact_person: req.body.contact_person ? req.body.contact_person : null,
+					fax: req.body.fax ? req.body.fax : null
                 });
                 res.status(200).json({ data: client, error: null, message: 'Client has been created successfully!' });
 			} else {

@@ -11,6 +11,7 @@ export interface IClient {
     phone_number?: string | null;
     email?: string | null;
     contact_person?: string | null;
+    fax?: string | null;
 };
 
 export interface IClientUpdatedData {
@@ -25,4 +26,5 @@ export interface IClientUpdatedData {
     phone_number?: string | null;
     email?: string | null;
     contact_person?: string | null;
+    fax?: string | null;
 }

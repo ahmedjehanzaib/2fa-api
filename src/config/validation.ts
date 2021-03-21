@@ -17,7 +17,8 @@ const validationSchema = {
             zipcode: JOI.string().trim().optional().allow('', null),
             phone_number: JOI.string().trim().optional().allow('', null),
 			email: JOI.string().email().optional().allow('', null),
-            contact_person: JOI.string().trim().optional().allow('', null)
+            contact_person: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null)
 		},
 		params: {
 		},
@@ -66,7 +67,8 @@ const validationSchema = {
             zipcode: JOI.string().trim().optional().allow('', null),
             phone_number: JOI.string().trim().optional().allow('', null),
 			email: JOI.string().email().optional().allow('', null),
-            contact_person: JOI.string().trim().optional().allow('', null)
+            contact_person: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null)
 		},
 		params: {
             id: JOI.string().guid().required()
