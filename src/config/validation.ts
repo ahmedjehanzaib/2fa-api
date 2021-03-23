@@ -74,6 +74,78 @@ const validationSchema = {
         query: {
         }
     },
+
+    createAPractice: {
+        headers: {
+		},
+		body: {
+			name: JOI.string().trim().required(),
+            client_id: JOI.string().trim().required(),
+            special_security_number: JOI.number().required(),
+            client_type: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().required(),
+            last_name: JOI.string().trim().required(),
+            pay_to_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            statement_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            direct_secure_email:JOI.string().email().optional().allow('', null),
+            direct_secure_password: JOI.string().trim().optional().allow('', null),
+			speciality: JOI.string().trim().required(),
+		},
+		params: {
+		},
+        query: {
+        }
+    },
+
+    // GET /api/v1/practices/:id
+    findPractice: {
+        headers: {
+		},
+		body: {
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
+
+    // DELETE /api/v1/practices/:id
+    deleteAPractice: {
+        headers: {
+		},
+		body: {
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
+
+    // PUT /api/v1/practices/:id
+    updateAPractice: {
+        headers: {
+		},
+		body: {
+            name: JOI.string().trim().required(),
+            client_id: JOI.string().trim().required(),
+            special_security_number: JOI.number().required(),
+            client_type: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().required(),
+            last_name: JOI.string().trim().required(),
+            pay_to_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            statement_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            direct_secure_email:JOI.string().email().optional().allow('', null),
+            direct_secure_password: JOI.string().trim().optional().allow('', null),
+			speciality: JOI.string().trim().required(),
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
 }
 
 export { validationSchema };

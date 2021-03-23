@@ -6,7 +6,7 @@ import cors = require('cors')
 import { json } from 'body-parser';
 import { Server } from 'http';
 import { log } from '../log';
-import { clientsRouter } from '../collections';
+import { clientsRouter, practicesRouter } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -48,6 +48,7 @@ app.use(`${app.locals.BaseUri}/tests`, express.static('docs/tests/', { extension
 /////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(json())
 app.use(`${app.locals.BaseUri}/clients`, clientsRouter());
+app.use(`${app.locals.BaseUri}/practices`, practicesRouter());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

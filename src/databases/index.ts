@@ -1,6 +1,8 @@
-import { Pool } from 'pg';
-import { log } from '../log';
-import fs = require('fs');
+import { Pool } from 'pg'
+import path = require('path')
+import fs = require('fs')
+
+import { log } from '../log'
 
 
 const config = {
@@ -11,7 +13,7 @@ const config = {
 	port: Number(process.env.POSTGRES_PORT) || 5432,
 	ssl: {
 		rejectUnauthorized: false,
-		ca: fs.readFileSync('/Users/ahmedjehanzaib/Downloads/ca-certificate.crt').toString(),
+		ca: fs.readFileSync(path.resolve(__dirname, '../../../ca-certificate.crt')).toString(),
 	}
 };
 
