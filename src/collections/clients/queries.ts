@@ -35,6 +35,13 @@ const clientsQueries = {
 			values: Object.keys(clientData).map((key) => clientData[key])
 		};
 	},
+
+    findAllClients: () => {
+        return {
+            text: `SELECT * FROM clients`,
+            values: []
+        }
+    },
 }
 
 export { clientsQueries };

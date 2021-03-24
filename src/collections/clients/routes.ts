@@ -111,5 +111,16 @@ export function clientsRouter(): Router {
 		}
 	});
 
+	// GET /api/v1/clients/
+	router.get('/',  async (_req: Request, res: Response, _next: NextFunction) => {
+		try {
+			const clients = await clientsFacade.findAllClients();
+			res.status(200).json({ data: clients, error: null, message: 'All Clients fetched successfully!' });
+		} catch (err) {
+			log.error({ message: 'Error in finding all client!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/clients/' });
+			res.status(500).json({ data: null, error: err, message: 'Error in finding all client!' });
+		}
+    });
+
 	return router;
 };

@@ -22,7 +22,12 @@ const clientsFacade = {
     updateClientById: async (clientId: string, clientData: IClientUpdatedData) => {
 		const { rows } = await PG_CLIENT.query(clientsQueries.updateClientById(clientId, clientData));
 		return rows;
-    }
+    },
+
+    findAllClients: async () => {
+        const { rows } = await PG_CLIENT.query(clientsQueries.findAllClients());
+        return rows;
+    },
 };
 
 export { clientsFacade };
