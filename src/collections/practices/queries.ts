@@ -19,7 +19,7 @@ const practicesQueries = {
 
     deletePracticesById: (practiceId: string) => {
         return {
-			text: `DELETE FROM clients WHERE id = $1 RETURNING *`,
+			text: `DELETE FROM practices WHERE id = $1 RETURNING *`,
 			values: [practiceId]
 		};
     },
