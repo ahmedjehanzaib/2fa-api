@@ -11,10 +11,12 @@ const config = {
 	password: process.env.POSTGRES_PASSWORD,
 	host: process.env.POSTGRES_HOST,
 	port: Number(process.env.POSTGRES_PORT) || 5432,
-	ssl: {
+	ssl: process.env.ENV === 'local' ? {
 		rejectUnauthorized: false,
 		ca: fs.readFileSync(path.resolve(__dirname, '../../../ca-certificate.crt')).toString(),
-	}
+	} 
+	:
+	null
 };
 
 const PG_CLIENT = new Pool(config);
