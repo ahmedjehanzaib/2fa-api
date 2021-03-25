@@ -16,7 +16,7 @@ const config = {
 		ca: fs.readFileSync(path.resolve(__dirname, '../../../ca-certificate.crt')).toString(),
 	} 
 	:
-	null
+	undefined
 };
 
 const PG_CLIENT = new Pool(config);
