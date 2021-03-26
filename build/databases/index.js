@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PG_CLIENT = void 0;
 var pg_1 = require("pg");
-var path = require("path");
 var fs = require("fs");
 var log_1 = require("../log");
 var config = {
@@ -13,7 +12,7 @@ var config = {
     port: Number(process.env.POSTGRES_PORT) || 5432,
     ssl: {
         rejectUnauthorized: false,
-        ca: fs.readFileSync(path.resolve(__dirname, '../../../ca-certificate.crt')).toString(),
+        ca: fs.readFileSync(process.env.CA_CERT ? process.env.CA_CERT : '').toString(),
     }
 };
 var PG_CLIENT = new pg_1.Pool(config);

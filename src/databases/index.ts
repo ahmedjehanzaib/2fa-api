@@ -1,5 +1,4 @@
-import { Pool } from 'pg'
-import path = require('path')
+import { Pool } from 'pg';
 import fs = require('fs')
 
 import { log } from '../log'

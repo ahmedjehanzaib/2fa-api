@@ -68,7 +68,7 @@ function clientsRouter() {
                         res.status(404).json({ data: null, error: true, message: 'Client not exist!' });
                     }
                     else {
-                        res.status(200).json({ data: client, error: null, message: 'Client fetched successfully!' });
+                        res.status(200).json({ data: client[0], error: null, message: 'Client fetched successfully!' });
                     }
                     return [3, 3];
                 case 2:
