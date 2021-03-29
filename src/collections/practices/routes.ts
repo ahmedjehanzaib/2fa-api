@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import * as JOI from 'joi';
-import * as uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import { log } from '../../log';
 import { validationSchema } from '../../config/validation';

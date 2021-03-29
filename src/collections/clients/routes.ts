@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import * as JOI from 'joi';
-import * as uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import { log } from '../../log';
 import { validationSchema } from '../../config/validation';
@@ -53,7 +53,7 @@ export function clientsRouter(): Router {
 					log.warn({ message: 'Client not exist!', statusCode: 404, detail: 'Client not exist!', repo: 'aquila-api', path: '/api/v1/clients/:id' });
 					res.status(404).json({ data: null, error: true, message: 'Client not exist!' });
 				} else {
-					res.status(200).json({ data: client, error: null, message: 'Client fetched successfully!' });
+					res.status(200).json({ data: client[0], error: null, message: 'Client fetched successfully!' });
 				}
 			} else {
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/clients/:id' });

@@ -1,4 +1,3 @@
-import { locationsFacade } from './facade';
 import { ILocation } from './interfaces';
 
 const locationQueries = {
