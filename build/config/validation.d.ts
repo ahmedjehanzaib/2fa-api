@@ -186,5 +186,93 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAReferringProvider: {
+        headers: {};
+        body: {
+            client_id: JOI.StringSchema;
+            short_name: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            speciality: JOI.StringSchema;
+            tax_id: JOI.StringSchema;
+            individual_npi: JOI.StringSchema;
+            group_npi: JOI.StringSchema;
+            taxonomy_code: JOI.StringSchema;
+            ssn: JOI.StringSchema;
+            clia_number: JOI.StringSchema;
+            dea_number: JOI.StringSchema;
+            na_dean: JOI.StringSchema;
+            direct_secure_email: JOI.StringSchema;
+            direct_secure_password: JOI.StringSchema;
+            qualification: JOI.StringSchema;
+            email: JOI.StringSchema;
+            cell_number: JOI.StringSchema;
+            work_phone: JOI.StringSchema;
+            address_line_1: JOI.StringSchema;
+            address_line_2: JOI.StringSchema;
+            city: JOI.StringSchema;
+            state: JOI.StringSchema;
+            zipcode: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            license_number: JOI.StringSchema;
+            notes: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAReferringProvider: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAReferringProvider: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAReferringProvider: {
+        headers: {};
+        body: {
+            client_id: JOI.StringSchema;
+            short_name: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            speciality: JOI.StringSchema;
+            tax_id: JOI.StringSchema;
+            individual_npi: JOI.StringSchema;
+            group_npi: JOI.StringSchema;
+            taxonomy_code: JOI.StringSchema;
+            ssn: JOI.StringSchema;
+            clia_number: JOI.StringSchema;
+            dea_number: JOI.StringSchema;
+            na_dean: JOI.StringSchema;
+            direct_secure_email: JOI.StringSchema;
+            direct_secure_password: JOI.StringSchema;
+            qualification: JOI.StringSchema;
+            email: JOI.StringSchema;
+            cell_number: JOI.StringSchema;
+            work_phone: JOI.StringSchema;
+            address_line_1: JOI.StringSchema;
+            address_line_2: JOI.StringSchema;
+            city: JOI.StringSchema;
+            state: JOI.StringSchema;
+            zipcode: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            license_number: JOI.StringSchema;
+            notes: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

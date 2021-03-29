@@ -1,6 +1,6 @@
 export interface IReferringProvider {
-    [index: string]: string | null | undefined,
-    id: string,
+    [index: string]: string | null | undefined;
+    id: string;
     client_id: string;
     short_name: string;
     first_name: string;
@@ -28,11 +28,10 @@ export interface IReferringProvider {
     zipcode?: string | null;
     fax?: string | null;
     license_number: string;
-    notes: string
-};
-
+    notes: string;
+}
 export interface IReferringProviderUpdatedData {
-    [index: string]: string | null | undefined,
+    [index: string]: string | null | undefined;
     client_id: string;
     short_name: string;
     first_name: string;
@@ -60,5 +59,5 @@ export interface IReferringProviderUpdatedData {
     zipcode?: string | null;
     fax?: string | null;
     license_number: string;
-    notes: string
+    notes: string;
 }

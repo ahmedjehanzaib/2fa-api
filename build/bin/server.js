@@ -27,6 +27,7 @@ exports.app.use(body_parser_1.json());
 exports.app.use(exports.app.locals.BaseUri + "/clients", collections_1.clientsRouter());
 exports.app.use(exports.app.locals.BaseUri + "/practices", collections_1.practicesRouter());
 exports.app.use(exports.app.locals.BaseUri + "/locations", collections_1.locationRouters());
+exports.app.use(exports.app.locals.BaseUri + "/referring_providers", collections_1.referringProvidersRouter());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')
