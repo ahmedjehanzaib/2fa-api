@@ -241,6 +241,112 @@ const validationSchema = {
         query: {
         }
     },
+    createAReferringProvider: {
+        headers: {
+		},
+		body: {
+            client_id: JOI.string().trim().required(),
+            short_name: JOI.string().trim().required(),
+            first_name: JOI.string().trim().required(),
+            middle_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().required(),
+            speciality: JOI.string().trim().required(),
+            tax_id: JOI.string().trim().optional().allow('', null),
+            individual_npi: JOI.string().trim().optional().allow('', null),
+            group_npi: JOI.string().trim().optional().allow('', null),
+            taxonomy_code: JOI.string().trim().optional().allow('', null),
+            ssn: JOI.string().trim().optional().allow('', null),
+            clia_number: JOI.string().trim().optional().allow('', null),
+            dea_number:JOI.string().trim().optional().allow('', null),
+            na_dean: JOI.string().trim().optional().allow('', null),
+            direct_secure_email: JOI.string().trim().optional().allow('', null),
+            direct_secure_password: JOI.string().trim().optional().allow('', null),
+            qualification: JOI.string().trim().optional().allow('', null),
+            email: JOI.string().trim().optional().allow('', null),
+            cell_number: JOI.string().trim().optional().allow('', null),
+            work_phone: JOI.string().trim().optional().allow('', null),
+            address_line_1: JOI.string().trim().optional().allow('', null),
+            address_line_2: JOI.string().trim().optional().allow('', null),
+            city: JOI.string().trim().optional().allow('', null),
+            state: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null),
+            license_number: JOI.string().trim().optional().allow('', null),
+            notes: JOI.string().trim().optional().allow('', null),
+		},
+		params: {
+		},
+        query: {
+        }
+    },
+
+    // GET /api/v1/practices/:id
+    findAReferringProvider: {
+        headers: {
+		},
+		body: {
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
+
+    // DELETE /api/v1/practices/:id
+    deleteAReferringProvider: {
+        headers: {
+		},
+		body: {
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
+
+    // PUT /api/v1/practices/:id
+    updateAReferringProvider: {
+        headers: {
+		},
+		body: {
+            client_id: JOI.string().trim().required(),
+            short_name: JOI.string().trim().required(),
+            first_name: JOI.string().trim().required(),
+            middle_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().required(),
+            speciality: JOI.string().trim().required(),
+            tax_id: JOI.string().trim().optional().allow('', null),
+            individual_npi: JOI.string().trim().optional().allow('', null),
+            group_npi: JOI.string().trim().optional().allow('', null),
+            taxonomy_code: JOI.string().trim().optional().allow('', null),
+            ssn: JOI.string().trim().optional().allow('', null),
+            clia_number: JOI.string().trim().optional().allow('', null),
+            dea_number:JOI.string().trim().optional().allow('', null),
+            na_dean: JOI.string().trim().optional().allow('', null),
+            direct_secure_email: JOI.string().trim().optional().allow('', null),
+            direct_secure_password: JOI.string().trim().optional().allow('', null),
+            qualification: JOI.string().trim().optional().allow('', null),
+            email: JOI.string().trim().optional().allow('', null),
+            cell_number: JOI.string().trim().optional().allow('', null),
+            work_phone: JOI.string().trim().optional().allow('', null),
+            address_line_1: JOI.string().trim().optional().allow('', null),
+            address_line_2: JOI.string().trim().optional().allow('', null),
+            city: JOI.string().trim().optional().allow('', null),
+            state: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null),
+            license_number: JOI.string().trim().optional().allow('', null),
+            notes: JOI.string().trim().optional().allow('', null)
+		},
+		params: {
+            id: JOI.string().guid().required()
+		},
+        query: {
+        }
+    },
+    
 }
 
 export { validationSchema };
