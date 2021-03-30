@@ -37,12 +37,12 @@ export function referringProvidersRouter(): Router {
 		try {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findAReferringProvider);
 			if (validated.error === null) {
-				const client = await referringProvidersFacade.findReferingProviderById(req.params.id);
-				if (!client.length) {
+				const rp = await referringProvidersFacade.findReferingProviderById(req.params.id);
+				if (!rp.length) {
 					log.warn({ message: 'Referring provider not exist!', statusCode: 404, detail: 'Referring provider not exist!', repo: 'aquila-api', path: '/api/v1/referring_providers/:id' });
 					res.status(404).json({ data: null, error: true, message: 'Referring provider not exist!' });
 				} else {
-					res.status(200).json({ data: client, error: null, message: 'Referring provider fetched successfully!' });
+					res.status(200).json({ data: rp[0], error: null, message: 'Referring provider fetched successfully!' });
 				}
 			} else {
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/referring_providers/:id' });
@@ -59,8 +59,8 @@ export function referringProvidersRouter(): Router {
 		try {
 			const validated = JOI.validate({ params: req.params }, validationSchema.deleteAReferringProvider);
 			if (validated.error === null) {
-				const client = await referringProvidersFacade.findReferingProviderById(req.params.id);
-				if (!client.length) {
+				const rp = await referringProvidersFacade.findReferingProviderById(req.params.id);
+				if (!rp.length) {
 					log.warn({ message: 'Referring provider not exist!', statusCode: 404, detail: 'Referring provider not exist!', repo: 'aquila-api', path: '/api/v1/referring_providers/:id' });
 					res.status(404).json({ data: null, error: true, message: 'Referring provider not exist!' });
 				} else {

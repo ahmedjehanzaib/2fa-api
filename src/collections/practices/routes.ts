@@ -39,12 +39,12 @@ export function practicesRouter(): Router {
 		try {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPractice);
 			if (validated.error === null) {
-				const client = await practicesFacade.findPracticeById(req.params.id);
-				if (!client.length) {
+				const practice = await practicesFacade.findPracticeById(req.params.id);
+				if (!practice.length) {
 					log.warn({ message: 'Practice does not exist!', statusCode: 404, detail: 'Practice does not exist!', repo: 'aquila-api', path: '/api/v1/practices/:id' });
 					res.status(404).json({ data: null, error: true, message: 'Practice does not exist!' });
 				} else {
-					res.status(200).json({ data: client, error: null, message: 'practice fetched successfully!' });
+					res.status(200).json({ data: practice[0], error: null, message: 'practice fetched successfully!' });
 				}
 			} else {
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practices/:id' });
