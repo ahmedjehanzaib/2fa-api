@@ -6,7 +6,7 @@ import cors = require('cors')
 import { json } from 'body-parser';
 import { Server } from 'http';
 import { log } from '../log';
-import { clientsRouter, practicesRouter, locationRouters, referringProvidersRouter } from '../collections';
+import { clientsRouter, practicesRouter, locationRouters, referringProvidersRouter, providersRouter } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -51,6 +51,7 @@ app.use(`${app.locals.BaseUri}/clients`, clientsRouter());
 app.use(`${app.locals.BaseUri}/practices`, practicesRouter());
 app.use(`${app.locals.BaseUri}/locations`, locationRouters());
 app.use(`${app.locals.BaseUri}/referring_providers`, referringProvidersRouter());
+app.use(`${app.locals.BaseUri}/providers`, providersRouter());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

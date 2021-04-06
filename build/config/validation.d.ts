@@ -202,7 +202,7 @@ declare const validationSchema: {
             ssn: JOI.StringSchema;
             clia_number: JOI.StringSchema;
             dea_number: JOI.StringSchema;
-            na_dean: JOI.StringSchema;
+            nadean: JOI.StringSchema;
             direct_secure_email: JOI.StringSchema;
             direct_secure_password: JOI.StringSchema;
             qualification: JOI.StringSchema;
@@ -213,7 +213,7 @@ declare const validationSchema: {
             address_line_2: JOI.StringSchema;
             city: JOI.StringSchema;
             state: JOI.StringSchema;
-            zipcode: JOI.StringSchema;
+            zip_code: JOI.StringSchema;
             fax: JOI.StringSchema;
             license_number: JOI.StringSchema;
             notes: JOI.StringSchema;
@@ -253,7 +253,44 @@ declare const validationSchema: {
             ssn: JOI.StringSchema;
             clia_number: JOI.StringSchema;
             dea_number: JOI.StringSchema;
-            na_dean: JOI.StringSchema;
+            nadean: JOI.StringSchema;
+            direct_secure_email: JOI.StringSchema;
+            direct_secure_password: JOI.StringSchema;
+            qualification: JOI.StringSchema;
+            email: JOI.StringSchema;
+            cell_number: JOI.StringSchema;
+            work_phone: JOI.StringSchema;
+            address_line_1: JOI.StringSchema;
+            address_line_2: JOI.StringSchema;
+            city: JOI.StringSchema;
+            state: JOI.StringSchema;
+            zip_code: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            license_number: JOI.StringSchema;
+            notes: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAProvider: {
+        headers: {};
+        body: {
+            client_id: JOI.StringSchema;
+            short_name: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            speciality: JOI.StringSchema;
+            tax_id: JOI.StringSchema;
+            individual_npi: JOI.StringSchema;
+            group_npi: JOI.StringSchema;
+            taxonomy_code: JOI.StringSchema;
+            ssn: JOI.StringSchema;
+            clia_number: JOI.StringSchema;
+            dea_number: JOI.StringSchema;
+            nadean: JOI.StringSchema;
             direct_secure_email: JOI.StringSchema;
             direct_secure_password: JOI.StringSchema;
             qualification: JOI.StringSchema;
@@ -268,6 +305,67 @@ declare const validationSchema: {
             fax: JOI.StringSchema;
             license_number: JOI.StringSchema;
             notes: JOI.StringSchema;
+            active: JOI.BooleanSchema;
+            signature: JOI.StringSchema;
+            is_pay_to_address: JOI.BooleanSchema;
+            payment_address: JOI.AlternativesSchema;
+            insurance_billing_options: JOI.ObjectSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAProvider: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAProvider: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAProvider: {
+        headers: {};
+        body: {
+            client_id: JOI.StringSchema;
+            short_name: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            speciality: JOI.StringSchema;
+            tax_id: JOI.StringSchema;
+            individual_npi: JOI.StringSchema;
+            group_npi: JOI.StringSchema;
+            taxonomy_code: JOI.StringSchema;
+            ssn: JOI.StringSchema;
+            clia_number: JOI.StringSchema;
+            dea_number: JOI.StringSchema;
+            nadean: JOI.StringSchema;
+            direct_secure_email: JOI.StringSchema;
+            direct_secure_password: JOI.StringSchema;
+            qualification: JOI.StringSchema;
+            email: JOI.StringSchema;
+            cell_number: JOI.StringSchema;
+            work_phone: JOI.StringSchema;
+            address_line_1: JOI.StringSchema;
+            address_line_2: JOI.StringSchema;
+            city: JOI.StringSchema;
+            state: JOI.StringSchema;
+            zipcode: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            license_number: JOI.StringSchema;
+            notes: JOI.StringSchema;
+            active: JOI.BooleanSchema;
+            signature: JOI.StringSchema;
+            is_pay_to_address: JOI.BooleanSchema;
+            payment_address: JOI.AlternativesSchema;
+            insurance_billing_options: JOI.ObjectSchema;
         };
         params: {
             id: JOI.StringSchema;

@@ -39,7 +39,7 @@ function locationRouters() {
         });
     }); });
     router.get('/:id', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, client, err_2;
+        var validated, location_1, err_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -48,13 +48,13 @@ function locationRouters() {
                     if (!(validated.error === null)) return [3, 2];
                     return [4, facade_1.locationsFacade.findLocationById(req.params.id)];
                 case 1:
-                    client = _a.sent();
-                    if (!client.length) {
+                    location_1 = _a.sent();
+                    if (!location_1.length) {
                         log_1.log.warn({ message: 'Practice location does not exist!', statusCode: 404, detail: 'Practice location does not exist!', repo: 'aquila-api', path: '/api/v1/locations/:id' });
                         res.status(404).json({ data: null, error: true, message: 'Practice location does not exist!' });
                     }
                     else {
-                        res.status(200).json({ data: client, error: null, message: 'practice location fetched successfully!' });
+                        res.status(200).json({ data: location_1[0], error: null, message: 'practice location fetched successfully!' });
                     }
                     return [3, 3];
                 case 2:

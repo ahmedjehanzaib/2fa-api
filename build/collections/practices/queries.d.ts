@@ -17,4 +17,58 @@ declare const practicesQueries: {
         values: any[];
     };
 };
-export { practicesQueries };
+declare const practiceStatementAddressQueries: {
+    create: (data: any) => {
+        text: string;
+        values: any[];
+    };
+    findById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    deleteById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    updateById: (practiceId: string, practiceData: any) => {
+        text: string;
+        values: any[];
+    };
+};
+declare const practiceStatementMessagesQueries: {
+    create: (data: any) => {
+        text: string;
+        values: any[];
+    };
+    findById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    deleteById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    updateById: (practiceId: string, practiceData: any) => {
+        text: string;
+        values: any[];
+    };
+};
+declare const practiceStatementOptionsQueries: {
+    create: (data: any) => {
+        text: string;
+        values: any[];
+    };
+    findById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    deleteById: (practiceId: string) => {
+        text: string;
+        values: string[];
+    };
+    updateById: (practiceId: string, practiceData: any) => {
+        text: string;
+        values: any[];
+    };
+};
+export { practicesQueries, practiceStatementAddressQueries, practiceStatementMessagesQueries, practiceStatementOptionsQueries };
