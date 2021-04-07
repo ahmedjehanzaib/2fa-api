@@ -39,4 +39,142 @@ const practicesQueries = {
 	},
 }
 
-export { practicesQueries };
+const practiceStatementAddressQueries = {
+    create: (data: any) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_statement_address(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByPracticeId: (practiceId: string) => {
+        return {
+            text: ` SELECT * FROM practice_statement_address WHERE practice_id = $1`,
+            values: [practiceId]
+        }
+    },
+
+    deleteByPracticeId: (practiceId: string) => {
+        return {
+			text: `DELETE FROM practice_statement_address WHERE practice_id = $1 RETURNING *`,
+			values: [practiceId]
+		};
+    },
+
+    updateById: (practiceId: string, practiceData: any) => {
+		let setQueryPart = ``
+		Object.keys(practiceData).forEach((key, index) => {
+			setQueryPart += ` ${key}=$${index + 1}`
+			if (Object.keys(practiceData).length !== (index + 1)) {
+				setQueryPart += `,`
+			}
+		});
+		return {
+			text: `UPDATE practice_statement_address SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
+			values: Object.keys(practiceData).map((key) => practiceData[key])
+		};
+	},
+}
+
+const practiceStatementMessagesQueries = {
+    create: (data: any) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_statement_messages(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByPracticeId: (practiceId: string) => {
+        return {
+            text: ` SELECT * FROM practice_statement_messages WHERE practice_id = $1`,
+            values: [practiceId]
+        }
+    },
+
+    deleteByPracticeId: (practiceId: string) => {
+        return {
+			text: `DELETE FROM practice_statement_messages WHERE practice_id = $1 RETURNING *`,
+			values: [practiceId]
+		};
+    },
+
+    updateByPracticeId: (practiceId: string, practiceData: any) => {
+		let setQueryPart = ``
+		Object.keys(practiceData).forEach((key, index) => {
+			setQueryPart += ` ${key}=$${index + 1}`
+			if (Object.keys(practiceData).length !== (index + 1)) {
+				setQueryPart += `,`
+			}
+		});
+		return {
+			text: `UPDATE practice_statement_messages SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
+			values: Object.keys(practiceData).map((key) => practiceData[key])
+		};
+	},
+}
+
+const practiceStatementOptionsQueries = {
+    create: (data: any) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_statement_options(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByPracticeId: (practiceId: string) => {
+        return {
+            text: ` SELECT * FROM practice_statement_options WHERE practice_id = $1`,
+            values: [practiceId]
+        }
+    },
+
+    deleteByPracticeId: (practiceId: string) => {
+        return {
+			text: `DELETE FROM practice_statement_options WHERE practice_id = $1 RETURNING *`,
+			values: [practiceId]
+		};
+    },
+
+    updateByPracticeId: (practiceId: string, practiceData: any) => {
+		let setQueryPart = ``
+		Object.keys(practiceData).forEach((key, index) => {
+			setQueryPart += ` ${key}=$${index + 1}`
+			if (Object.keys(practiceData).length !== (index + 1)) {
+				setQueryPart += `,`
+			}
+		});
+		return {
+			text: `UPDATE practice_statement_options SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
+			values: Object.keys(practiceData).map((key) => practiceData[key])
+		};
+	},
+}
+
+export { practicesQueries, practiceStatementAddressQueries, practiceStatementMessagesQueries, practiceStatementOptionsQueries };

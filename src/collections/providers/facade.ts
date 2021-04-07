@@ -13,17 +13,31 @@ const providersFacade = {
         delete data.payment_address
         delete data.insurance_billing_options
 
-        const { rows } = await PG_CLIENT.query(providersQueries.createAProvider(data));
-        const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.create({ provider_id: id, ...insurance_billing_options }))
+        try {
 
-        rows[0].insurance_billing_options = insurance[0]
+            await PG_CLIENT.query('BEGIN')
 
-        if (is_pay_to_address === false) {
-            const { rows: inserted } = await PG_CLIENT.query(providerPayToAddressQueries.create({ provider_id: id, ...payment_address }))
-            rows[0].payment_address = inserted[0]
+            const { rows } = await PG_CLIENT.query(providersQueries.createAProvider(data));
+            const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.create({ provider_id: id, ...insurance_billing_options }))
+
+            rows[0].insurance_billing_options = insurance[0]
+
+            if (is_pay_to_address === false) {
+                const { rows: inserted } = await PG_CLIENT.query(providerPayToAddressQueries.create({ provider_id: id, ...payment_address }))
+                rows[0].payment_address = inserted[0]
+            }
+            await PG_CLIENT.query('COMMIT')
+
+            return rows;
+        } catch (err) {
+            console.error('Error while creating provider', err)
+
+            await PG_CLIENT.query('ROLLBACK')
+
+            throw err
+
         }
 
-        return rows;
     },
 
     findProviderById: async (Id: string) => {
@@ -36,12 +50,24 @@ const providersFacade = {
     },
 
     deleteProviderById: async (Id: string) => {
-        await PG_CLIENT.query(providerPayToAddressQueries.deleteByProviderId(Id))
-        await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.deleteByProviderId(Id))
 
-        const { rows } = await PG_CLIENT.query(providersQueries.deleteProviderById(Id));
+        try {
+            await PG_CLIENT.query('BEGIN')
+            await PG_CLIENT.query(providerPayToAddressQueries.deleteByProviderId(Id))
+            await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.deleteByProviderId(Id))
 
-        return rows;
+            const { rows } = await PG_CLIENT.query(providersQueries.deleteProviderById(Id));
+            await PG_CLIENT.query('COMMIT')
+
+            return rows;
+        } catch (err) {
+            await PG_CLIENT.query('ROLLBACK')
+
+            console.error('Error while deleting provider', err)
+
+            throw err
+
+        }
     },
 
     updateProviderById: async (Id: string, data: IUpdateData) => {
@@ -50,31 +76,43 @@ const providersFacade = {
         delete data.payment_address
         delete data.insurance_billing_options
 
-        const { rows } = await PG_CLIENT.query(providersQueries.updateProviderById(Id, data));
-        const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.updateByProviderId(Id, insurance_billing_options as any));
+        try {
+            await PG_CLIENT.query('BEGIN')
 
-        rows[0].insurance_billing_options = insurance[0]
+            const { rows } = await PG_CLIENT.query(providersQueries.updateProviderById(Id, data));
+            const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.updateByProviderId(Id, insurance_billing_options as any));
 
+            rows[0].insurance_billing_options = insurance[0]
 
-        if (!is_pay_to_address) {
-            const { rows: paymentData } = await PG_CLIENT.query(providerPayToAddressQueries.findByProviderId(Id))
+            if (!is_pay_to_address) {
+                const { rows: paymentData } = await PG_CLIENT.query(providerPayToAddressQueries.findByProviderId(Id))
 
-            if (paymentData.length) {
-                const { rows: updated } = await PG_CLIENT.query(providerPayToAddressQueries.updateById(paymentData[0].id, payment_address as any))
-                rows[0].payment_address = updated[0]
+                if (paymentData.length) {
+                    const { rows: updated } = await PG_CLIENT.query(providerPayToAddressQueries.updateById(paymentData[0].id, payment_address as any))
+                    rows[0].payment_address = updated[0]
 
+                }
+                else {
+                    const { rows: inserted } = await PG_CLIENT.query(providerPayToAddressQueries.create({ provider_id: Id, ...payment_address }))
+                    rows[0].payment_address = inserted[0]
+
+                }
+            } else {
+                await PG_CLIENT.query(providerPayToAddressQueries.deleteByProviderId(Id))
             }
-            else {
-                const { rows: inserted } = await PG_CLIENT.query(providerPayToAddressQueries.create({ provider_id: Id, ...payment_address }))
-                rows[0].payment_address = inserted[0]
 
-            }
-        } else {
-            await PG_CLIENT.query(providerPayToAddressQueries.deleteByProviderId(Id))
+            await PG_CLIENT.query('COMMIT')
+
+            return rows;
+
+        } catch (err) {
+            await PG_CLIENT.query('ROLLBACK')
+
+            console.error('Error while updating provider', err)
+
+            throw err
         }
 
-
-        return rows;
     },
 
     findAllProviders: async () => {
