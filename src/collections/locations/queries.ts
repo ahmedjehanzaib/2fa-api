@@ -1,56 +1,37 @@
-import { ILocation } from './interfaces';
+import { ILocation, ILocationUpdatedData, ILocationPaymentAddress } from './interfaces';
 
-const locationQueries = {
-    createALocation: (locationData: ILocation) => {
-        console.log(locationData)
+export const locationQueries = {
+    create: (data: ILocation) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
         return {
-            text: `INSERT INTO practice_locations(id, name, practice_id, city, state, zip_code, address_line_1, address_line_2,
-                phone_number, fax, website, cell_number, by_default, description, email, taxonomy_code,
-                 national_provider_identity, pos, tax_id, clia_number, insurance_bill_pay_to_address, insurance_bill_under_location, insurance_donot_report_location)
-                   VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) RETURNING *`,
-            values: [
-                locationData.id,
-                locationData.name,
-                locationData.practice_id,
-                locationData.city,
-                locationData.state,
-                locationData.zip_code,
-                locationData.address_line_1,
-                locationData.address_line_2,
-                locationData.phone_number,
-                locationData.fax,
-                locationData.website,
-                locationData.cell_number,
-                locationData.by_default,
-                locationData.description,
-                locationData.email,
-                locationData.taxonomy_code,
-                locationData.national_provider_identity,
-                locationData.pos,
-                locationData.tax_id,
-                locationData.clia_number,
-                locationData.insurance_bill_pay_to_address,
-                locationData.insurance_bill_under_location,
-                locationData.insurance_donot_report_location
-            ]
+            text: `INSERT INTO practice_locations(${columns})  VALUES (${indices}) RETURNING *`,
+            values
         }
     },
 
-    findLocationById: (locationId: string) => {
+    findById: (Id: string) => {
         return {
             text: ` SELECT * FROM practice_locations WHERE id = $1`,
-            values: [locationId]
+            values: [Id]
         }
     },
 
-    deleteLocationById: (locationId: string) => {
+    deleteById: (Id: string) => {
         return {
             text: `DELETE FROM practice_locations WHERE id = $1 RETURNING *`,
-            values: [locationId]
+            values: [Id]
         };
     },
 
-    updateLocationById: (locationId: string, locationData: any) => {
+    updateById: (Id: string, locationData: ILocationUpdatedData) => {
         let setQueryPart = ``
         Object.keys(locationData).forEach((key, index) => {
             setQueryPart += ` ${key}=$${index + 1}`
@@ -59,10 +40,55 @@ const locationQueries = {
             }
         });
         return {
-            text: `UPDATE practice_locations SET ${setQueryPart} WHERE id = '${locationId}' RETURNING *`,
+            text: `UPDATE practice_locations SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
             values: Object.keys(locationData).map((key) => locationData[key])
         };
     },
 }
 
-export { locationQueries };
+export const locationPaymentAddressQueries = {
+    create: (data: ILocationPaymentAddress) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_location_pay_to_address(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByLocationId: (Id: string) => {
+        return {
+            text: ` SELECT * FROM practice_location_pay_to_address WHERE practice_location_id = $1`,
+            values: [Id]
+        }
+    },
+
+    deleteLocationById: (Id: string) => {
+        return {
+            text: `DELETE FROM practice_location_pay_to_address WHERE practice_location_id = $1 RETURNING *`,
+            values: [Id]
+        };
+    },
+
+    updateByLocationId: (Id: string, locationData: ILocationPaymentAddress) => {
+        let setQueryPart = ``
+        Object.keys(locationData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(locationData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+
+        return {
+            text: `UPDATE practice_location_pay_to_address SET ${setQueryPart} WHERE practice_location_id = '${Id}' RETURNING *`,
+            values: Object.keys(locationData).map((key) => locationData[key])
+        };
+    },
+}

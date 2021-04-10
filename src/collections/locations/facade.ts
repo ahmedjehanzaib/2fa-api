@@ -1,26 +1,26 @@
 import { locationQueries } from './queries';
 import { PG_CLIENT } from '../../databases';
-import { ILocation, ILocationUpdatedData } from './interfaces';
+import { IInsertData, IUpdateData } from './interfaces';
 
 
 const locationsFacade = {
-    createALocation: async (locationData: ILocation) => {
-        const { rows } = await PG_CLIENT.query(locationQueries.createALocation(locationData));
+    createALocation: async (locationData: IInsertData) => {
+        const { rows } = await PG_CLIENT.query(locationQueries.create(locationData));
         return rows;
     },
 
     findLocationById: async (locationId: string) => {
-        const { rows } = await PG_CLIENT.query(locationQueries.findLocationById(locationId));
+        const { rows } = await PG_CLIENT.query(locationQueries.findById(locationId));
         return rows;
     },
 
     deleteLocationById: async (locationId: string) => {
-        const { rows } = await PG_CLIENT.query(locationQueries.deleteLocationById(locationId));
+        const { rows } = await PG_CLIENT.query(locationQueries.deleteById(locationId));
         return rows;
     },
 
-    updateLocationById: async (locationId: string, clientData: ILocationUpdatedData) => {
-        const { rows } = await PG_CLIENT.query(locationQueries.updateLocationById(locationId, clientData));
+    updateLocationById: async (locationId: string, data: IUpdateData) => {
+        const { rows } = await PG_CLIENT.query(locationQueries.updateById(locationId, data));
         return rows;
     }
 };

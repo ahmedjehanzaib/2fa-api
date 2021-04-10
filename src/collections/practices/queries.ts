@@ -1,12 +1,22 @@
-import { IPractice } from './interfaces';
+import {
+    IPractice, ILocation, IPracticeUpdatedData, ILocationUpdatedData, ILocationPaymentAddress,
+    IPracticeStatementAddress, IPracticeStatementMessages, IPracticeStatementOptions
+} from './interfaces';
 
-const practicesQueries = {
-    createAPractice: (practiceData: IPractice) => {
+export const practicesQueries = {
+    createAPractice: (data: IPractice) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
         return {
-            text: `INSERT INTO practices(id, name, client_id, special_security_number, client_type, first_name, last_name, pay_to_address_same_as_address, statement_address_same_as_address,
-                direct_secure_email, direct_secure_password, speciality)  VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-            values: [practiceData.id, practiceData.name, practiceData.client_id, practiceData.special_security_number, practiceData.client_type, practiceData.first_name, practiceData.last_name, practiceData.pay_to_address_same_as_address, practiceData.statement_address_same_as_address,
-                 practiceData.direct_secure_email, practiceData.direct_secure_password, practiceData.speciality]
+            text: `INSERT INTO practices(${columns})  VALUES (${indices}) RETURNING *`,
+            values
         }
     },
 
@@ -19,28 +29,81 @@ const practicesQueries = {
 
     deletePracticesById: (practiceId: string) => {
         return {
-			text: `DELETE FROM practices WHERE id = $1 RETURNING *`,
-			values: [practiceId]
-		};
+            text: `DELETE FROM practices WHERE id = $1 RETURNING *`,
+            values: [practiceId]
+        };
     },
 
-    updatePracticeById: (practiceId: string, practiceData: any) => {
-		let setQueryPart = ``
-		Object.keys(practiceData).forEach((key, index) => {
-			setQueryPart += ` ${key}=$${index + 1}`
-			if (Object.keys(practiceData).length !== (index + 1)) {
-				setQueryPart += `,`
-			}
-		});
-		return {
-			text: `UPDATE practices SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
-			values: Object.keys(practiceData).map((key) => practiceData[key])
-		};
-	},
+    updatePracticeById: (practiceId: string, practiceData: IPracticeUpdatedData) => {
+        let setQueryPart = ``
+        Object.keys(practiceData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(practiceData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE practices SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
+            values: Object.keys(practiceData).map((key) => practiceData[key])
+        };
+    },
 }
 
-const practiceStatementAddressQueries = {
-    create: (data: any) => {
+export const locationQueries = {
+    create: (data: ILocation) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_locations(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findById: (locationId: string) => {
+        return {
+            text: ` SELECT * FROM practice_locations WHERE id = $1`,
+            values: [locationId]
+        }
+    },
+
+    findByPracticeId: (practiceId: string) => {
+        return {
+            text: ` SELECT * FROM practice_locations WHERE practice_id = $1`,
+            values: [practiceId]
+        }
+    },
+
+    deleteBypracticeId: (practiceId: string) => {
+        return {
+            text: `DELETE FROM practice_locations WHERE practice_id = $1 RETURNING *`,
+            values: [practiceId]
+        };
+    },
+
+    updateById: (locationId: string, locationData: ILocationUpdatedData) => {
+        let setQueryPart = ``
+        Object.keys(locationData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(locationData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE practice_locations SET ${setQueryPart} WHERE id = '${locationId}' RETURNING *`,
+            values: Object.keys(locationData).map((key) => locationData[key])
+        };
+    },
+}
+
+export const practiceStatementAddressQueries = {
+    create: (data: IPracticeStatementAddress) => {
         const columns = Object.keys(data)
 
         const indices: any = []
@@ -65,28 +128,28 @@ const practiceStatementAddressQueries = {
 
     deleteByPracticeId: (practiceId: string) => {
         return {
-			text: `DELETE FROM practice_statement_address WHERE practice_id = $1 RETURNING *`,
-			values: [practiceId]
-		};
+            text: `DELETE FROM practice_statement_address WHERE practice_id = $1 RETURNING *`,
+            values: [practiceId]
+        };
     },
 
-    updateById: (practiceId: string, practiceData: any) => {
-		let setQueryPart = ``
-		Object.keys(practiceData).forEach((key, index) => {
-			setQueryPart += ` ${key}=$${index + 1}`
-			if (Object.keys(practiceData).length !== (index + 1)) {
-				setQueryPart += `,`
-			}
-		});
-		return {
-			text: `UPDATE practice_statement_address SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
-			values: Object.keys(practiceData).map((key) => practiceData[key])
-		};
-	},
+    updateByPracticeId: (practiceId: string, data: IPracticeStatementAddress) => {
+        let setQueryPart = ``
+        Object.keys(data).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(data).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE practice_statement_address SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
+            values: Object.keys(data).map((key) => data[key])
+        };
+    },
 }
 
-const practiceStatementMessagesQueries = {
-    create: (data: any) => {
+export const practiceStatementMessagesQueries = {
+    create: (data: IPracticeStatementMessages) => {
         const columns = Object.keys(data)
 
         const indices: any = []
@@ -111,28 +174,28 @@ const practiceStatementMessagesQueries = {
 
     deleteByPracticeId: (practiceId: string) => {
         return {
-			text: `DELETE FROM practice_statement_messages WHERE practice_id = $1 RETURNING *`,
-			values: [practiceId]
-		};
+            text: `DELETE FROM practice_statement_messages WHERE practice_id = $1 RETURNING *`,
+            values: [practiceId]
+        };
     },
 
-    updateByPracticeId: (practiceId: string, practiceData: any) => {
-		let setQueryPart = ``
-		Object.keys(practiceData).forEach((key, index) => {
-			setQueryPart += ` ${key}=$${index + 1}`
-			if (Object.keys(practiceData).length !== (index + 1)) {
-				setQueryPart += `,`
-			}
-		});
-		return {
-			text: `UPDATE practice_statement_messages SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
-			values: Object.keys(practiceData).map((key) => practiceData[key])
-		};
-	},
+    updateByPracticeId: (practiceId: string, practiceData: IPracticeStatementMessages) => {
+        let setQueryPart = ``
+        Object.keys(practiceData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(practiceData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE practice_statement_messages SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
+            values: Object.keys(practiceData).map((key) => practiceData[key])
+        };
+    },
 }
 
-const practiceStatementOptionsQueries = {
-    create: (data: any) => {
+export const practiceStatementOptionsQueries = {
+    create: (data: IPracticeStatementOptions) => {
         const columns = Object.keys(data)
 
         const indices: any = []
@@ -157,24 +220,75 @@ const practiceStatementOptionsQueries = {
 
     deleteByPracticeId: (practiceId: string) => {
         return {
-			text: `DELETE FROM practice_statement_options WHERE practice_id = $1 RETURNING *`,
-			values: [practiceId]
-		};
+            text: `DELETE FROM practice_statement_options WHERE practice_id = $1 RETURNING *`,
+            values: [practiceId]
+        };
     },
 
-    updateByPracticeId: (practiceId: string, practiceData: any) => {
-		let setQueryPart = ``
-		Object.keys(practiceData).forEach((key, index) => {
-			setQueryPart += ` ${key}=$${index + 1}`
-			if (Object.keys(practiceData).length !== (index + 1)) {
-				setQueryPart += `,`
-			}
-		});
-		return {
-			text: `UPDATE practice_statement_options SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
-			values: Object.keys(practiceData).map((key) => practiceData[key])
-		};
-	},
+    updateByPracticeId: (practiceId: string, practiceData: IPracticeStatementOptions) => {
+        let setQueryPart = ``
+        Object.keys(practiceData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(practiceData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE practice_statement_options SET ${setQueryPart} WHERE practice_id = '${practiceId}' RETURNING *`,
+            values: Object.keys(practiceData).map((key) => practiceData[key])
+        };
+    },
 }
 
-export { practicesQueries, practiceStatementAddressQueries, practiceStatementMessagesQueries, practiceStatementOptionsQueries };
+export const locationPaymentAddressQueries = {
+    create: (data: ILocationPaymentAddress) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO practice_location_pay_to_address(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByLocationId: (Id: string) => {
+        return {
+            text: ` SELECT * FROM practice_location_pay_to_address WHERE practice_location_id = $1`,
+            values: [Id]
+        }
+    },
+
+    deleteByLocationId: (locationId: any[]) => {
+        return {
+            text: `DELETE FROM practice_location_pay_to_address WHERE practice_location_id = $1 RETURNING *`,
+            values: [locationId]
+        };
+    },
+    deleteByLocationIds: (locationIds: any[]) => {
+        return {
+            text: `DELETE FROM practice_location_pay_to_address WHERE practice_location_id IN (${locationIds.join(',')}) RETURNING *`,
+            values: []
+        };
+    },
+
+    updateByLocationId: (locationId: string, locationData: ILocationPaymentAddress) => {
+        let setQueryPart = ``
+        Object.keys(locationData).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(locationData).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+
+        return {
+            text: `UPDATE practice_location_pay_to_address SET ${setQueryPart} WHERE practice_location_id = '${locationId}' RETURNING *`,
+            values: Object.keys(locationData).map((key) => locationData[key])
+        };
+    },
+}

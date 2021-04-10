@@ -1,17 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.practiceStatementOptionsQueries = exports.practiceStatementMessagesQueries = exports.practiceStatementAddressQueries = exports.practicesQueries = void 0;
-var practicesQueries = {
-    createAPractice: function (practiceData) {
+exports.locationPaymentAddressQueries = exports.practiceStatementOptionsQueries = exports.practiceStatementMessagesQueries = exports.practiceStatementAddressQueries = exports.locationQueries = exports.practicesQueries = void 0;
+exports.practicesQueries = {
+    createAPractice: function (data) {
+        var columns = Object.keys(data);
+        var indices = [];
+        var values = columns.map(function (k, i) {
+            indices.push("$" + (i + 1));
+            return data[k];
+        });
         return {
-            text: "INSERT INTO practices(id, name, client_id, special_security_number, client_type, first_name, last_name, pay_to_address_same_as_address, statement_address_same_as_address,\n                direct_secure_email, direct_secure_password, speciality)  VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
-            values: [practiceData.id, practiceData.name, practiceData.client_id, practiceData.special_security_number, practiceData.client_type, practiceData.first_name, practiceData.last_name, practiceData.pay_to_address_same_as_address, practiceData.statement_address_same_as_address,
-                practiceData.direct_secure_email, practiceData.direct_secure_password, practiceData.speciality]
+            text: "INSERT INTO practices(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            values: values
         };
     },
     findPracticeById: function (practiceId) {
         return {
-            text: " SELECT * FROM practices WHERE id = $1 \n            LEFT JOIN practice_statement_address ON practices.id = practice_statement_address.practice_id\n            LEFT JOIN practice_pay_address ON practices.id = practice_pay_address.practice_id\n             ",
+            text: " SELECT * FROM practices WHERE id = $1",
             values: [practiceId]
         };
     },
@@ -35,8 +40,52 @@ var practicesQueries = {
         };
     },
 };
-exports.practicesQueries = practicesQueries;
-var practiceStatementAddressQueries = {
+exports.locationQueries = {
+    create: function (data) {
+        var columns = Object.keys(data);
+        var indices = [];
+        var values = columns.map(function (k, i) {
+            indices.push("$" + (i + 1));
+            return data[k];
+        });
+        return {
+            text: "INSERT INTO practice_locations(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            values: values
+        };
+    },
+    findById: function (locationId) {
+        return {
+            text: " SELECT * FROM practice_locations WHERE id = $1",
+            values: [locationId]
+        };
+    },
+    findByPracticeId: function (practiceId) {
+        return {
+            text: " SELECT * FROM practice_locations WHERE practice_id = $1",
+            values: [practiceId]
+        };
+    },
+    deleteBypracticeId: function (practiceId) {
+        return {
+            text: "DELETE FROM practice_locations WHERE practice_id = $1 RETURNING *",
+            values: [practiceId]
+        };
+    },
+    updateById: function (locationId, locationData) {
+        var setQueryPart = "";
+        Object.keys(locationData).forEach(function (key, index) {
+            setQueryPart += " " + key + "=$" + (index + 1);
+            if (Object.keys(locationData).length !== (index + 1)) {
+                setQueryPart += ",";
+            }
+        });
+        return {
+            text: "UPDATE practice_locations SET " + setQueryPart + " WHERE id = '" + locationId + "' RETURNING *",
+            values: Object.keys(locationData).map(function (key) { return locationData[key]; })
+        };
+    },
+};
+exports.practiceStatementAddressQueries = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -49,34 +98,33 @@ var practiceStatementAddressQueries = {
             values: values
         };
     },
-    findById: function (practiceId) {
+    findByPracticeId: function (practiceId) {
         return {
             text: " SELECT * FROM practice_statement_address WHERE practice_id = $1",
             values: [practiceId]
         };
     },
-    deleteById: function (practiceId) {
+    deleteByPracticeId: function (practiceId) {
         return {
             text: "DELETE FROM practice_statement_address WHERE practice_id = $1 RETURNING *",
             values: [practiceId]
         };
     },
-    updateById: function (practiceId, practiceData) {
+    updateByPracticeId: function (practiceId, data) {
         var setQueryPart = "";
-        Object.keys(practiceData).forEach(function (key, index) {
+        Object.keys(data).forEach(function (key, index) {
             setQueryPart += " " + key + "=$" + (index + 1);
-            if (Object.keys(practiceData).length !== (index + 1)) {
+            if (Object.keys(data).length !== (index + 1)) {
                 setQueryPart += ",";
             }
         });
         return {
             text: "UPDATE practice_statement_address SET " + setQueryPart + " WHERE practice_id = '" + practiceId + "' RETURNING *",
-            values: Object.keys(practiceData).map(function (key) { return practiceData[key]; })
+            values: Object.keys(data).map(function (key) { return data[key]; })
         };
     },
 };
-exports.practiceStatementAddressQueries = practiceStatementAddressQueries;
-var practiceStatementMessagesQueries = {
+exports.practiceStatementMessagesQueries = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -89,19 +137,19 @@ var practiceStatementMessagesQueries = {
             values: values
         };
     },
-    findById: function (practiceId) {
+    findByPracticeId: function (practiceId) {
         return {
             text: " SELECT * FROM practice_statement_messages WHERE practice_id = $1",
             values: [practiceId]
         };
     },
-    deleteById: function (practiceId) {
+    deleteByPracticeId: function (practiceId) {
         return {
             text: "DELETE FROM practice_statement_messages WHERE practice_id = $1 RETURNING *",
             values: [practiceId]
         };
     },
-    updateById: function (practiceId, practiceData) {
+    updateByPracticeId: function (practiceId, practiceData) {
         var setQueryPart = "";
         Object.keys(practiceData).forEach(function (key, index) {
             setQueryPart += " " + key + "=$" + (index + 1);
@@ -115,8 +163,7 @@ var practiceStatementMessagesQueries = {
         };
     },
 };
-exports.practiceStatementMessagesQueries = practiceStatementMessagesQueries;
-var practiceStatementOptionsQueries = {
+exports.practiceStatementOptionsQueries = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -129,19 +176,19 @@ var practiceStatementOptionsQueries = {
             values: values
         };
     },
-    findById: function (practiceId) {
+    findByPracticeId: function (practiceId) {
         return {
             text: " SELECT * FROM practice_statement_options WHERE practice_id = $1",
             values: [practiceId]
         };
     },
-    deleteById: function (practiceId) {
+    deleteByPracticeId: function (practiceId) {
         return {
             text: "DELETE FROM practice_statement_options WHERE practice_id = $1 RETURNING *",
             values: [practiceId]
         };
     },
-    updateById: function (practiceId, practiceData) {
+    updateByPracticeId: function (practiceId, practiceData) {
         var setQueryPart = "";
         Object.keys(practiceData).forEach(function (key, index) {
             setQueryPart += " " + key + "=$" + (index + 1);
@@ -155,4 +202,48 @@ var practiceStatementOptionsQueries = {
         };
     },
 };
-exports.practiceStatementOptionsQueries = practiceStatementOptionsQueries;
+exports.locationPaymentAddressQueries = {
+    create: function (data) {
+        var columns = Object.keys(data);
+        var indices = [];
+        var values = columns.map(function (k, i) {
+            indices.push("$" + (i + 1));
+            return data[k];
+        });
+        return {
+            text: "INSERT INTO practice_location_pay_to_address(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            values: values
+        };
+    },
+    findByLocationId: function (Id) {
+        return {
+            text: " SELECT * FROM practice_location_pay_to_address WHERE practice_location_id = $1",
+            values: [Id]
+        };
+    },
+    deleteByLocationId: function (locationId) {
+        return {
+            text: "DELETE FROM practice_location_pay_to_address WHERE practice_location_id = $1 RETURNING *",
+            values: [locationId]
+        };
+    },
+    deleteByLocationIds: function (locationIds) {
+        return {
+            text: "DELETE FROM practice_location_pay_to_address WHERE practice_location_id IN (" + locationIds.join(',') + ") RETURNING *",
+            values: []
+        };
+    },
+    updateByLocationId: function (locationId, locationData) {
+        var setQueryPart = "";
+        Object.keys(locationData).forEach(function (key, index) {
+            setQueryPart += " " + key + "=$" + (index + 1);
+            if (Object.keys(locationData).length !== (index + 1)) {
+                setQueryPart += ",";
+            }
+        });
+        return {
+            text: "UPDATE practice_location_pay_to_address SET " + setQueryPart + " WHERE practice_location_id = '" + locationId + "' RETURNING *",
+            values: Object.keys(locationData).map(function (key) { return locationData[key]; })
+        };
+    },
+};

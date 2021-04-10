@@ -61,15 +61,18 @@ declare const validationSchema: {
         body: {
             name: JOI.StringSchema;
             client_id: JOI.StringSchema;
-            special_security_number: JOI.NumberSchema;
+            special_security_number: JOI.StringSchema;
             client_type: JOI.StringSchema;
             first_name: JOI.StringSchema;
             last_name: JOI.StringSchema;
-            pay_to_address_same_as_address: JOI.StringSchema;
-            statement_address_same_as_address: JOI.StringSchema;
+            statement_address_same_as_address: JOI.BooleanSchema;
             direct_secure_email: JOI.StringSchema;
             direct_secure_password: JOI.StringSchema;
             speciality: JOI.StringSchema;
+            location: JOI.ObjectSchema;
+            statement_address: JOI.AlternativesSchema;
+            statement_options: JOI.ObjectSchema;
+            statement_messages: JOI.ObjectSchema;
         };
         params: {};
         query: {};
@@ -95,15 +98,18 @@ declare const validationSchema: {
         body: {
             name: JOI.StringSchema;
             client_id: JOI.StringSchema;
-            special_security_number: JOI.NumberSchema;
+            special_security_number: JOI.StringSchema;
             client_type: JOI.StringSchema;
             first_name: JOI.StringSchema;
             last_name: JOI.StringSchema;
-            pay_to_address_same_as_address: JOI.StringSchema;
-            statement_address_same_as_address: JOI.StringSchema;
+            statement_address_same_as_address: JOI.BooleanSchema;
             direct_secure_email: JOI.StringSchema;
             direct_secure_password: JOI.StringSchema;
             speciality: JOI.StringSchema;
+            location: JOI.ObjectSchema;
+            statement_address: JOI.AlternativesSchema;
+            statement_options: JOI.ObjectSchema;
+            statement_messages: JOI.ObjectSchema;
         };
         params: {
             id: JOI.StringSchema;

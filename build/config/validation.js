@@ -64,15 +64,71 @@ var validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             client_id: JOI.string().trim().required(),
-            special_security_number: JOI.number().required(),
+            special_security_number: JOI.string().trim().required(),
             client_type: JOI.string().trim().optional().allow('', null),
-            first_name: JOI.string().trim().required(),
-            last_name: JOI.string().trim().required(),
-            pay_to_address_same_as_address: JOI.string().trim().optional().allow('', null),
-            statement_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().optional().allow('', null),
+            statement_address_same_as_address: JOI.boolean().optional(),
             direct_secure_email: JOI.string().email().optional().allow('', null),
             direct_secure_password: JOI.string().trim().optional().allow('', null),
-            speciality: JOI.string().trim().required(),
+            speciality: JOI.string().trim().optional().allow('', null),
+            location: JOI.object().keys({
+                name: JOI.string().trim().required(),
+                zip_code: JOI.number().optional(),
+                city: JOI.string().trim().optional().allow('', null),
+                state: JOI.string().trim().optional().allow('', null),
+                address_line_1: JOI.string().trim().optional().allow('', null),
+                address_line_2: JOI.string().trim().optional().allow('', null),
+                phone_number: JOI.string().trim().allow('', null),
+                fax: JOI.string().trim().allow('', null),
+                website: JOI.string().trim().allow('', null),
+                cell_number: JOI.string().trim().allow('', null),
+                description: JOI.string().trim().allow('', null),
+                email: JOI.string().email().optional().allow('', null),
+                taxonomy_code: JOI.string().trim().allow('', null),
+                national_provider_identity: JOI.string().trim().allow('', null),
+                tax_id: JOI.string().trim().allow('', null),
+                clia_number: JOI.string().trim().allow('', null),
+                pos: JOI.string().trim().allow('', null),
+                pay_to_address_same_as_address: JOI.boolean().optional(),
+                insurance_bill_under_location: JOI.boolean().optional(),
+                insurance_bill_pay_to_address: JOI.boolean().optional(),
+                insurance_donot_report_location: JOI.boolean().optional(),
+                payment_address: JOI.when('pay_to_address_same_as_address', {
+                    is: JOI.equal(false),
+                    then: JOI.object().keys({
+                        address_line_1: JOI.string().trim().optional().allow('', null),
+                        address_line_2: JOI.string().trim().optional().allow('', null),
+                        city: JOI.string().trim().optional().allow('', null),
+                        state: JOI.string().trim().optional().allow('', null),
+                        zipcode: JOI.string().trim().optional().allow('', null)
+                    })
+                }),
+            }),
+            statement_address: JOI.when('statement_address_same_as_address', {
+                is: JOI.equal(false),
+                then: JOI.object().keys({
+                    address_line_1: JOI.string().trim().optional().allow('', null),
+                    address_line_2: JOI.string().trim().optional().allow('', null),
+                    city: JOI.string().trim().optional().allow('', null),
+                    state: JOI.string().trim().optional().allow('', null),
+                    zipcode: JOI.string().trim().optional().allow('', null)
+                })
+            }),
+            statement_options: JOI.object().keys({
+                vendor: JOI.string().trim().optional().allow('', null),
+                aging_days: JOI.string().trim().optional().allow('', null),
+                maximum_statements: JOI.string().trim().optional().allow('', null),
+                phone_number: JOI.string().trim().optional().allow('', null),
+                fax: JOI.string().trim().optional().allow('', null)
+            }),
+            statement_messages: JOI.object().keys({
+                above_30_days: JOI.string().trim().optional().allow('', null),
+                above_60_days: JOI.string().trim().optional().allow('', null),
+                above_90_days: JOI.string().trim().optional().allow('', null),
+                above_120_days: JOI.string().trim().optional().allow('', null),
+                outstanding_days: JOI.string().trim().optional().allow('', null)
+            })
         },
         params: {},
         query: {}
@@ -98,15 +154,72 @@ var validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             client_id: JOI.string().trim().required(),
-            special_security_number: JOI.number().required(),
+            special_security_number: JOI.string().trim().required(),
             client_type: JOI.string().trim().optional().allow('', null),
-            first_name: JOI.string().trim().required(),
-            last_name: JOI.string().trim().required(),
-            pay_to_address_same_as_address: JOI.string().trim().optional().allow('', null),
-            statement_address_same_as_address: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().optional().allow('', null),
+            statement_address_same_as_address: JOI.boolean().optional(),
             direct_secure_email: JOI.string().email().optional().allow('', null),
             direct_secure_password: JOI.string().trim().optional().allow('', null),
-            speciality: JOI.string().trim().required(),
+            speciality: JOI.string().trim().optional().allow('', null),
+            location: JOI.object().keys({
+                id: JOI.string().required(),
+                name: JOI.string().trim().required(),
+                zip_code: JOI.number().optional(),
+                city: JOI.string().trim().optional().allow('', null),
+                state: JOI.string().trim().optional().allow('', null),
+                address_line_1: JOI.string().trim().optional().allow('', null),
+                address_line_2: JOI.string().trim().optional().allow('', null),
+                phone_number: JOI.string().trim().allow('', null),
+                fax: JOI.string().trim().allow('', null),
+                website: JOI.string().trim().allow('', null),
+                cell_number: JOI.string().trim().optional().allow('', null),
+                description: JOI.string().trim().allow('', null),
+                email: JOI.string().email().optional().allow('', null),
+                taxonomy_code: JOI.string().trim().allow('', null),
+                national_provider_identity: JOI.string().trim().allow('', null),
+                tax_id: JOI.string().trim().allow('', null),
+                clia_number: JOI.string().trim().allow('', null),
+                pos: JOI.string().trim().allow('', null),
+                pay_to_address_same_as_address: JOI.boolean().optional(),
+                insurance_bill_under_location: JOI.boolean().optional(),
+                insurance_bill_pay_to_address: JOI.boolean().optional(),
+                insurance_donot_report_location: JOI.boolean().optional(),
+                payment_address: JOI.when('pay_to_address_same_as_address', {
+                    is: JOI.equal(false),
+                    then: JOI.object().keys({
+                        address_line_1: JOI.string().trim().optional().allow('', null),
+                        address_line_2: JOI.string().trim().optional().allow('', null),
+                        city: JOI.string().trim().optional().allow('', null),
+                        state: JOI.string().trim().optional().allow('', null),
+                        zipcode: JOI.string().trim().optional().allow('', null)
+                    })
+                }),
+            }),
+            statement_address: JOI.when('statement_address_same_as_address', {
+                is: JOI.equal(false),
+                then: JOI.object().keys({
+                    address_line_1: JOI.string().trim().optional().allow('', null),
+                    address_line_2: JOI.string().trim().optional().allow('', null),
+                    city: JOI.string().trim().optional().allow('', null),
+                    state: JOI.string().trim().optional().allow('', null),
+                    zipcode: JOI.string().trim().optional().allow('', null)
+                })
+            }),
+            statement_options: JOI.object().keys({
+                vendor: JOI.string().trim().optional().allow('', null),
+                aging_days: JOI.string().trim().optional().allow('', null),
+                maximum_statements: JOI.string().trim().optional().allow('', null),
+                phone_number: JOI.string().trim().optional().allow('', null),
+                fax: JOI.string().trim().optional().allow('', null)
+            }),
+            statement_messages: JOI.object().keys({
+                above_30_days: JOI.string().trim().optional().allow('', null),
+                above_60_days: JOI.string().trim().optional().allow('', null),
+                above_90_days: JOI.string().trim().optional().allow('', null),
+                above_120_days: JOI.string().trim().optional().allow('', null),
+                outstanding_days: JOI.string().trim().optional().allow('', null)
+            })
         },
         params: {
             id: JOI.string().guid().required()

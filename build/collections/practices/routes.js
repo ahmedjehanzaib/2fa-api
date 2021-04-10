@@ -12,25 +12,25 @@ function practicesRouter() {
     var _this = this;
     var router = express_1.Router();
     router.post('/', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, client, err_1;
-        return tslib_1.__generator(this, function (_a) {
-            switch (_a.label) {
+        var validated, _a, practice, err_1;
+        return tslib_1.__generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 5]);
+                    _b.trys.push([0, 4, , 5]);
                     validated = JOI.validate({ body: req.body }, validation_1.validationSchema.createAPractice);
                     if (!(validated.error === null)) return [3, 2];
-                    return [4, facade_1.practicesFacade.createAPractice(tslib_1.__assign({ id: uuid_1.v4() }, req.body))];
+                    return [4, facade_1.practicesFacade.createAPractice(tslib_1.__assign(tslib_1.__assign({ id: uuid_1.v4() }, req.body), { location: tslib_1.__assign({ id: uuid_1.v4() }, req.body.location) }))];
                 case 1:
-                    client = _a.sent();
-                    res.status(200).json({ data: client, error: null, message: 'Practice has been created successfully!' });
+                    _a = tslib_1.__read.apply(void 0, [_b.sent(), 1]), practice = _a[0];
+                    res.status(200).json({ data: practice, error: null, message: 'Practice has been created successfully!' });
                     return [3, 3];
                 case 2:
                     log_1.log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practices/' });
                     res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
-                    _a.label = 3;
+                    _b.label = 3;
                 case 3: return [3, 5];
                 case 4:
-                    err_1 = _a.sent();
+                    err_1 = _b.sent();
                     log_1.log.error({ message: 'Error in creating a new practice!', statusCode: 500, detail: err_1, repo: 'aquila-api', path: '/api/v1/practices/' });
                     res.status(500).json({ data: null, error: err_1, message: 'Error in creating a new practice!' });
                     return [3, 5];
@@ -72,7 +72,7 @@ function practicesRouter() {
         });
     }); });
     router.delete('/:id', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, client, deletedClient, err_3;
+        var validated, practice, deletedPractice, err_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -81,15 +81,15 @@ function practicesRouter() {
                     if (!(validated.error === null)) return [3, 5];
                     return [4, facade_1.practicesFacade.findPracticeById(req.params.id)];
                 case 1:
-                    client = _a.sent();
-                    if (!!client.length) return [3, 2];
+                    practice = _a.sent();
+                    if (!!practice.length) return [3, 2];
                     log_1.log.warn({ message: 'Pracrice does not exist!', statusCode: 404, detail: 'Pracrice does not exist!', repo: 'aquila-api', path: '/api/v1/practices/:id' });
                     res.status(404).json({ data: null, error: true, message: 'Pracrice does not exist!' });
                     return [3, 4];
                 case 2: return [4, facade_1.practicesFacade.deletePracticeById(req.params.id)];
                 case 3:
-                    deletedClient = _a.sent();
-                    res.status(200).json({ data: deletedClient, error: null, message: 'Practice deleted successfully!' });
+                    deletedPractice = _a.sent();
+                    res.status(200).json({ data: deletedPractice, error: null, message: 'Practice deleted successfully!' });
                     _a.label = 4;
                 case 4: return [3, 6];
                 case 5:
@@ -124,7 +124,7 @@ function practicesRouter() {
                 case 2: return [4, facade_1.practicesFacade.updatePracticeById(req.params.id, req.body)];
                 case 3:
                     updatedPracticeInfo = _a.sent();
-                    res.status(200).json({ data: updatedPracticeInfo, error: null, message: 'practice updated successfully!' });
+                    res.status(200).json({ data: updatedPracticeInfo[0], error: null, message: 'practice updated successfully!' });
                     _a.label = 4;
                 case 4: return [3, 6];
                 case 5:

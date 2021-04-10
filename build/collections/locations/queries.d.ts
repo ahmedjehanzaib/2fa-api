@@ -1,20 +1,37 @@
-import { ILocation } from './interfaces';
-declare const locationQueries: {
-    createALocation: (locationData: ILocation) => {
+import { ILocation, ILocationUpdatedData, ILocationPaymentAddress } from './interfaces';
+export declare const locationQueries: {
+    create: (data: ILocation) => {
         text: string;
-        values: (string | number | boolean | null | undefined)[];
+        values: any[];
     };
-    findLocationById: (locationId: string) => {
-        text: string;
-        values: string[];
-    };
-    deleteLocationById: (locationId: string) => {
+    findById: (Id: string) => {
         text: string;
         values: string[];
     };
-    updateLocationById: (locationId: string, locationData: any) => {
+    deleteById: (Id: string) => {
+        text: string;
+        values: string[];
+    };
+    updateById: (Id: string, locationData: ILocationUpdatedData) => {
         text: string;
         values: any[];
     };
 };
-export { locationQueries };
+export declare const locationPaymentAddressQueries: {
+    create: (data: ILocationPaymentAddress) => {
+        text: string;
+        values: any[];
+    };
+    findByLocationId: (Id: string) => {
+        text: string;
+        values: string[];
+    };
+    deleteLocationById: (Id: string) => {
+        text: string;
+        values: string[];
+    };
+    updateByLocationId: (Id: string, locationData: ILocationPaymentAddress) => {
+        text: string;
+        values: any[];
+    };
+};

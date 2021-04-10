@@ -1,8 +1,8 @@
-import { IPractice, IPracticeUpdatedData } from './interfaces';
+import { IInsert, IUpdate } from './interfaces';
 declare const practicesFacade: {
-    createAPractice: (data: IPractice) => Promise<any[]>;
-    findPracticeById: (clientId: string) => Promise<any[]>;
+    createAPractice: (data: IInsert) => Promise<any[]>;
+    findPracticeById: (Id: string) => Promise<any[]>;
     deletePracticeById: (Id: string) => Promise<any[]>;
-    updatePracticeById: (clientId: string, practiceData: IPracticeUpdatedData) => Promise<any[]>;
+    updatePracticeById: (Id: string, data: IUpdate) => Promise<any[]>;
 };
 export { practicesFacade };
