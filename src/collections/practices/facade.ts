@@ -62,8 +62,8 @@ const practicesFacade = {
     findPracticeById: async (Id: string) => {
 
         const { rows } = await PG_CLIENT.query(practicesQueries.findPracticeById(Id));
-       
-        if(!rows.length) return rows
+
+        if (!rows.length) return rows
 
         const { rows: location } = await PG_CLIENT.query(locationQueries.findByPracticeId(Id));
         const { rows: statement_address } = await PG_CLIENT.query(practiceStatementAddressQueries.findByPracticeId(Id));
@@ -175,6 +175,10 @@ const practicesFacade = {
 
             throw err
         }
+    },
+    findAll: async () => {
+        const { rows } = await PG_CLIENT.query(practicesQueries.findAllPractices())
+        return rows
     }
 };
 

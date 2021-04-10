@@ -4,5 +4,6 @@ declare const practicesFacade: {
     findPracticeById: (Id: string) => Promise<any[]>;
     deletePracticeById: (Id: string) => Promise<any[]>;
     updatePracticeById: (Id: string, data: IUpdate) => Promise<any[]>;
+    findAll: () => Promise<any[]>;
 };
 export { practicesFacade };

@@ -38,8 +38,34 @@ function practicesRouter() {
             }
         });
     }); });
+    router.get('/', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+        var practices, err_2;
+        return tslib_1.__generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4, facade_1.practicesFacade.findPracticeById(req.params.id)];
+                case 1:
+                    practices = _a.sent();
+                    if (!practices.length) {
+                        log_1.log.warn({ message: 'Practices does not exist!', statusCode: 404, detail: 'Practices do not exist!', repo: 'aquila-api', path: '/api/v1/practices' });
+                        res.status(404).json({ data: null, error: true, message: 'Practices do not exist!' });
+                    }
+                    else {
+                        res.status(200).json({ data: practices, error: null, message: 'practices fetched successfully!' });
+                    }
+                    return [3, 3];
+                case 2:
+                    err_2 = _a.sent();
+                    log_1.log.error({ message: 'Error in finding practices!', statusCode: 500, detail: err_2, repo: 'aquila-api', path: '/api/v1/practices' });
+                    res.status(500).json({ data: null, error: err_2, message: 'Error in finding practices!' });
+                    return [3, 3];
+                case 3: return [2];
+            }
+        });
+    }); });
     router.get('/:id', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, practice, err_2;
+        var validated, practice, err_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -63,16 +89,16 @@ function practicesRouter() {
                     _a.label = 3;
                 case 3: return [3, 5];
                 case 4:
-                    err_2 = _a.sent();
-                    log_1.log.error({ message: 'Error in finding a client!', statusCode: 500, detail: err_2, repo: 'aquila-api', path: '/api/v1/practices/:id' });
-                    res.status(500).json({ data: null, error: err_2, message: 'Error in finding a client!' });
+                    err_3 = _a.sent();
+                    log_1.log.error({ message: 'Error in finding a client!', statusCode: 500, detail: err_3, repo: 'aquila-api', path: '/api/v1/practices/:id' });
+                    res.status(500).json({ data: null, error: err_3, message: 'Error in finding a client!' });
                     return [3, 5];
                 case 5: return [2];
             }
         });
     }); });
     router.delete('/:id', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, practice, deletedPractice, err_3;
+        var validated, practice, deletedPractice, err_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -98,16 +124,16 @@ function practicesRouter() {
                     _a.label = 6;
                 case 6: return [3, 8];
                 case 7:
-                    err_3 = _a.sent();
-                    log_1.log.error({ message: 'Error in deleting a practice!', statusCode: 500, detail: err_3, repo: 'aquila-api', path: '/api/v1/practices/:id' });
-                    res.status(500).json({ data: null, error: err_3, message: 'Error in deleting a practice!' });
+                    err_4 = _a.sent();
+                    log_1.log.error({ message: 'Error in deleting a practice!', statusCode: 500, detail: err_4, repo: 'aquila-api', path: '/api/v1/practices/:id' });
+                    res.status(500).json({ data: null, error: err_4, message: 'Error in deleting a practice!' });
                     return [3, 8];
                 case 8: return [2];
             }
         });
     }); });
     router.put('/:id', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        var validated, practice, updatedPracticeInfo, err_4;
+        var validated, practice, updatedPracticeInfo, err_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -133,9 +159,9 @@ function practicesRouter() {
                     _a.label = 6;
                 case 6: return [3, 8];
                 case 7:
-                    err_4 = _a.sent();
-                    log_1.log.error({ message: 'Error in updating a practice!', statusCode: 500, detail: err_4, repo: 'aquila-api', path: '/api/v1/practices/:id' });
-                    res.status(500).json({ data: null, error: err_4, message: 'Error in updating a practice!' });
+                    err_5 = _a.sent();
+                    log_1.log.error({ message: 'Error in updating a practice!', statusCode: 500, detail: err_5, repo: 'aquila-api', path: '/api/v1/practices/:id' });
+                    res.status(500).json({ data: null, error: err_5, message: 'Error in updating a practice!' });
                     return [3, 8];
                 case 8: return [2];
             }

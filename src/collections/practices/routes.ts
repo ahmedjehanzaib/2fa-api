@@ -37,6 +37,26 @@ export function practicesRouter(): Router {
 			res.status(500).json({ data: null, error: err, message: 'Error in creating a new practice!' });
 		}
 	})
+	router.get('/', async (req: Request, res: Response, _next: NextFunction) => {
+		try {
+			// const validated = JOI.validate({ params: req.params }, validationSchema.findPractice);
+			// if (validated.error === null) {
+				const practices = await practicesFacade.findPracticeById(req.params.id);
+				if (!practices.length) {
+					log.warn({ message: 'Practices does not exist!', statusCode: 404, detail: 'Practices do not exist!', repo: 'aquila-api', path: '/api/v1/practices' });
+					res.status(404).json({ data: null, error: true, message: 'Practices do not exist!' });
+				} else {
+					res.status(200).json({ data: practices, error: null, message: 'practices fetched successfully!' });
+				}
+			// } else {
+			// 	log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practices/:id' });
+			// 	res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
+			// }
+		} catch (err) {
+			log.error({ message: 'Error in finding practices!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practices' });
+			res.status(500).json({ data: null, error: err, message: 'Error in finding practices!' });
+		}
+	});
 
 	// GET /api/v1/practices/:id
 	router.get('/:id', async (req: Request, res: Response, _next: NextFunction) => {

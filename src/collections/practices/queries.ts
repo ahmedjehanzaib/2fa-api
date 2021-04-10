@@ -46,7 +46,14 @@ export const practicesQueries = {
             text: `UPDATE practices SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
             values: Object.keys(practiceData).map((key) => practiceData[key])
         };
+    
     },
+    findAllPractices: () => {
+        return {
+            text: ` SELECT * FROM practices`,
+            values: []
+        }
+    }
 }
 
 export const locationQueries = {

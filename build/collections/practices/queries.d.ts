@@ -16,6 +16,10 @@ export declare const practicesQueries: {
         text: string;
         values: any[];
     };
+    findAllPractices: () => {
+        text: string;
+        values: never[];
+    };
 };
 export declare const locationQueries: {
     create: (data: ILocation) => {

@@ -39,6 +39,12 @@ exports.practicesQueries = {
             values: Object.keys(practiceData).map(function (key) { return practiceData[key]; })
         };
     },
+    findAllPractices: function () {
+        return {
+            text: " SELECT * FROM practices",
+            values: []
+        };
+    }
 };
 exports.locationQueries = {
     create: function (data) {
