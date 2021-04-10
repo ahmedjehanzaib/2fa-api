@@ -130,7 +130,7 @@ declare const validationSchema: {
             fax: JOI.StringSchema;
             website: JOI.StringSchema;
             cell_number: JOI.StringSchema;
-            by_default: JOI.StringSchema;
+            by_default: JOI.BooleanSchema;
             description: JOI.StringSchema;
             email: JOI.StringSchema;
             taxonomy_code: JOI.StringSchema;
@@ -138,9 +138,11 @@ declare const validationSchema: {
             tax_id: JOI.StringSchema;
             clia_number: JOI.StringSchema;
             pos: JOI.StringSchema;
+            pay_to_address_same_as_address: JOI.BooleanSchema;
             insurance_bill_under_location: JOI.BooleanSchema;
             insurance_bill_pay_to_address: JOI.BooleanSchema;
             insurance_donot_report_location: JOI.BooleanSchema;
+            payment_address: JOI.AlternativesSchema;
         };
         params: {};
         query: {};
@@ -175,7 +177,7 @@ declare const validationSchema: {
             fax: JOI.StringSchema;
             website: JOI.StringSchema;
             cell_number: JOI.StringSchema;
-            by_default: JOI.StringSchema;
+            by_default: JOI.BooleanSchema;
             description: JOI.StringSchema;
             email: JOI.StringSchema;
             taxonomy_code: JOI.StringSchema;
@@ -183,9 +185,11 @@ declare const validationSchema: {
             tax_id: JOI.StringSchema;
             clia_number: JOI.StringSchema;
             pos: JOI.StringSchema;
+            pay_to_address_same_as_address: JOI.BooleanSchema;
             insurance_bill_under_location: JOI.BooleanSchema;
             insurance_bill_pay_to_address: JOI.BooleanSchema;
             insurance_donot_report_location: JOI.BooleanSchema;
+            payment_address: JOI.AlternativesSchema;
         };
         params: {
             id: JOI.StringSchema;

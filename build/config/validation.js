@@ -80,6 +80,7 @@ var validationSchema = {
                 address_line_1: JOI.string().trim().optional().allow('', null),
                 address_line_2: JOI.string().trim().optional().allow('', null),
                 phone_number: JOI.string().trim().allow('', null),
+                by_default: JOI.boolean().optional(),
                 fax: JOI.string().trim().allow('', null),
                 website: JOI.string().trim().allow('', null),
                 cell_number: JOI.string().trim().allow('', null),
@@ -174,6 +175,7 @@ var validationSchema = {
                 fax: JOI.string().trim().allow('', null),
                 website: JOI.string().trim().allow('', null),
                 cell_number: JOI.string().trim().optional().allow('', null),
+                by_default: JOI.boolean().optional(),
                 description: JOI.string().trim().allow('', null),
                 email: JOI.string().email().optional().allow('', null),
                 taxonomy_code: JOI.string().trim().allow('', null),
@@ -240,7 +242,7 @@ var validationSchema = {
             fax: JOI.string().trim().allow('', null),
             website: JOI.string().trim().allow('', null),
             cell_number: JOI.string().trim().required(),
-            by_default: JOI.string().trim().required(),
+            by_default: JOI.boolean().optional(),
             description: JOI.string().trim().allow('', null),
             email: JOI.string().email().optional().allow('', null),
             taxonomy_code: JOI.string().trim().allow('', null),
@@ -248,9 +250,20 @@ var validationSchema = {
             tax_id: JOI.string().trim().allow('', null),
             clia_number: JOI.string().trim().allow('', null),
             pos: JOI.string().trim().allow('', null),
+            pay_to_address_same_as_address: JOI.boolean().optional(),
             insurance_bill_under_location: JOI.boolean().optional(),
             insurance_bill_pay_to_address: JOI.boolean().optional(),
             insurance_donot_report_location: JOI.boolean().optional(),
+            payment_address: JOI.when('pay_to_address_same_as_address', {
+                is: JOI.equal(false),
+                then: JOI.object().keys({
+                    address_line_1: JOI.string().trim().optional().allow('', null),
+                    address_line_2: JOI.string().trim().optional().allow('', null),
+                    city: JOI.string().trim().optional().allow('', null),
+                    state: JOI.string().trim().optional().allow('', null),
+                    zipcode: JOI.string().trim().optional().allow('', null)
+                })
+            }),
         },
         params: {},
         query: {}
@@ -285,7 +298,7 @@ var validationSchema = {
             fax: JOI.string().trim().allow('', null),
             website: JOI.string().trim().allow('', null),
             cell_number: JOI.string().trim().required(),
-            by_default: JOI.string().trim().required(),
+            by_default: JOI.boolean().optional(),
             description: JOI.string().trim().allow('', null),
             email: JOI.string().email().optional().allow('', null),
             taxonomy_code: JOI.string().trim().allow('', null),
@@ -293,9 +306,20 @@ var validationSchema = {
             tax_id: JOI.string().trim().allow('', null),
             clia_number: JOI.string().trim().allow('', null),
             pos: JOI.string().trim().allow('', null),
+            pay_to_address_same_as_address: JOI.boolean().optional(),
             insurance_bill_under_location: JOI.boolean().optional(),
             insurance_bill_pay_to_address: JOI.boolean().optional(),
             insurance_donot_report_location: JOI.boolean().optional(),
+            payment_address: JOI.when('pay_to_address_same_as_address', {
+                is: JOI.equal(false),
+                then: JOI.object().keys({
+                    address_line_1: JOI.string().trim().optional().allow('', null),
+                    address_line_2: JOI.string().trim().optional().allow('', null),
+                    city: JOI.string().trim().optional().allow('', null),
+                    state: JOI.string().trim().optional().allow('', null),
+                    zipcode: JOI.string().trim().optional().allow('', null)
+                })
+            }),
         },
         params: {
             id: JOI.string().guid().required()

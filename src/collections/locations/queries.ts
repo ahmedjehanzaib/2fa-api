@@ -44,6 +44,12 @@ export const locationQueries = {
             values: Object.keys(locationData).map((key) => locationData[key])
         };
     },
+    findAll: () => {
+        return {
+            text: `SELECT * FROM practice_locations`,
+            values: []
+        }
+    },
 }
 
 export const locationPaymentAddressQueries = {

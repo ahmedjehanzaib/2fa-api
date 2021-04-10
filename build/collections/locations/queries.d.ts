@@ -16,6 +16,10 @@ export declare const locationQueries: {
         text: string;
         values: any[];
     };
+    findAll: () => {
+        text: string;
+        values: never[];
+    };
 };
 export declare const locationPaymentAddressQueries: {
     create: (data: ILocationPaymentAddress) => {
