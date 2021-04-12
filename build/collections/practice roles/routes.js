@@ -4,7 +4,6 @@ exports.practiceRoleRouters = void 0;
 var tslib_1 = require("tslib");
 var express_1 = require("express");
 var JOI = require("joi");
-var uuid_1 = require("uuid");
 var log_1 = require("../../log");
 var validation_1 = require("../../config/validation");
 var facade_1 = require("./facade");
@@ -19,7 +18,7 @@ function practiceRoleRouters() {
                     _a.trys.push([0, 4, , 5]);
                     validated = JOI.validate({ body: req.body }, validation_1.validationSchema.createAPracticeRole);
                     if (!(validated.error === null)) return [3, 2];
-                    return [4, facade_1.practiceRoleFacade.create(tslib_1.__assign({ id: uuid_1.v4() }, req.body))];
+                    return [4, facade_1.practiceRoleFacade.create(req.body)];
                 case 1:
                     role = _a.sent();
                     res.status(200).json({ data: role[0], error: null, message: 'Practice role has been created successfully!' });

@@ -4,3 +4,4 @@ export * from './locations';
 export * from './practice roles';
 export * from './referring providers';
 export * from './providers';
+export * from './users';

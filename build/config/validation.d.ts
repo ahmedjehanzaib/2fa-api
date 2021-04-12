@@ -420,5 +420,73 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAUser: {
+        headers: {};
+        body: {
+            default_provider: JOI.StringSchema;
+            email: JOI.StringSchema;
+            password: JOI.StringSchema;
+            picture_url: JOI.StringSchema;
+            last_login: JOI.StringSchema;
+            last_login_ip: JOI.StringSchema;
+            last_login_location: JOI.StringSchema;
+            is_active: JOI.BooleanSchema;
+            login_counts: JOI.NumberSchema;
+            created_by: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            epcs_settings: JOI.BooleanSchema;
+            allow_epcs: JOI.BooleanSchema;
+            epcs_approver: JOI.BooleanSchema;
+            verified: JOI.BooleanSchema;
+            roles: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAUser: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAUser: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAUser: {
+        headers: {};
+        body: {
+            default_provider: JOI.StringSchema;
+            email: JOI.StringSchema;
+            password: JOI.StringSchema;
+            picture_url: JOI.StringSchema;
+            last_login: JOI.StringSchema;
+            last_login_ip: JOI.StringSchema;
+            last_login_location: JOI.StringSchema;
+            is_active: JOI.BooleanSchema;
+            login_counts: JOI.NumberSchema;
+            created_by: JOI.StringSchema;
+            first_name: JOI.StringSchema;
+            middle_name: JOI.StringSchema;
+            last_name: JOI.StringSchema;
+            epcs_settings: JOI.BooleanSchema;
+            allow_epcs: JOI.BooleanSchema;
+            epcs_approver: JOI.BooleanSchema;
+            verified: JOI.BooleanSchema;
+            roles: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

@@ -30,6 +30,7 @@ exports.app.use(exports.app.locals.BaseUri + "/locations", collections_1.locatio
 exports.app.use(exports.app.locals.BaseUri + "/practice_roles", collections_1.practiceRoleRouters());
 exports.app.use(exports.app.locals.BaseUri + "/referring_providers", collections_1.referringProvidersRouter());
 exports.app.use(exports.app.locals.BaseUri + "/providers", collections_1.providersRouter());
+exports.app.use(exports.app.locals.BaseUri + "/users", collections_1.userRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import * as JOI from 'joi';
-import { v4 as uuidv4 } from 'uuid';
 
 import { log } from '../../log';
 import { validationSchema } from '../../config/validation';
@@ -17,10 +16,7 @@ export function practiceRoleRouters(): Router {
 		try {
 			const validated = JOI.validate({ body: req.body }, validationSchema.createAPracticeRole);
 			if (validated.error === null) {
-                const role = await practiceRoleFacade.create({
-                    id: uuidv4(),
-					...req.body
-                })
+                const role = await practiceRoleFacade.create(req.body)
 
                 res.status(200).json({ data: role[0], error: null, message: 'Practice role has been created successfully!' })
 

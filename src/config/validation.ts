@@ -157,7 +157,7 @@ const validationSchema = {
         }
     },
 
-    // GET /api/v1/practices/:id
+    
     findPractice: {
         headers: {
         },
@@ -308,7 +308,7 @@ const validationSchema = {
         }
     },
 
-    // GET /api/v1/practices/:id
+    
     findPracticeLocation: {
         headers: {
         },
@@ -393,7 +393,7 @@ const validationSchema = {
         }
     },
 
-    // GET /api/v1/practices/:id
+    
     findPracticeRole: {
         headers: {
         },
@@ -473,7 +473,7 @@ const validationSchema = {
         }
     },
 
-    // GET /api/v1/practices/:id
+    
     findAReferringProvider: {
         headers: {
         },
@@ -600,7 +600,7 @@ const validationSchema = {
         }
     },
 
-    // GET /api/v1/practices/:id
+    
     findAProvider: {
         headers: {
         },
@@ -680,6 +680,90 @@ const validationSchema = {
                 report_tax_id: JOI.boolean().optional()
 
             })
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+    createAUser: {
+        headers: {
+        },
+        body: {
+            default_provider: JOI.string().trim().required(),
+            email: JOI.string().trim().required(),
+            password: JOI.string().trim().optional().allow('', null),
+            picture_url: JOI.string().trim().optional().allow('', null),
+            last_login: JOI.string().trim().optional().allow('', null),
+            last_login_ip: JOI.string().trim().optional().allow('', null),
+            last_login_location: JOI.string().trim().optional().allow('', null),
+            is_active: JOI.boolean().optional(),
+            login_counts: JOI.number().optional(),
+            created_by: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().optional().allow('', null),
+            middle_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().optional().allow('', null),
+            epcs_settings: JOI.boolean().optional(),
+            allow_epcs: JOI.boolean().optional(),
+            epcs_approver: JOI.boolean().optional(),
+            verified: JOI.boolean().optional(),
+            roles: JOI.array().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    
+    findAUser: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+  
+    deleteAUser: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAUser: {
+        headers: {
+        },
+        body: {
+            default_provider: JOI.string().trim().required(),
+            email: JOI.string().trim().required(),
+            password: JOI.string().trim().optional().allow('', null),
+            picture_url: JOI.string().trim().optional().allow('', null),
+            last_login: JOI.string().trim().optional().allow('', null),
+            last_login_ip: JOI.string().trim().optional().allow('', null),
+            last_login_location: JOI.string().trim().optional().allow('', null),
+            is_active: JOI.boolean().optional(),
+            login_counts: JOI.number().optional(),
+            created_by: JOI.string().trim().optional().allow('', null),
+            first_name: JOI.string().trim().optional().allow('', null),
+            middle_name: JOI.string().trim().optional().allow('', null),
+            last_name: JOI.string().trim().optional().allow('', null),
+            epcs_settings: JOI.boolean().optional(),
+            allow_epcs: JOI.boolean().optional(),
+            epcs_approver: JOI.boolean().optional(),
+            verified: JOI.boolean().optional(),
+            roles: JOI.array().required()
         },
         params: {
             id: JOI.string().guid().required()

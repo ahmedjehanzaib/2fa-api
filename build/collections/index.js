@@ -7,3 +7,4 @@ tslib_1.__exportStar(require("./locations"), exports);
 tslib_1.__exportStar(require("./practice roles"), exports);
 tslib_1.__exportStar(require("./referring providers"), exports);
 tslib_1.__exportStar(require("./providers"), exports);
+tslib_1.__exportStar(require("./users"), exports);
