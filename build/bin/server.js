@@ -27,6 +27,7 @@ exports.app.use(body_parser_1.json());
 exports.app.use(exports.app.locals.BaseUri + "/clients", collections_1.clientsRouter());
 exports.app.use(exports.app.locals.BaseUri + "/practices", collections_1.practicesRouter());
 exports.app.use(exports.app.locals.BaseUri + "/locations", collections_1.locationRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice_roles", collections_1.practiceRoleRouters());
 exports.app.use(exports.app.locals.BaseUri + "/referring_providers", collections_1.referringProvidersRouter());
 exports.app.use(exports.app.locals.BaseUri + "/providers", collections_1.providersRouter());
 var errorHandler = function (error, _req, res, _next) {

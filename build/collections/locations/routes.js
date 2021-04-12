@@ -38,13 +38,13 @@ function locationRouters() {
             }
         });
     }); });
-    router.get('/', function (req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+    router.get('/', function (_req, res, _next) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
         var locations, err_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4, facade_1.locationsFacade.findLocationById(req.params.id)];
+                    return [4, facade_1.locationsFacade.findAll()];
                 case 1:
                     locations = _a.sent();
                     if (!locations.length) {

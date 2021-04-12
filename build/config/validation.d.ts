@@ -196,6 +196,44 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticeRole: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findPracticeRole: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeRole: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPracticeRole: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
     createAReferringProvider: {
         headers: {};
         body: {

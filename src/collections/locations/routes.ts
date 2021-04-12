@@ -34,10 +34,10 @@ export function locationRouters(): Router {
 		}
 	});
 
-	router.get('/',  async (req: Request, res: Response, _next: NextFunction) => {
+	router.get('/',  async (_req: Request, res: Response, _next: NextFunction) => {
 		try {
 			
-				const locations = await locationsFacade.findLocationById(req.params.id);
+				const locations = await locationsFacade.findAll();
 				if (!locations.length) {
 					log.warn({ message: 'Practice locations do not exist!', statusCode: 404, detail: 'Practice locations do not exist!', repo: 'aquila-api', path: '/api/v1/locations' });
 					res.status(404).json({ data: null, error: true, message: 'Practice locations do not exist!' });

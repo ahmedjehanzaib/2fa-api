@@ -326,6 +326,44 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticeRole: {
+        headers: {},
+        body: {
+            name: JOI.string().trim().allow('', null),
+            practice_id: JOI.string().trim().required(),
+            description: JOI.string().trim().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findPracticeRole: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticeRole: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPracticeRole: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().allow('', null),
+            description: JOI.string().trim().allow('', null)
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
     createAReferringProvider: {
         headers: {},
         body: {
