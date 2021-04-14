@@ -488,5 +488,43 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAHCFATemplate: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            path: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAHCFATemplate: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAHCFATemplate: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAHCFATemplate: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            path: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

@@ -648,5 +648,43 @@ var validationSchema = {
         },
         query: {}
     },
+    createAHCFATemplate: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required(),
+            path: JOI.string().trim().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAHCFATemplate: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAHCFATemplate: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAHCFATemplate: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required(),
+            path: JOI.string().trim().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

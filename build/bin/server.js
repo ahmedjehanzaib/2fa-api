@@ -31,6 +31,7 @@ exports.app.use(exports.app.locals.BaseUri + "/practice_roles", collections_1.pr
 exports.app.use(exports.app.locals.BaseUri + "/referring_providers", collections_1.referringProvidersRouter());
 exports.app.use(exports.app.locals.BaseUri + "/providers", collections_1.providersRouter());
 exports.app.use(exports.app.locals.BaseUri + "/users", collections_1.userRouters());
+exports.app.use(exports.app.locals.BaseUri + "/hcfa_templates", collections_1.hcfaTemplatesRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

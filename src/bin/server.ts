@@ -6,8 +6,10 @@ import cors = require('cors')
 import { json } from 'body-parser';
 import { Server } from 'http';
 import { log } from '../log';
-import { clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
-	 referringProvidersRouter, providersRouter, userRouters } from '../collections';
+import {
+	clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
+	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters
+} from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -55,6 +57,7 @@ app.use(`${app.locals.BaseUri}/practice_roles`, practiceRoleRouters());
 app.use(`${app.locals.BaseUri}/referring_providers`, referringProvidersRouter());
 app.use(`${app.locals.BaseUri}/providers`, providersRouter());
 app.use(`${app.locals.BaseUri}/users`, userRouters());
+app.use(`${app.locals.BaseUri}/hcfa_templates`, hcfaTemplatesRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -64,7 +67,7 @@ app.use(`${app.locals.BaseUri}/users`, userRouters());
 const errorHandler: express.ErrorRequestHandler = (error: Error, _req: express.Request, res: express.Response, _next: express.NextFunction): void => {
 	log.error(error)
 	if (error.name === 'UnauthorizedError')
-		res.status(401).json({message: error.message})
+		res.status(401).json({ message: error.message })
 	else
 		res.sendStatus(500)
 	if (process.env.ENV === 'development')
