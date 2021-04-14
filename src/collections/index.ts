@@ -7,3 +7,4 @@ export * from './providers';
 export * from './users';
 export * from './hcfa_templates';
 export * from './plan_categories';
+export * from './plan_types';

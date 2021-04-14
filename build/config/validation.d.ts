@@ -564,5 +564,41 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPlanType: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPlanType: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPlanType: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPlanType: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

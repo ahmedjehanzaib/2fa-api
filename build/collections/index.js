@@ -10,3 +10,4 @@ tslib_1.__exportStar(require("./providers"), exports);
 tslib_1.__exportStar(require("./users"), exports);
 tslib_1.__exportStar(require("./hcfa_templates"), exports);
 tslib_1.__exportStar(require("./plan_categories"), exports);
+tslib_1.__exportStar(require("./plan_types"), exports);

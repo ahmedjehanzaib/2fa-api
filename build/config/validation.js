@@ -724,5 +724,41 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPlanType: {
+        headers: {},
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPlanType: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPlanType: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPlanType: {
+        headers: {},
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;
