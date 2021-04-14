@@ -686,5 +686,43 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPlanCategory: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPlanCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPlanCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPlanCategory: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

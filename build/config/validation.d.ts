@@ -526,5 +526,43 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPlanCategory: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPlanCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPlanCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPlanCategory: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

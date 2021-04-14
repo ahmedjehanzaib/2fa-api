@@ -8,7 +8,8 @@ import { Server } from 'http';
 import { log } from '../log';
 import {
 	clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
-	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters
+	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters,
+	planCategoriesRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,7 @@ app.use(`${app.locals.BaseUri}/referring_providers`, referringProvidersRouter())
 app.use(`${app.locals.BaseUri}/providers`, providersRouter());
 app.use(`${app.locals.BaseUri}/users`, userRouters());
 app.use(`${app.locals.BaseUri}/hcfa_templates`, hcfaTemplatesRouters());
+app.use(`${app.locals.BaseUri}/plan_categories`, planCategoriesRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
