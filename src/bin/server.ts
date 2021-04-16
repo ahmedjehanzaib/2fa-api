@@ -9,7 +9,7 @@ import { log } from '../log';
 import {
 	clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
 	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters,
-	planCategoriesRouters, planTypesRouters
+	planCategoriesRouters, planTypesRouters, practicePlanRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,6 +61,7 @@ app.use(`${app.locals.BaseUri}/users`, userRouters());
 app.use(`${app.locals.BaseUri}/hcfa_templates`, hcfaTemplatesRouters());
 app.use(`${app.locals.BaseUri}/plan_categories`, planCategoriesRouters());
 app.use(`${app.locals.BaseUri}/plan_types`, planTypesRouters());
+app.use(`${app.locals.BaseUri}/practice_plans`, practicePlanRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

@@ -600,5 +600,59 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticePlan: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            payer_id: JOI.StringSchema;
+            plan_category_id: JOI.StringSchema;
+            plan_type_id: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            submission_type: JOI.StringSchema;
+            hcfa_template_id: JOI.StringSchema;
+            address: JOI.ObjectSchema;
+            fees: JOI.ObjectSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticePlan: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticePlan: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPracticePlan: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            payer_id: JOI.StringSchema;
+            plan_category_id: JOI.StringSchema;
+            plan_type_id: JOI.StringSchema;
+            fax: JOI.StringSchema;
+            submission_type: JOI.StringSchema;
+            hcfa_template_id: JOI.StringSchema;
+            address: JOI.ObjectSchema;
+            fees: JOI.ObjectSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

@@ -760,5 +760,83 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticePlan: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().optional().allow('', null),
+            description: JOI.string().trim().optional().allow('', null),
+            payer_id: JOI.string().trim().optional().allow('', null),
+            plan_category_id: JOI.string().trim().optional().allow('', null),
+            plan_type_id: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null),
+            submission_type: JOI.string().trim().optional().allow('', null),
+            hcfa_template_id: JOI.string().trim().optional().allow('', null),
+            address: JOI.object().keys({
+                address_line_1: JOI.string().trim().optional().allow('', null),
+                address_line_2: JOI.string().trim().optional().allow('', null),
+                city: JOI.string().trim().optional().allow('', null),
+                state: JOI.string().trim().optional().allow('', null),
+                zipcode: JOI.string().trim().optional().allow('', null),
+                work_phone: JOI.string().trim().optional().allow('', null),
+                fax: JOI.string().trim().optional().allow('', null),
+            }).optional(),
+            fees: JOI.object().keys({
+                cpt_id: JOI.string().trim().optional().allow('', null),
+                fee: JOI.number().optional(),
+                allowed: JOI.boolean().optional(),
+            }).optional(),
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticePlan: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticePlan: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPracticePlan: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().optional().allow('', null),
+            description: JOI.string().trim().optional().allow('', null),
+            payer_id: JOI.string().trim().optional().allow('', null),
+            plan_category_id: JOI.string().trim().optional().allow('', null),
+            plan_type_id: JOI.string().trim().optional().allow('', null),
+            fax: JOI.string().trim().optional().allow('', null),
+            submission_type: JOI.string().trim().optional().allow('', null),
+            hcfa_template_id: JOI.string().trim().optional().allow('', null),
+            address: JOI.object().keys({
+                address_line_1: JOI.string().trim().optional().allow('', null),
+                address_line_2: JOI.string().trim().optional().allow('', null),
+                city: JOI.string().trim().optional().allow('', null),
+                state: JOI.string().trim().optional().allow('', null),
+                zipcode: JOI.string().trim().optional().allow('', null),
+                work_phone: JOI.string().trim().optional().allow('', null),
+                fax: JOI.string().trim().optional().allow('', null),
+            }).optional(),
+            fees: JOI.object().keys({
+                cpt_id: JOI.string().trim().optional().allow('', null),
+                fee: JOI.number().optional(),
+                allowed: JOI.boolean().optional(),
+            }).optional(),
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;
