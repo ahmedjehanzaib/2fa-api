@@ -694,5 +694,43 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticeModifier: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeModifier: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeModifier: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeModifier: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

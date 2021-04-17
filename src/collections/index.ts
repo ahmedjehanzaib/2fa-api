@@ -10,3 +10,4 @@ export * from './plan_categories';
 export * from './plan_types';
 export * from './practice_plans';
 export * from './practice_icd';
+export * from './practice_modifiers';

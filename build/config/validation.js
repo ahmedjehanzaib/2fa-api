@@ -878,5 +878,43 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticeModifier: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeModifier: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPracticeModifier: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeModifier: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().required()
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;
