@@ -1297,6 +1297,58 @@ const validationSchema = {
         query: {
         }
     },
+
+
+    createANDCUnitOfMeasurement: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findANDCUnitOfMeasurement: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    deleteANDCUnitOfMeasurement: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateANDCUnitOfMeasurement: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
