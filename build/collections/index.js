@@ -12,3 +12,4 @@ tslib_1.__exportStar(require("./hcfa_templates"), exports);
 tslib_1.__exportStar(require("./plan_categories"), exports);
 tslib_1.__exportStar(require("./plan_types"), exports);
 tslib_1.__exportStar(require("./practice_plans"), exports);
+tslib_1.__exportStar(require("./practice_icd"), exports);

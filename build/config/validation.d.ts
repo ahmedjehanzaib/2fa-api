@@ -654,5 +654,45 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticeICD: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+            valid: JOI.BooleanSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeICD: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeICD: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeICD: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+            valid: JOI.BooleanSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

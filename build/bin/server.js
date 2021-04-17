@@ -35,6 +35,7 @@ exports.app.use(exports.app.locals.BaseUri + "/hcfa_templates", collections_1.hc
 exports.app.use(exports.app.locals.BaseUri + "/plan_categories", collections_1.planCategoriesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/plan_types", collections_1.planTypesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_plans", collections_1.practicePlanRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice_icd", collections_1.practiceICDRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

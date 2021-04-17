@@ -838,5 +838,45 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticeICD: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().required(),
+            valid: JOI.boolean().optional()
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeICD: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPracticeICD: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeICD: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().required(),
+            valid: JOI.boolean().optional()
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;
