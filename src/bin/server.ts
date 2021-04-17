@@ -10,7 +10,7 @@ import {
 	clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
 	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters,
 	planCategoriesRouters, planTypesRouters, practicePlanRouters, practiceICDRouters,
-	practiceModifierRouters
+	practiceModifierRouters, practicePlaceOfServiceRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +65,7 @@ app.use(`${app.locals.BaseUri}/plan_types`, planTypesRouters());
 app.use(`${app.locals.BaseUri}/practice_plans`, practicePlanRouters());
 app.use(`${app.locals.BaseUri}/practice_icd`, practiceICDRouters());
 app.use(`${app.locals.BaseUri}/practice_modifiers`, practiceModifierRouters());
+app.use(`${app.locals.BaseUri}/practice_place_of_service`, practicePlaceOfServiceRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
