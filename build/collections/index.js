@@ -15,3 +15,4 @@ tslib_1.__exportStar(require("./practice_plans"), exports);
 tslib_1.__exportStar(require("./practice_icd"), exports);
 tslib_1.__exportStar(require("./practice_modifiers"), exports);
 tslib_1.__exportStar(require("./practice_place_of_service"), exports);
+tslib_1.__exportStar(require("./practice_type_of_service"), exports);

@@ -770,5 +770,43 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticeTypeOfService: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeTypeOfService: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeTypeOfService: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeTypeOfService: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

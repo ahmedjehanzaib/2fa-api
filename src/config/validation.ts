@@ -1246,6 +1246,57 @@ const validationSchema = {
         }
     },
 
+
+    createAPracticeProcedureCategory: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPracticeProcedureCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAPracticeProcedureCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPracticeProcedureCategory: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required()
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
