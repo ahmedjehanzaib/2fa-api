@@ -15,3 +15,4 @@ export * from './practice_place_of_service';
 export * from './practice_type_of_service';
 export * from './practice_procedure_categories';
 export * from './ndc_unit_of_measurements';
+export * from './practice_cpt';

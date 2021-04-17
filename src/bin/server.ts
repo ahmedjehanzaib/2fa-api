@@ -11,7 +11,7 @@ import {
 	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters,
 	planCategoriesRouters, planTypesRouters, practicePlanRouters, practiceICDRouters,
 	practiceModifierRouters, practicePlaceOfServiceRouters, practiceTypeOfServiceRouters,
-	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters
+	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters, practiceCPTRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +65,7 @@ app.use(`${app.locals.BaseUri}/plan_categories`, planCategoriesRouters());
 app.use(`${app.locals.BaseUri}/plan_types`, planTypesRouters());
 app.use(`${app.locals.BaseUri}/practice_plans`, practicePlanRouters());
 app.use(`${app.locals.BaseUri}/practice_icd`, practiceICDRouters());
+app.use(`${app.locals.BaseUri}/practice_cpt`, practiceCPTRouters());
 app.use(`${app.locals.BaseUri}/practice_modifiers`, practiceModifierRouters());
 app.use(`${app.locals.BaseUri}/practice_place_of_service`, practicePlaceOfServiceRouters());
 app.use(`${app.locals.BaseUri}/practice_type_of_service`, practiceTypeOfServiceRouters());
