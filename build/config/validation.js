@@ -916,5 +916,43 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticePlaceOfService: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticePlaceOfService: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPracticePlaceOfService: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticePlaceOfService: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            code: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

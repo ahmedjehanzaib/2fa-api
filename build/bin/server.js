@@ -37,6 +37,7 @@ exports.app.use(exports.app.locals.BaseUri + "/plan_types", collections_1.planTy
 exports.app.use(exports.app.locals.BaseUri + "/practice_plans", collections_1.practicePlanRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_icd", collections_1.practiceICDRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_modifiers", collections_1.practiceModifierRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice_place_of_service", collections_1.practicePlaceOfServiceRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

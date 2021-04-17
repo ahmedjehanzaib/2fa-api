@@ -732,5 +732,43 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticePlaceOfService: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticePlaceOfService: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticePlaceOfService: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticePlaceOfService: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            code: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };
