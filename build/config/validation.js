@@ -992,5 +992,149 @@ var validationSchema = {
         },
         query: {}
     },
+    createAPracticeProcedureCategory: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeProcedureCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPracticeProcedureCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeProcedureCategory: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            name: JOI.string().trim().required()
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createANDCUnitOfMeasurement: {
+        headers: {},
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findANDCUnitOfMeasurement: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteANDCUnitOfMeasurement: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateANDCUnitOfMeasurement: {
+        headers: {},
+        body: {
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAPracticeCPT: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            cpt_code: JOI.string().trim().optional().allow('', null),
+            description: JOI.string().trim().optional().allow('', null),
+            service_description: JOI.string().trim().optional().allow('', null),
+            fess: JOI.number().optional(),
+            medicare_fees: JOI.number().optional(),
+            place_of_service: JOI.number().optional(),
+            type_of_service: JOI.number().optional(),
+            procedure_category: JOI.number().optional(),
+            ndc_unit_of_measurements: JOI.number().optional(),
+            ndc_number: JOI.string().trim().optional().allow('', null),
+            ndc_description: JOI.string().trim().optional().allow('', null),
+            ndc_units: JOI.string().trim().optional().allow('', null),
+            actively_used: JOI.boolean().optional(),
+            valid: JOI.boolean().optional(),
+            discontinued: JOI.boolean().optional(),
+            clia: JOI.boolean().optional(),
+            patient_responsibility: JOI.boolean().optional(),
+            donot_print: JOI.boolean().optional(),
+            revenue_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeCPT: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAPracticeCPT: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeCPT: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().trim().required(),
+            cpt_code: JOI.string().trim().optional().allow('', null),
+            description: JOI.string().trim().optional().allow('', null),
+            service_description: JOI.string().trim().optional().allow('', null),
+            fess: JOI.number().optional(),
+            medicare_fees: JOI.number().optional(),
+            place_of_service: JOI.number().optional(),
+            type_of_service: JOI.number().optional(),
+            procedure_category: JOI.number().optional(),
+            ndc_number: JOI.string().trim().optional().allow('', null),
+            ndc_description: JOI.string().trim().optional().allow('', null),
+            ndc_units: JOI.string().trim().optional().allow('', null),
+            ndc_unit_of_measurements: JOI.number().optional(),
+            actively_used: JOI.boolean().optional(),
+            valid: JOI.boolean().optional(),
+            discontinued: JOI.boolean().optional(),
+            clia: JOI.boolean().optional(),
+            patient_responsibility: JOI.boolean().optional(),
+            donot_print: JOI.boolean().optional(),
+            revenue_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

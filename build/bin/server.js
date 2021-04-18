@@ -36,9 +36,12 @@ exports.app.use(exports.app.locals.BaseUri + "/plan_categories", collections_1.p
 exports.app.use(exports.app.locals.BaseUri + "/plan_types", collections_1.planTypesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_plans", collections_1.practicePlanRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_icd", collections_1.practiceICDRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice_cpt", collections_1.practiceCPTRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_modifiers", collections_1.practiceModifierRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_place_of_service", collections_1.practicePlaceOfServiceRouters());
 exports.app.use(exports.app.locals.BaseUri + "/practice_type_of_service", collections_1.practiceTypeOfServiceRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice_procedure_categories", collections_1.practiceProcedureCategoriesRouters());
+exports.app.use(exports.app.locals.BaseUri + "/ndc_unit_of_measurements", collections_1.NDCUnitOfMeasurementRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

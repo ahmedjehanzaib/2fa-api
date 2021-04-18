@@ -1,4 +1,4 @@
-import { IPracticeRole, IPracticeRoleUpdatedData  } from './interfaces';
+import { IPracticeRole } from './interfaces';
 
 export const practiceRolesQueries = {
     create: (data: IPracticeRole) => {
@@ -19,7 +19,11 @@ export const practiceRolesQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM practice_roles WHERE id = $1`,
+            text: `SELECT pr.*,
+            p."name" AS practice_name
+            FROM  practice_roles pr
+            LEFT JOIN practices p
+                   ON pr.practice_id = p.id  WHERE pr.id = $1`,
             values: [Id]
         }
     },
@@ -31,7 +35,7 @@ export const practiceRolesQueries = {
         };
     },
 
-    updateById: (Id: string, locationData: IPracticeRoleUpdatedData) => {
+    updateById: (Id: string, locationData: IPracticeRole) => {
         let setQueryPart = ``
         Object.keys(locationData).forEach((key, index) => {
             setQueryPart += ` ${key}=$${index + 1}`
@@ -46,7 +50,11 @@ export const practiceRolesQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM practice_roles`,
+            text: `SELECT pr.*,
+            p."name" AS practice_name
+            FROM  practice_roles pr
+            LEFT JOIN practices p
+            ON pr.practice_id = p.id`,
             values: []
         }
     },

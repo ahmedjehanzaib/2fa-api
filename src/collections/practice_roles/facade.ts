@@ -1,6 +1,6 @@
 import { practiceRolesQueries } from './queries';
 import { PG_CLIENT } from '../../databases';
-import { IPracticeRole, IPracticeRoleUpdatedData } from './interfaces';
+import { IPracticeRole } from './interfaces';
 
 
 export const practiceRoleFacade = {
@@ -23,7 +23,7 @@ export const practiceRoleFacade = {
         return rows;
     },
 
-    updateById: async (Id: string, data: IPracticeRoleUpdatedData) => {
+    updateById: async (Id: string, data: IPracticeRole) => {
         const { rows } = await PG_CLIENT.query(practiceRolesQueries.updateById(Id, data));
 
         return rows;

@@ -400,7 +400,7 @@ const validationSchema = {
         body: {
         },
         params: {
-            id: JOI.string().guid().required()
+            id:  JOI.number().required()
         },
         query: {
         }
@@ -413,7 +413,7 @@ const validationSchema = {
         body: {
         },
         params: {
-            id: JOI.string().guid().required()
+            id: JOI.number().required()
         },
         query: {
         }
@@ -429,7 +429,7 @@ const validationSchema = {
             description: JOI.string().trim().allow('', null)
         },
         params: {
-            id: JOI.string().guid().required()
+            id: JOI.number().required()
         },
         query: {
         }

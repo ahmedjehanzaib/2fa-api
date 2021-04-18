@@ -808,5 +808,149 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createAPracticeProcedureCategory: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeProcedureCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeProcedureCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeProcedureCategory: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createANDCUnitOfMeasurement: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findANDCUnitOfMeasurement: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteANDCUnitOfMeasurement: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateANDCUnitOfMeasurement: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAPracticeCPT: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            cpt_code: JOI.StringSchema;
+            description: JOI.StringSchema;
+            service_description: JOI.StringSchema;
+            fess: JOI.NumberSchema;
+            medicare_fees: JOI.NumberSchema;
+            place_of_service: JOI.NumberSchema;
+            type_of_service: JOI.NumberSchema;
+            procedure_category: JOI.NumberSchema;
+            ndc_unit_of_measurements: JOI.NumberSchema;
+            ndc_number: JOI.StringSchema;
+            ndc_description: JOI.StringSchema;
+            ndc_units: JOI.StringSchema;
+            actively_used: JOI.BooleanSchema;
+            valid: JOI.BooleanSchema;
+            discontinued: JOI.BooleanSchema;
+            clia: JOI.BooleanSchema;
+            patient_responsibility: JOI.BooleanSchema;
+            donot_print: JOI.BooleanSchema;
+            revenue_code: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeCPT: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeCPT: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeCPT: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            cpt_code: JOI.StringSchema;
+            description: JOI.StringSchema;
+            service_description: JOI.StringSchema;
+            fess: JOI.NumberSchema;
+            medicare_fees: JOI.NumberSchema;
+            place_of_service: JOI.NumberSchema;
+            type_of_service: JOI.NumberSchema;
+            procedure_category: JOI.NumberSchema;
+            ndc_number: JOI.StringSchema;
+            ndc_description: JOI.StringSchema;
+            ndc_units: JOI.StringSchema;
+            ndc_unit_of_measurements: JOI.NumberSchema;
+            actively_used: JOI.BooleanSchema;
+            valid: JOI.BooleanSchema;
+            discontinued: JOI.BooleanSchema;
+            clia: JOI.BooleanSchema;
+            patient_responsibility: JOI.BooleanSchema;
+            donot_print: JOI.BooleanSchema;
+            revenue_code: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

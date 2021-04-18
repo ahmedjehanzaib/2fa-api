@@ -1,8 +1,4 @@
-export interface IPracticeRole extends IPracticeRoleUpdatedData {
-    id: string
-};
-
-export interface IPracticeRoleUpdatedData {
+export interface IPracticeRole {
     [index: string]: any,
     name: string,
     practice_id: string,
