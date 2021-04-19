@@ -19,7 +19,12 @@ export const hcfaTemplatesQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM hcfa_templates WHERE id = $1`,
+            text: ` SELECT ht.*, 
+            p."name" AS practice_name
+            FROM hcfa_templates ht
+            LEFT JOIN practices p
+                   ON ht.practice_id = p.id
+            WHERE ht.id = $1`,
             values: [Id]
         }
     },
@@ -46,7 +51,11 @@ export const hcfaTemplatesQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM hcfa_templates`,
+            text: `SELECT ht.*, 
+            p."name" AS practice_name
+            FROM hcfa_templates ht
+            LEFT JOIN practices p
+            ON ht.practice_id = p.id`,
             values: []
         }
     },

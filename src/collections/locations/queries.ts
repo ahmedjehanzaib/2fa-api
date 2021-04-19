@@ -19,7 +19,11 @@ export const locationQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM practice_locations WHERE id = $1`,
+            text: ` SELECT pl.*,
+            p."name" AS practice_name
+            FROM practice_locations pl 
+            LEFT JOIN practices p
+            ON pl.practice_id = p.id  WHERE pl.id = $1`,
             values: [Id]
         }
     },
@@ -46,7 +50,12 @@ export const locationQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM practice_locations`,
+            text: `SELECT pl.*,
+            p."name" AS practice_name
+            FROM practice_locations pl 
+            LEFT JOIN practices p
+                   ON pl.practice_id = p.id 
+            `,
             values: []
         }
     },
