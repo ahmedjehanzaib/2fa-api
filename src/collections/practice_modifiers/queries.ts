@@ -20,7 +20,11 @@ export const practiceModifierQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM practice_modifier WHERE id = $1`,
+            text: `SELECT pm.*,
+            p."name" AS practice_name
+            FROM practice_modifier pm
+            LEFT JOIN practices p
+            ON pm.practice_id = p.id WHERE pm.id = $1`,
             values: [Id]
         }
     },
@@ -48,7 +52,11 @@ export const practiceModifierQueries = {
     
     findAll: () => {
         return {
-            text: `SELECT * FROM practice_modifier`,
+            text: `SELECT pm.*,
+            p."name" AS practice_name
+            FROM practice_modifier pm
+            LEFT JOIN practices p
+            ON pm.practice_id = p.id`,
             values: []
         }
     },

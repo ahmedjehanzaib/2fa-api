@@ -19,7 +19,11 @@ export const planCategoriesQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM practice_plan_category WHERE id = $1`,
+            text: ` SELECT ppc.*,
+            p."name" AS practice_name
+            FROM practice_plan_category ppc
+            LEFT JOIN practices p
+            ON ppc.practice_id = p.id WHERE ppc.id = $1`,
             values: [Id]
         }
     },
@@ -46,7 +50,12 @@ export const planCategoriesQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM practice_plan_category`,
+            text: `SELECT ppc.*,
+            p."name" AS practice_name
+            FROM practice_plan_category ppc
+            LEFT JOIN practices p
+            ON ppc.practice_id = p.id
+            `,
             values: []
         }
     },

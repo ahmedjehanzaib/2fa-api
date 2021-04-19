@@ -19,7 +19,11 @@ export const practiceICDQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM practice_icd WHERE id = $1`,
+            text: `SELECT pi.*,
+            p."name" AS practice_name
+            FROM practice_icd pi
+            LEFT JOIN practices p
+            ON pi.practice_id = p.id WHERE pi.id = $1`,
             values: [Id]
         }
     },
@@ -46,7 +50,11 @@ export const practiceICDQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM practice_icd`,
+            text: `SELECT pi.*,
+            p."name" AS practice_name
+            FROM practice_icd pi
+            LEFT JOIN practices p
+            ON pi.practice_id = p.id`,
             values: []
         }
     },
