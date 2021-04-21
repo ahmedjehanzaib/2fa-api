@@ -22,7 +22,11 @@ export const practicesQueries = {
 
     findPracticeById: (practiceId: string) => {
         return {
-            text: ` SELECT * FROM practices WHERE id = $1`,
+            text: `SELECT p.*,
+            c."name" AS client_name
+            FROM practices p
+            LEFT JOIN clients c
+            ON p.client_id = c.id WHERE p.id = $1`,
             values: [practiceId]
         }
     },
@@ -46,11 +50,18 @@ export const practicesQueries = {
             text: `UPDATE practices SET ${setQueryPart} WHERE id = '${practiceId}' RETURNING *`,
             values: Object.keys(practiceData).map((key) => practiceData[key])
         };
-    
+
     },
     findAllPractices: () => {
         return {
-            text: ` SELECT * FROM practices`,
+            text: `SELECT p.*,
+            c."name" AS client_name,
+            to_json(pl.*) as location
+            FROM practices p
+            LEFT JOIN clients c
+            ON p.client_id = c.id
+            left join practice_locations pl 
+            on p.id = pl.practice_id`,
             values: []
         }
     }
