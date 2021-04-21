@@ -23,10 +23,19 @@ export const practicePlansQueries = {
     findById: (Id: string) => {
         return {
             text: `SELECT pp.*,
-            p."name" AS practice_name
+            p."name" AS practice_name,
+            ppc."name" as category_name,
+            to_json(pa.*) as address,
+            to_json(pf.*) as fees 
             FROM practice_plan pp
             LEFT JOIN practices p
-            ON pp.practice_id = p.id WHERE pp.id = $1`,
+            ON pp.practice_id = p.id
+            left join practice_plan_category ppc 
+            on pp.plan_category_id = ppc.id 
+            left join plan_addresses pa 
+            on pp.id = pa.plan_id 
+            left join plan_fees pf 
+            on pp.id = pf.plan_id WHERE pp.id = $1`,
             values: [Id]
         }
     },
@@ -54,10 +63,19 @@ export const practicePlansQueries = {
     findAll: () => {
         return {
             text: `SELECT pp.*,
-            p."name" AS practice_name
+            p."name" AS practice_name,
+            ppc."name" as category_name,
+            to_json(pa.*) as address,
+            to_json(pf.*) as fees 
             FROM practice_plan pp
             LEFT JOIN practices p
-            ON pp.practice_id = p.id`,
+            ON pp.practice_id = p.id
+            left join practice_plan_category ppc 
+            on pp.plan_category_id = ppc.id 
+            left join plan_addresses pa 
+            on pp.id = pa.plan_id 
+            left join plan_fees pf 
+            on pp.id = pf.plan_id`,
             values: []
         }
     },

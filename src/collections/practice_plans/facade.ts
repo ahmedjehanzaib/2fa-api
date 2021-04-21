@@ -45,11 +45,6 @@ export const practicePlanFacade = {
 
     findById: async (Id: string) => {
         const { rows } = await PG_CLIENT.query(practicePlansQueries.findById(Id));
-        const { rows: planAddress } = await PG_CLIENT.query(planAddressesQueries.findByplanId(Id))
-        const { rows: planFees } = await PG_CLIENT.query(planFeesQueries.findByplanId(Id))
-        rows[0].address = planAddress[0]
-        rows[0].fees = planFees[0]
-
         return rows;
     },
 
