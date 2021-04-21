@@ -93,7 +93,7 @@ const validationSchema = {
             speciality: JOI.string().trim().optional().allow('', null),
             location: JOI.object().keys({
                 name: JOI.string().trim().required(),
-                zip_code: JOI.number().optional(),
+                zipcode: JOI.string().trim().optional().allow('', null),
                 city: JOI.string().trim().optional().allow('', null),
                 state: JOI.string().trim().optional().allow('', null),
                 address_line_1: JOI.string().trim().optional().allow('', null),
@@ -201,7 +201,7 @@ const validationSchema = {
             location: JOI.object().keys({
                 id: JOI.string().required(),
                 name: JOI.string().trim().required(),
-                zip_code: JOI.number().optional(),
+                zipcode: JOI.string().trim().optional().allow('', null),
                 city: JOI.string().trim().optional().allow('', null),
                 state: JOI.string().trim().optional().allow('', null),
                 address_line_1: JOI.string().trim().optional().allow('', null),
@@ -270,7 +270,7 @@ const validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             practice_id: JOI.string().trim().required(),
-            zip_code: JOI.number().optional(),
+            zipcode: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().required(),
             state: JOI.string().trim().required(),
             address_line_1: JOI.string().trim().optional().allow('', null),
@@ -341,7 +341,7 @@ const validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             practice_id: JOI.string().trim().required(),
-            zip_code: JOI.number().optional(),
+            zipcode: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().required(),
             state: JOI.string().trim().required(),
             address_line_1: JOI.string().trim().optional().allow('', null),
@@ -400,7 +400,7 @@ const validationSchema = {
         body: {
         },
         params: {
-            id:  JOI.number().required()
+            id: JOI.number().required()
         },
         query: {
         }
@@ -462,7 +462,7 @@ const validationSchema = {
             address_line_2: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().optional().allow('', null),
             state: JOI.string().trim().optional().allow('', null),
-            zip_code: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
             fax: JOI.string().trim().optional().allow('', null),
             license_number: JOI.string().trim().optional().allow('', null),
             notes: JOI.string().trim().optional().allow('', null),
@@ -528,7 +528,7 @@ const validationSchema = {
             address_line_2: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().optional().allow('', null),
             state: JOI.string().trim().optional().allow('', null),
-            zip_code: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
             fax: JOI.string().trim().optional().allow('', null),
             license_number: JOI.string().trim().optional().allow('', null),
             notes: JOI.string().trim().optional().allow('', null)
