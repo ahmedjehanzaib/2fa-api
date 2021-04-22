@@ -1439,6 +1439,65 @@ const validationSchema = {
         query: {
         }
     },
+
+
+
+    createAPlanFees: {
+        headers: {
+        },
+        body: {
+            plan_id: JOI.string().uuid().required(),
+            cpt_id: JOI.number().optional(),
+            fee: JOI.number().optional(),
+            allowed: JOI.boolean().optional()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+
+    findAPlanFees: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPlanFees: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPlanFees: {
+        headers: {
+        },
+        body: {
+            plan_id: JOI.string().uuid().required(),
+            cpt_id: JOI.number().optional(),
+            fee: JOI.number().optional(),
+            allowed: JOI.boolean().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
