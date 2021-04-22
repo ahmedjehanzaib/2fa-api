@@ -958,6 +958,15 @@ const validationSchema = {
                 fee: JOI.number().optional(),
                 allowed: JOI.boolean().optional(),
             }).optional(),
+            insurance_billing_options: JOI.object().keys({
+                provider_id: JOI.string().uuid().required(),
+                insurance_id: JOI.string().uuid().optional(),
+                practice_location_id: JOI.string().uuid().optional(),
+                tax_id_type: JOI.string().trim().optional().allow('', null),
+                pay_to_address: JOI.string().trim().optional().allow('', null),
+                report_tax_id: JOI.boolean().optional()
+
+            })
 
         },
         params: {
@@ -1019,6 +1028,16 @@ const validationSchema = {
                 fee: JOI.number().optional(),
                 allowed: JOI.boolean().optional(),
             }).optional(),
+            insurance_billing_options: JOI.object().keys({
+                id: JOI.number().optional(),
+                provider_id: JOI.string().uuid().required(),
+                insurance_id: JOI.string().uuid().optional(),
+                practice_location_id: JOI.string().uuid().optional(),
+                tax_id_type: JOI.string().trim().optional().allow('', null),
+                pay_to_address: JOI.string().trim().optional().allow('', null),
+                report_tax_id: JOI.boolean().optional()
+
+            })
         },
         params: {
             id: JOI.string().guid().required()

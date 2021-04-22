@@ -1,6 +1,7 @@
 import {
     IPracticePlan, IPracticePlanUpdatedData, IPlanAddress,
-    IPlanAddressUpdatedData, IPlanFees, IPlanFeesUpdatedData
+    IPlanAddressUpdatedData, IPlanFees, IPlanFeesUpdatedData,
+    IProviderInsuranceBillingOption
 } from './interfaces';
 
 export const practicePlansQueries = {
@@ -208,6 +209,60 @@ export const planFeesQueries = {
     findAll: () => {
         return {
             text: `SELECT * FROM plan_fees`,
+            values: []
+        }
+    },
+}
+
+export const providerInsuranceBillingOptionsQueries = {
+    create: (data: IProviderInsuranceBillingOption) => {
+
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO provider_insurance_billing_option(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findByProviderId: (providerId: string) => {
+        return {
+            text: ` SELECT * FROM provider_insurance_billing_option WHERE provider_id = $1`,
+            values: [providerId]
+        }
+    },
+
+    deleteByProviderId: (providerId: string) => {
+        return {
+            text: `DELETE FROM provider_insurance_billing_option WHERE provider_id = $1 RETURNING *`,
+            values: [providerId]
+        };
+    },
+
+    updateById: (Id: string, data: IProviderInsuranceBillingOption) => {
+        let setQueryPart = ``
+        Object.keys(data).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(data).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE provider_insurance_billing_option SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
+            values: Object.keys(data).map((key) => data[key])
+        };
+    },
+
+    findAll: () => {
+        return {
+            text: `SELECT * FROM provider_insurance_billing_option`,
             values: []
         }
     },

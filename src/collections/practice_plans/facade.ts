@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { practicePlansQueries, planAddressesQueries, planFeesQueries } from './queries';
+import { practicePlansQueries, planAddressesQueries, planFeesQueries, providerInsuranceBillingOptionsQueries } from './queries';
 import { PG_CLIENT } from '../../databases';
 import { InsertData, UpdateData } from './interfaces';
 
@@ -8,10 +8,11 @@ import { InsertData, UpdateData } from './interfaces';
 export const practicePlanFacade = {
 
     create: async (data: InsertData) => {
-        const { id, address, fees } = data
+        const { id, address, fees, insurance_billing_options } = data
 
         delete data.address
         delete data.fees
+        delete data.insurance_billing_options
 
         try {
 
@@ -27,6 +28,11 @@ export const practicePlanFacade = {
             if (fees) {
                 const { rows: planFees } = await PG_CLIENT.query(planFeesQueries.create({ id: uuidv4(), plan_id: id, ...fees }))
                 rows[0].fees = planFees[0]
+            }
+
+            if (insurance_billing_options) {
+                const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.create(insurance_billing_options))
+                rows[0].insurance_billing_options = insurance[0]
             }
 
             await PG_CLIENT.query('COMMIT')
@@ -71,10 +77,11 @@ export const practicePlanFacade = {
     },
 
     updateById: async (Id: string, data: UpdateData) => {
-        const { address, fees } = data
+        const { address, fees, insurance_billing_options } = data
 
         delete data.address
         delete data.fees
+        delete data.insurance_billing_options
 
         try {
 
@@ -102,6 +109,21 @@ export const practicePlanFacade = {
 
                     const { rows: planFees } = await PG_CLIENT.query(planFeesQueries.create({ id: uuidv4(), plan_id: Id, ...fees }))
                     rows[0].fees = planFees[0]
+                }
+            }
+
+            if (insurance_billing_options) {
+
+                if (insurance_billing_options.id) {
+                    const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries
+                        .updateById(insurance_billing_options.id, insurance_billing_options))
+                    rows[0].insurance_billing_options = insurance[0]
+
+                } else {
+
+                    const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries
+                        .create(insurance_billing_options))
+                    rows[0].insurance_billing_options = insurance[0]
                 }
             }
 
