@@ -1,4 +1,4 @@
-import { IPracticeCPT } from './interfaces';
+import { IPracticeCPT, ICPTToModifier, ICPTToICD } from './interfaces';
 
 export const practiceCPTQueries = {
     create: (data: IPracticeCPT) => {
@@ -95,6 +95,123 @@ export const practiceCPTQueries = {
             LEFT JOIN
                ndc_unit_of_measurement nuom 
                ON nuom.id = pc.ndc_unit_of_measurements`,
+            values: []
+        }
+    },
+}
+
+export const CPTToModifierQueries = {
+    create: (data: ICPTToModifier) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO cpt_to_modifiers(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findById: (Id: string) => {
+        return {
+            text: ` SELECT * FROM cpt_to_modifiers WHERE id = $1`,
+            values: [Id]
+        }
+    },
+
+    deleteById: (Id: string) => {
+        return {
+            text: `DELETE FROM cpt_to_modifiers WHERE id = $1 RETURNING *`,
+            values: [Id]
+        };
+    },
+
+    deleteByCPTId: (CPTId: string) => {
+        return {
+            text: `DELETE FROM cpt_to_modifiers WHERE cpt_id = $1 RETURNING *`,
+            values: [CPTId]
+        };
+    },
+
+    updateById: (Id: string, data: ICPTToModifier) => {
+        let setQueryPart = ``
+        Object.keys(data).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(data).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE cpt_to_modifiers SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
+            values: Object.keys(data).map((key) => data[key])
+        };
+    },
+    findAll: () => {
+        return {
+            text: `SELECT * FROM cpt_to_modifiers`,
+            values: []
+        }
+    },
+}
+
+export const CPTToICDQueries = {
+    create: (data: ICPTToICD) => {
+        const columns = Object.keys(data)
+
+        const indices: any = []
+        const values = columns.map((k, i) => {
+            indices.push(`$${i + 1}`)
+            return data[k]
+
+        })
+
+        return {
+            text: `INSERT INTO cpt_icd(${columns})  VALUES (${indices}) RETURNING *`,
+            values
+        }
+    },
+
+    findById: (Id: string) => {
+        return {
+            text: ` SELECT * FROM cpt_icd WHERE id = $1`,
+            values: [Id]
+        }
+    },
+
+    deleteById: (Id: string) => {
+        return {
+            text: `DELETE FROM cpt_icd WHERE id = $1 RETURNING *`,
+            values: [Id]
+        };
+    },
+    deleteByCPTId: (CPTId: string) => {
+        return {
+            text: `DELETE FROM cpt_icd WHERE cpt_id = $1 RETURNING *`,
+            values: [CPTId]
+        };
+    },
+
+    updateById: (Id: string, data: ICPTToICD) => {
+        let setQueryPart = ``
+        Object.keys(data).forEach((key, index) => {
+            setQueryPart += ` ${key}=$${index + 1}`
+            if (Object.keys(data).length !== (index + 1)) {
+                setQueryPart += `,`
+            }
+        });
+        return {
+            text: `UPDATE cpt_icd SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
+            values: Object.keys(data).map((key) => data[key])
+        };
+    },
+    findAll: () => {
+        return {
+            text: `SELECT * FROM cpt_icd`,
             values: []
         }
     },

@@ -21,3 +21,21 @@ export interface IPracticeCPT {
     donot_print?: boolean,
     revenue_code: string
 }
+
+export interface ICPTToModifier {
+    [index: string]: any,
+    cpt_id: number,
+    modifier_id: number
+}
+
+export interface ICPTToICD {
+    [index: string]: any,
+    cpt_id: number,
+    icd_id: number
+}
+
+export interface IRequestData extends IPracticeCPT {
+    modifiers?: ICPTToModifier[],
+    icds?: ICPTToICD[],
+
+}

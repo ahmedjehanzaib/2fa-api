@@ -1394,7 +1394,9 @@ const validationSchema = {
             clia: JOI.boolean().optional(),
             patient_responsibility: JOI.boolean().optional(),
             donot_print: JOI.boolean().optional(),
-            revenue_code: JOI.string().trim().optional().allow('', null)
+            revenue_code: JOI.string().trim().optional().allow('', null),
+            modifiers: JOI.array().optional(),
+            icds: JOI.array().optional(),
         },
         params: {
         },
@@ -1450,7 +1452,9 @@ const validationSchema = {
             clia: JOI.boolean().optional(),
             patient_responsibility: JOI.boolean().optional(),
             donot_print: JOI.boolean().optional(),
-            revenue_code: JOI.string().trim().optional().allow('', null)
+            revenue_code: JOI.string().trim().optional().allow('', null),
+            modifiers: JOI.array().optional(),
+            icds: JOI.array().optional(),
         },
         params: {
             id: JOI.number().required()
@@ -1513,6 +1517,73 @@ const validationSchema = {
         },
         params: {
             id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    createAPracticeAppointmentReason: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)  
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPracticeAppointmentReason: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    findPracticeAppointmentReasonsByPracticeId: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPracticeAppointmentReason: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPracticeAppointmentReason: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)        },
+        params: {
+            id: JOI.number().required()
         },
         query: {
         }
