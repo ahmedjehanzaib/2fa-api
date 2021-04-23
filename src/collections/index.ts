@@ -19,4 +19,9 @@ export * from './practice_cpt';
 export * from './plan_fees';
 export * from './practice_appointment_reasons';
 export * from './practice_appointment_statuses';
-export * from './practice_rooms'
+export * from './practice_rooms';
+export * from './practice_lab_test';
+export * from './practice_laboratories';
+export * from './practice_specimen';
+export * from './practice_result_alerts';
+export * from './practice_result_statuses';

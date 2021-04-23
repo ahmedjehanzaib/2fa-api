@@ -13,7 +13,8 @@ import {
 	practiceModifierRouters, practicePlaceOfServiceRouters, practiceTypeOfServiceRouters,
 	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters, practiceCPTRouters,
 	planFeesRouters, practiceAppointmentReasonsRouters, practiceAppointmentStatusRouters,
-	practiceRoomRouters
+	practiceRoomRouters, practiceLabTestRouters, practiceLaboratoryRouters, practiceSpecimenRouters,
+	practiceResultAlertRouters, practiceResultStatusRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +76,11 @@ app.use(`${app.locals.BaseUri}/practice_procedure_categories`, practiceProcedure
 app.use(`${app.locals.BaseUri}/practice_appointment_reasons`, practiceAppointmentReasonsRouters());
 app.use(`${app.locals.BaseUri}/practice_appointment_statuses`, practiceAppointmentStatusRouters());
 app.use(`${app.locals.BaseUri}/practice_rooms`, practiceRoomRouters());
+app.use(`${app.locals.BaseUri}/practice_lab_tests`, practiceLabTestRouters());
+app.use(`${app.locals.BaseUri}/practice_laboratories`, practiceLaboratoryRouters());
+app.use(`${app.locals.BaseUri}/practice_specimen`, practiceSpecimenRouters());
+app.use(`${app.locals.BaseUri}/practice_result_alerts`, practiceResultAlertRouters());
+app.use(`${app.locals.BaseUri}/practice_result_statuses`, practiceResultStatusRouters());
 app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
 app.use(`${app.locals.BaseUri}/plan_fees`, planFeesRouters());
 
