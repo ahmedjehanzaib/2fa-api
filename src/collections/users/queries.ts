@@ -4,45 +4,47 @@ export const userQueries = {
     create: (data: IUser) => {
         const columns = Object.keys(data)
 
+        
         const indices: any = []
         const values = columns.map((k, i) => {
             indices.push(`$${i + 1}`)
             return data[k]
-
+            
         })
-        console.log({ data })
-
+        
         return {
             text: `INSERT INTO users(${columns})  VALUES (${indices}) RETURNING *`,
             values
         }
     },
-
+    
     findById: (Id: string) => {
         return {
             text: ` SELECT * FROM users WHERE id = $1`,
             values: [Id]
         }
     },
-
+    
     deleteById: (Id: string) => {
         return {
             text: `DELETE FROM users WHERE id = $1 RETURNING *`,
             values: [Id]
         };
     },
-
-    updateById: (Id: string, locationData: IUpdateData) => {
+    
+    updateById: (Id: string, data: IUpdateData) => {
+    
         let setQueryPart = ``
-        Object.keys(locationData).forEach((key, index) => {
+        
+        Object.keys(data).forEach((key, index) => {
             setQueryPart += ` ${key}=$${index + 1}`
-            if (Object.keys(locationData).length !== (index + 1)) {
+            if (Object.keys(data).length !== (index + 1)) {
                 setQueryPart += `,`
             }
         });
         return {
             text: `UPDATE users SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
-            values: Object.keys(locationData).map((key) => locationData[key])
+            values: Object.keys(data).map((key) => data[key])
         };
     },
     findAll: () => {

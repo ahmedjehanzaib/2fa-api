@@ -1685,7 +1685,7 @@ const validationSchema = {
         }
     },
 
-    findPracticeGeneralItem: {
+    findPracticeGeneralItems: {
         headers: {
         },
         body: {

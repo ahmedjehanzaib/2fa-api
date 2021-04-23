@@ -12,7 +12,8 @@ import {
 	planCategoriesRouters, planTypesRouters, practicePlanRouters, practiceICDRouters,
 	practiceModifierRouters, practicePlaceOfServiceRouters, practiceTypeOfServiceRouters,
 	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters, practiceCPTRouters,
-	planFeesRouters, practiceAppointmentReasonsRouters, practiceAppointmentStatusRouters
+	planFeesRouters, practiceAppointmentReasonsRouters, practiceAppointmentStatusRouters,
+	practiceRoomRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +74,7 @@ app.use(`${app.locals.BaseUri}/practice_type_of_service`, practiceTypeOfServiceR
 app.use(`${app.locals.BaseUri}/practice_procedure_categories`, practiceProcedureCategoriesRouters());
 app.use(`${app.locals.BaseUri}/practice_appointment_reasons`, practiceAppointmentReasonsRouters());
 app.use(`${app.locals.BaseUri}/practice_appointment_statuses`, practiceAppointmentStatusRouters());
+app.use(`${app.locals.BaseUri}/practice_rooms`, practiceRoomRouters());
 app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
 app.use(`${app.locals.BaseUri}/plan_fees`, planFeesRouters());
 

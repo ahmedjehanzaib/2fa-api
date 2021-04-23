@@ -3,7 +3,7 @@ import { PG_CLIENT } from '../../databases';
 import { IPracticeRoom } from './interfaces';
 
 
-export const practiceRoomsFacade = {
+export const practiceRoomFacade = {
 
     create: async (data: IPracticeRoom) => {
         const { rows } = await PG_CLIENT.query(practiceRoomQueries.create(data))
