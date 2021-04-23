@@ -90,13 +90,13 @@ export const practiceCPTFacade = {
             for (const icd of icds) {
                 if (icd.id) {
                     // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.updateById(icd.id, { cpt_id: rows[0].id, ...modifier }))
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.updateById(icd.id, { cpt_id: rows[0].id, ...icd }))
                     rows[0].icds.push(inserted[0])
 
                 } else {
 
                     // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.create({ cpt_id: rows[0].id, ...modifier }))
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.create({ cpt_id: rows[0].id, ...icd }))
                     rows[0].icds.push(inserted[0])
                 }
 
