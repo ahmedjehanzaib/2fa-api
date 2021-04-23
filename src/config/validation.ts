@@ -1529,7 +1529,7 @@ const validationSchema = {
             practice_id: JOI.string().uuid().required(),
             name: JOI.string().required(),
             description: JOI.string().trim().optional().allow('', null),
-            color_code: JOI.string().trim().optional().allow('', null)  
+            color_code: JOI.string().trim().optional().allow('', null)
         },
         params: {
         },
@@ -1581,7 +1581,8 @@ const validationSchema = {
             practice_id: JOI.string().uuid().required(),
             name: JOI.string().required(),
             description: JOI.string().trim().optional().allow('', null),
-            color_code: JOI.string().trim().optional().allow('', null)        },
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
         params: {
             id: JOI.number().required()
         },
@@ -1596,7 +1597,7 @@ const validationSchema = {
             practice_id: JOI.string().uuid().required(),
             name: JOI.string().required(),
             description: JOI.string().trim().optional().allow('', null),
-            color_code: JOI.string().trim().optional().allow('', null)  
+            color_code: JOI.string().trim().optional().allow('', null)
         },
         params: {
         },
@@ -1648,7 +1649,75 @@ const validationSchema = {
             practice_id: JOI.string().uuid().required(),
             name: JOI.string().required(),
             description: JOI.string().trim().optional().allow('', null),
-            color_code: JOI.string().trim().optional().allow('', null)        },
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+
+    createAPracticeGeneralItem: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPracticeGeneralItem: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    findPracticeGeneralItem: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPracticeGeneralItem: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPracticeGeneralItem: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
         params: {
             id: JOI.number().required()
         },

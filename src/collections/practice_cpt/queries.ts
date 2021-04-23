@@ -124,6 +124,13 @@ export const CPTToModifierQueries = {
         }
     },
 
+    findByCPTId: (Id: string) => {
+        return {
+            text: ` SELECT * FROM cpt_to_modifiers WHERE cpt_id = $1`,
+            values: [Id]
+        }
+    },
+
     deleteById: (Id: string) => {
         return {
             text: `DELETE FROM cpt_to_modifiers WHERE id = $1 RETURNING *`,
@@ -179,6 +186,13 @@ export const CPTToICDQueries = {
     findById: (Id: string) => {
         return {
             text: ` SELECT * FROM cpt_icd WHERE id = $1`,
+            values: [Id]
+        }
+    },
+
+    findByCPTId: (Id: string) => {
+        return {
+            text: ` SELECT * FROM cpt_icd WHERE cpt_id = $1`,
             values: [Id]
         }
     },

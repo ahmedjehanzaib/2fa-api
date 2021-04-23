@@ -40,6 +40,10 @@ export const practiceCPTFacade = {
 
     findById: async (Id: string) => {
         const { rows } = await PG_CLIENT.query(practiceCPTQueries.findById(Id));
+        const { rows: modifiers } = await PG_CLIENT.query(CPTToModifierQueries.findByCPTId(Id));
+        const { rows: icds } = await PG_CLIENT.query(CPTToICDQueries.findByCPTId(Id));
+        rows[0].modifiers = modifiers
+        rows[0].icds = icds
         return rows;
     },
 
