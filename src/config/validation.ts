@@ -1588,6 +1588,73 @@ const validationSchema = {
         query: {
         }
     },
+
+    createAPracticeAppointmentStatus: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)  
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPracticeAppointmentStatus: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    findPracticeAppointmentStatusesByPracticeId: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPracticeAppointmentStatus: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPracticeAppointmentStatus: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
