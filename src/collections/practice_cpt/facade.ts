@@ -11,30 +11,42 @@ export const practiceCPTFacade = {
         delete data.modifiers
         delete data.icds
 
-        const { rows } = await PG_CLIENT.query(practiceCPTQueries.create(data))
+        try {
+            await PG_CLIENT.query('BEGIN')
 
-        rows[0].modifiers = []
-        rows[0].icds = []
+            const { rows } = await PG_CLIENT.query(practiceCPTQueries.create(data))
 
-        if (modifiers) {
-            for (const modifier of modifiers) {
-                // @ts-ignore
-                const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.create({ cpt_id: rows[0].id, ...modifier }))
-                rows[0].modifiers.push(inserted[0])
+            rows[0].modifiers = []
+            rows[0].icds = []
 
+            if (modifiers) {
+                for (const modifier of modifiers) {
+                    // @ts-ignore
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.create({ cpt_id: rows[0].id, ...modifier }))
+                    rows[0].modifiers.push(inserted[0])
+
+                }
             }
+
+            if (icds) {
+                for (const icd of icds) {
+                    // @ts-ignore
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.create({ cpt_id: rows[0].id, ...icd }))
+                    rows[0].icds.push(inserted[0])
+
+                }
+            }
+
+            await PG_CLIENT.query('COMMIT')
+
+            return rows;
+        } catch (err) {
+            console.error('Error while creating CPT', err)
+            await PG_CLIENT.query('ROLLBACK')
+
+            throw err
         }
 
-        if (icds) {
-            for (const icd of icds) {
-                // @ts-ignore
-                const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.create({ cpt_id: rows[0].id, ...icd }))
-                rows[0].icds.push(inserted[0])
-
-            }
-        }
-
-        return rows;
 
     },
 
@@ -64,46 +76,45 @@ export const practiceCPTFacade = {
         delete data.modifiers
         delete data.icds
 
-        const { rows } = await PG_CLIENT.query(practiceCPTQueries.updateById(Id, data));
+        try {
+            await PG_CLIENT.query('BEGIN')
 
-        rows[0].modifiers = []
-        rows[0].icds = []
+            await PG_CLIENT.query(CPTToModifierQueries.deleteByCPTId(Id));
+            await PG_CLIENT.query(CPTToICDQueries.deleteByCPTId(Id));
 
-        if (modifiers) {
-            for (const modifier of modifiers) {
-                if (modifier.id) {
+            const { rows } = await PG_CLIENT.query(practiceCPTQueries.updateById(Id, data));
+
+            rows[0].modifiers = []
+            rows[0].icds = []
+
+            if (modifiers) {
+                for (const modifier of modifiers) {
                     // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.updateById(modifier.id, { cpt_id: rows[0].id, ...modifier }))
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.create({ cpt_id: Id, ...modifier }))
                     rows[0].modifiers.push(inserted[0])
 
-                } else {
-
-                    // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToModifierQueries.create({ cpt_id: rows[0].id, ...modifier }))
-                    rows[0].modifiers.push(inserted[0])
                 }
-
             }
-        }
 
-        if (icds) {
-            for (const icd of icds) {
-                if (icd.id) {
+            if (icds) {
+                for (const icd of icds) {
                     // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.updateById(icd.id, { cpt_id: rows[0].id, ...icd }))
+                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.create({ cpt_id: Id, ...icd }))
                     rows[0].icds.push(inserted[0])
 
-                } else {
-
-                    // @ts-ignore
-                    const { rows: inserted } = await PG_CLIENT.query(CPTToICDQueries.create({ cpt_id: rows[0].id, ...icd }))
-                    rows[0].icds.push(inserted[0])
                 }
-
             }
+            await PG_CLIENT.query('COMMIT')
+
+
+            return rows;
+        } catch (err) {
+            console.log('Error while updating practice CPT')
+
+            await PG_CLIENT.query('ROLLBACK')
+            throw err
         }
 
-        return rows;
 
     },
 

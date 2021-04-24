@@ -31,7 +31,7 @@ export const practicePlanFacade = {
             }
 
             if (insurance_billing_options) {
-                const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.create(insurance_billing_options))
+                const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.create({ plan_id: id, ...insurance_billing_options }))
                 rows[0].insurance_billing_options = insurance[0]
             }
 
@@ -98,7 +98,8 @@ export const practicePlanFacade = {
                     const { rows: planAddress } = await PG_CLIENT.query(planAddressesQueries.create({ id: uuidv4(), plan_id: Id, ...address }))
                     rows[0].address = planAddress[0]
                 }
-            }
+            } else await PG_CLIENT.query(planAddressesQueries.deleteByPlanId(Id))
+
 
             if (fees) {
                 if (fees.id) {
@@ -110,7 +111,7 @@ export const practicePlanFacade = {
                     const { rows: planFees } = await PG_CLIENT.query(planFeesQueries.create({ id: uuidv4(), plan_id: Id, ...fees }))
                     rows[0].fees = planFees[0]
                 }
-            }
+            } else await PG_CLIENT.query(planFeesQueries.deleteByPlanId(Id))
 
             if (insurance_billing_options) {
 
@@ -122,10 +123,11 @@ export const practicePlanFacade = {
                 } else {
 
                     const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries
-                        .create(insurance_billing_options))
+                        .create({ plan_id: Id, ...insurance_billing_options }))
                     rows[0].insurance_billing_options = insurance[0]
                 }
-            }
+            } else await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.deleteByPlanId(Id))
+
 
             await PG_CLIENT.query('COMMIT')
 

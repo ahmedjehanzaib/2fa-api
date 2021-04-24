@@ -27,7 +27,8 @@ export const practicePlansQueries = {
             p."name" AS practice_name,
             ppc."name" as category_name,
             to_json(pa.*) as address,
-            to_json(pf.*) as fees 
+            to_json(pf.*) as fees,
+            to_json(pibo.*) as insurance_billing_options 
             FROM practice_plan pp
             LEFT JOIN practices p
             ON pp.practice_id = p.id
@@ -36,7 +37,9 @@ export const practicePlansQueries = {
             left join plan_addresses pa 
             on pp.id = pa.plan_id 
             left join plan_fees pf 
-            on pp.id = pf.plan_id WHERE pp.id = $1`,
+            on pp.id = pf.plan_id
+            left join provider_insurance_billing_option pibo 
+            on pp.id = pibo.plan_id  WHERE pp.id = $1`,
             values: [Id]
         }
     },
@@ -67,7 +70,8 @@ export const practicePlansQueries = {
             p."name" AS practice_name,
             ppc."name" as category_name,
             to_json(pa.*) as address,
-            to_json(pf.*) as fees 
+            to_json(pf.*) as fees,
+            to_json(pibo.*) as insurance_billing_options 
             FROM practice_plan pp
             LEFT JOIN practices p
             ON pp.practice_id = p.id
@@ -76,7 +80,9 @@ export const practicePlansQueries = {
             left join plan_addresses pa 
             on pp.id = pa.plan_id 
             left join plan_fees pf 
-            on pp.id = pf.plan_id`,
+            on pp.id = pf.plan_id
+            left join provider_insurance_billing_option pibo 
+            on pp.id = pibo.plan_id`,
             values: []
         }
     },
@@ -239,9 +245,9 @@ export const providerInsuranceBillingOptionsQueries = {
         }
     },
 
-    deleteByProviderId: (providerId: string) => {
+    deleteByPlanId: (providerId: string) => {
         return {
-            text: `DELETE FROM provider_insurance_billing_option WHERE provider_id = $1 RETURNING *`,
+            text: `DELETE FROM provider_insurance_billing_option WHERE plan_id = $1 RETURNING *`,
             values: [providerId]
         };
     },
