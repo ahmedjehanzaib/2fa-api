@@ -14,7 +14,10 @@ import {
 	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters, practiceCPTRouters,
 	planFeesRouters, practiceAppointmentReasonsRouters, practiceAppointmentStatusRouters,
 	practiceRoomRouters, practiceLabTestRouters, practiceLaboratoryRouters, practiceSpecimenRouters,
-	practiceResultAlertRouters, practiceResultStatusRouters
+	practiceResultAlertRouters, practiceResultStatusRouters, practiceClassRouters,
+	practicePaymentTypeRouters, practicePatientReferralSourceRouters, practicePreferredCommunicationRouters,
+	practiceMartialStatusRouters, practicePharmacyRouters, practiceColorCodeRouters, practiceAlertTypeRouters,
+	practiceAuthorizationStatusRouters, practiceTaskTypeRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +69,7 @@ app.use(`${app.locals.BaseUri}/users`, userRouters());
 app.use(`${app.locals.BaseUri}/hcfa_templates`, hcfaTemplatesRouters());
 app.use(`${app.locals.BaseUri}/plan_categories`, planCategoriesRouters());
 app.use(`${app.locals.BaseUri}/plan_types`, planTypesRouters());
+app.use(`${app.locals.BaseUri}/plan_fees`, planFeesRouters());
 app.use(`${app.locals.BaseUri}/practice_plans`, practicePlanRouters());
 app.use(`${app.locals.BaseUri}/practice_icd`, practiceICDRouters());
 app.use(`${app.locals.BaseUri}/practice_cpt`, practiceCPTRouters());
@@ -81,8 +85,17 @@ app.use(`${app.locals.BaseUri}/practice_laboratories`, practiceLaboratoryRouters
 app.use(`${app.locals.BaseUri}/practice_specimen`, practiceSpecimenRouters());
 app.use(`${app.locals.BaseUri}/practice_result_alerts`, practiceResultAlertRouters());
 app.use(`${app.locals.BaseUri}/practice_result_statuses`, practiceResultStatusRouters());
+app.use(`${app.locals.BaseUri}/practice_classes`, practiceClassRouters());
+app.use(`${app.locals.BaseUri}/practice_payment_types`, practicePaymentTypeRouters());
+app.use(`${app.locals.BaseUri}/practice_patient_referral_sources`, practicePatientReferralSourceRouters());
+app.use(`${app.locals.BaseUri}/practice_preferred_communications`, practicePreferredCommunicationRouters());
+app.use(`${app.locals.BaseUri}/practice_martial_statuses`, practiceMartialStatusRouters());
+app.use(`${app.locals.BaseUri}/practice_pharmacies`, practicePharmacyRouters());
+app.use(`${app.locals.BaseUri}/practice_color_codes`, practiceColorCodeRouters());
+app.use(`${app.locals.BaseUri}/practice_alert_types`, practiceAlertTypeRouters());
+app.use(`${app.locals.BaseUri}/practice_authorization_statuses`, practiceAuthorizationStatusRouters());
+app.use(`${app.locals.BaseUri}/practice_task_types`, practiceTaskTypeRouters());
 app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
-app.use(`${app.locals.BaseUri}/plan_fees`, planFeesRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
