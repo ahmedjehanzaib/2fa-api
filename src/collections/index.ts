@@ -41,3 +41,4 @@ export * from './practice_provider_specialities';
 export * from './practice_template_types';
 export * from './practice_qualifiers';
 export * from './practice_rx_statuses';
+export * from './practice_clinical_visit_statuses';
