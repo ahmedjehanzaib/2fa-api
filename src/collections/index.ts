@@ -46,3 +46,4 @@ export * from './practice_financial_visit_statuses';
 export * from './practice_gender_indentities';
 export * from './practice_sexual_orientations';
 export * from './practice_accident_types';
+export * from './practice_accident_states';
