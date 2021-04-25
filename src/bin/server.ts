@@ -17,7 +17,8 @@ import {
 	practiceResultAlertRouters, practiceResultStatusRouters, practiceClassRouters,
 	practicePaymentTypeRouters, practicePatientReferralSourceRouters, practicePreferredCommunicationRouters,
 	practiceMartialStatusRouters, practicePharmacyRouters, practiceColorCodeRouters, practiceAlertTypeRouters,
-	practiceAuthorizationStatusRouters, practiceTaskTypeRouters, practiceCaseTypeRouters, practiceDocumentRouters
+	practiceAuthorizationStatusRouters, practiceTaskTypeRouters, practiceCaseTypeRouters, practiceDocumentRouters,
+	practiceProviderSpecialityRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +98,7 @@ app.use(`${app.locals.BaseUri}/practice_authorization_statuses`, practiceAuthori
 app.use(`${app.locals.BaseUri}/practice_task_types`, practiceTaskTypeRouters());
 app.use(`${app.locals.BaseUri}/practice_case_types`, practiceCaseTypeRouters());
 app.use(`${app.locals.BaseUri}/practice_documents`, practiceDocumentRouters());
+app.use(`${app.locals.BaseUri}/practice_provider_specialities`, practiceProviderSpecialityRouters());
 app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

@@ -37,3 +37,4 @@ export * from './practice_authorization_statuses';
 export * from './practice_task_types';
 export * from './practice_case_types';
 export * from './practice_documents';
+export * from './practice_provider_specialities';
