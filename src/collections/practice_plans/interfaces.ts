@@ -9,7 +9,7 @@ export interface IPracticePlanUpdatedData {
     description?: string,
     payer_id?: string,
     plan_category_id?: string,
-    plan_type_id?: string,
+    plan_type_id?: number,
     fax?: string,
     submission_type?: string,
     hcfa_template_id?: string
