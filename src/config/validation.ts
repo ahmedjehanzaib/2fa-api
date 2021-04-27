@@ -586,7 +586,7 @@ const validationSchema = {
                 })
             }),
             insurance_billing_options: JOI.object().keys({
-                insurance_id: JOI.string().trim().optional().allow('', null),
+                plan_id: JOI.string().uuid().optional().allow(null),
                 practice_location_id: JOI.string().trim().optional().allow('', null),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
@@ -673,7 +673,7 @@ const validationSchema = {
                 })
             }),
             insurance_billing_options: JOI.object().keys({
-                insurance_id: JOI.string().trim().optional().allow('', null),
+                plan_id: JOI.string().uuid().optional().allow(null),
                 practice_location_id: JOI.string().trim().optional().allow('', null),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
