@@ -19,7 +19,9 @@ export const planFeesQueries = {
 
     findById: (Id: string) => {
         return {
-            text: ` SELECT * FROM plan_fees WHERE id = $1`,
+            text: `SELECT pf.*, to_json(pp.*) as plan FROM plan_fees pf 
+            LEFT join practice_plan pp 
+            on pf.plan_id = pp.id  WHERE pf.id = $1`,
             values: [Id]
         }
     },
@@ -46,7 +48,9 @@ export const planFeesQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT * FROM plan_fees`,
+            text: `SELECT pf.*, to_json(pp.*) as plan FROM plan_fees pf 
+            LEFT join practice_plan pp 
+            on pf.plan_id = pp.id `,
             values: []
         }
     },
