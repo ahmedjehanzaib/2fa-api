@@ -7,5 +7,5 @@ export interface IPlanFeesUpdatedData {
     cpt_id: number,
     plan_id: string,
     fee: number,
-    allowed: boolean
+    allowed: number
 }

@@ -956,14 +956,14 @@ const validationSchema = {
             fees: JOI.object().keys({
                 cpt_id: JOI.string().trim().optional().allow('', null),
                 fee: JOI.number().optional(),
-                allowed: JOI.boolean().optional(),
+                allowed: JOI.number().optional(),
             }).optional(),
             insurance_billing_options: JOI.object().keys({
                 provider_id: JOI.string().uuid().required(),
                 practice_location_id: JOI.string().uuid().optional(),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
-                report_tax_id: JOI.boolean().optional()
+                report_tax_id: JOI.number().optional()
 
             })
 
@@ -1470,7 +1470,7 @@ const validationSchema = {
             plan_id: JOI.string().uuid().required(),
             cpt_id: JOI.number().optional(),
             fee: JOI.number().optional(),
-            allowed: JOI.boolean().optional()
+            allowed: JOI.number().optional()
         },
         params: {
         },
@@ -1511,7 +1511,7 @@ const validationSchema = {
             plan_id: JOI.string().uuid().required(),
             cpt_id: JOI.number().optional(),
             fee: JOI.number().optional(),
-            allowed: JOI.boolean().optional()
+            allowed: JOI.number().optional()
         },
         params: {
             id: JOI.string().guid().required()

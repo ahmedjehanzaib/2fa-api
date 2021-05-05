@@ -24,7 +24,7 @@ export interface IPlanFeesUpdatedData {
     cpt_id: string,
     fee: number,
     plan_id?: string,
-    allowed: boolean
+    allowed: number
 }
 
 export interface IPlanAddress extends IPlanAddressUpdatedData {
