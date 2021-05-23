@@ -1722,6 +1722,56 @@ const validationSchema = {
         query: {
         }
     },
+    createAQuestionType: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAQuestionType: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAQuestionType: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateAQuestionType: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };

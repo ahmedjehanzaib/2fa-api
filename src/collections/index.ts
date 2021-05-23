@@ -47,3 +47,4 @@ export * from './practice_gender_indentities';
 export * from './practice_sexual_orientations';
 export * from './practice_accident_types';
 export * from './practice_accident_states';
+export * from './question_types';
