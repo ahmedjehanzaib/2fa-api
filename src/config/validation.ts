@@ -1772,6 +1772,60 @@ const validationSchema = {
         query: {
         }
     },
+    createAQuestion: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            question_type_id: JOI.number().required(),
+            options: JOI.array().optional()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAQuestion: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAQuestion: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAQuestion: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            question_type_id: JOI.number().required(),
+            options: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
