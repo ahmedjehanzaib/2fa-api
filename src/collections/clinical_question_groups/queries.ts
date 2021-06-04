@@ -64,6 +64,7 @@ export const questionGroupToQuestionQueries = {
         const indices: any = []
         const values = columns.map((k, i) => {
             indices.push(`$${i + 1}`)
+            // @ts-ignore
             return data[k]
 
         })

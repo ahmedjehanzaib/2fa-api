@@ -19,6 +19,7 @@ export const questionGroupFacade = {
 
             rows[0].questions = []
 
+            // @ts-ignore
             for (const question of questions) {
 
                 const { rows: inserted } = await PG_CLIENT.query(questionGroupToQuestionQueries
@@ -81,7 +82,7 @@ export const questionGroupFacade = {
 
             rows[0].questions = []
 
-
+            // @ts-ignore
             for (const question of questions) {
 
                 const { rows: inserted } = await PG_CLIENT.query(questionGroupToQuestionQueries
