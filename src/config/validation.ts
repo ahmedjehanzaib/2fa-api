@@ -1826,6 +1826,59 @@ const validationSchema = {
         query: {
         }
     },
+    createAQuestionGroup: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            questions: JOI.array().optional()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findAQuestionGroup: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAQuestionGroup: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAQuestionGroup: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            questions: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };

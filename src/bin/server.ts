@@ -21,7 +21,7 @@ import {
 	practiceProviderSpecialityRouters, practiceTemplateTypeRouters, practiceQualifierRouters, practiceRXStatusRouters,
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
-	questionRouters, questionTypeRouters
+	questionRouters, questionTypeRouters, questionGroupRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +114,7 @@ app.use(`${app.locals.BaseUri}/practice_accident_states`, practiceAccidentStateR
 app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
 app.use(`${app.locals.BaseUri}/clinical/question_types`, questionTypeRouters());
 app.use(`${app.locals.BaseUri}/clinical/questions`, questionRouters());
+app.use(`${app.locals.BaseUri}/clinical/question_groups`, questionGroupRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
