@@ -89,7 +89,7 @@ export interface IProviderPayToAddressUpdatedData {
 export interface IProviderInsuranceBillingOption {
     [index: string]: any;
     provider_id: string;
-    insurance_id?: string;
+    plan_id?: string;
     practice_location_id?: string;
     report_tax_id?: boolean;
     tax_id_type?: string;
@@ -99,7 +99,7 @@ export interface IProviderInsuranceBillingOptionUpdatedData {
     [index: string]: string | number | boolean;
     id: number;
     provider_id: string;
-    insurance_id: string;
+    plan_id: string;
     practice_location_id: string;
     report_tax_id: boolean;
     tax_id_type: string;

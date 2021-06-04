@@ -1,4 +1,4 @@
-import { IPracticePlan, IPracticePlanUpdatedData, IPlanAddress, IPlanAddressUpdatedData, IPlanFees, IPlanFeesUpdatedData } from './interfaces';
+import { IPracticePlan, IPracticePlanUpdatedData, IPlanAddress, IPlanAddressUpdatedData, IPlanFees, IPlanFeesUpdatedData, IProviderInsuranceBillingOption } from './interfaces';
 export declare const practicePlansQueries: {
     create: (data: IPracticePlan) => {
         text: string;
@@ -73,6 +73,28 @@ export declare const planFeesQueries: {
         values: string[];
     };
     updateById: (Id: string, locationData: IPlanFeesUpdatedData) => {
+        text: string;
+        values: any[];
+    };
+    findAll: () => {
+        text: string;
+        values: never[];
+    };
+};
+export declare const providerInsuranceBillingOptionsQueries: {
+    create: (data: IProviderInsuranceBillingOption) => {
+        text: string;
+        values: any[];
+    };
+    findByProviderId: (providerId: string) => {
+        text: string;
+        values: string[];
+    };
+    deleteByPlanId: (providerId: string) => {
+        text: string;
+        values: string[];
+    };
+    updateById: (Id: string, data: IProviderInsuranceBillingOption) => {
         text: string;
         values: any[];
     };

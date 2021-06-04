@@ -12,7 +12,7 @@ export declare const userQueries: {
         text: string;
         values: string[];
     };
-    updateById: (Id: string, locationData: IUpdateData) => {
+    updateById: (Id: string, data: IUpdateData) => {
         text: string;
         values: any[];
     };

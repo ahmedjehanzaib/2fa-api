@@ -5,7 +5,7 @@ export interface ILocationUpdatedData {
     [index: string]: any;
     name: string;
     practice_id: string;
-    zip_code?: number;
+    zipcode?: string;
     city: string;
     state: string;
     address_line_1?: string | null;
@@ -30,7 +30,7 @@ export interface ILocationUpdatedData {
 export interface ILocationPaymentAddress {
     [index: string]: any;
     practice_location_id: string;
-    zip_code?: number;
+    zipcode?: string;
     city: string;
     state: string;
     address_line_1?: string | null;

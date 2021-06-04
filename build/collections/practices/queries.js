@@ -16,7 +16,7 @@ exports.practicesQueries = {
     },
     findPracticeById: function (practiceId) {
         return {
-            text: " SELECT * FROM practices WHERE id = $1",
+            text: "SELECT p.*,\n            c.\"name\" AS client_name\n            FROM practices p\n            LEFT JOIN clients c\n            ON p.client_id = c.id WHERE p.id = $1",
             values: [practiceId]
         };
     },
@@ -41,7 +41,7 @@ exports.practicesQueries = {
     },
     findAllPractices: function () {
         return {
-            text: " SELECT * FROM practices",
+            text: "SELECT p.*,\n            c.\"name\" AS client_name,\n            to_json(pl.*) as location\n            FROM practices p\n            LEFT JOIN clients c\n            ON p.client_id = c.id\n            left join practice_locations pl \n            on p.id = pl.practice_id",
             values: []
         };
     }

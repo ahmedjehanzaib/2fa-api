@@ -16,7 +16,7 @@ exports.planCategoriesQueries = {
     },
     findById: function (Id) {
         return {
-            text: " SELECT * FROM practice_plan_category WHERE id = $1",
+            text: " SELECT ppc.*,\n            p.\"name\" AS practice_name\n            FROM practice_plan_category ppc\n            LEFT JOIN practices p\n            ON ppc.practice_id = p.id WHERE ppc.id = $1",
             values: [Id]
         };
     },
@@ -41,7 +41,7 @@ exports.planCategoriesQueries = {
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM practice_plan_category",
+            text: "SELECT ppc.*,\n            p.\"name\" AS practice_name\n            FROM practice_plan_category ppc\n            LEFT JOIN practices p\n            ON ppc.practice_id = p.id\n            ",
             values: []
         };
     },

@@ -1,4 +1,4 @@
-import { IPracticeRole, IPracticeRoleUpdatedData } from './interfaces';
+import { IPracticeRole } from './interfaces';
 export declare const practiceRolesQueries: {
     create: (data: IPracticeRole) => {
         text: string;
@@ -12,7 +12,7 @@ export declare const practiceRolesQueries: {
         text: string;
         values: string[];
     };
-    updateById: (Id: string, locationData: IPracticeRoleUpdatedData) => {
+    updateById: (Id: string, locationData: IPracticeRole) => {
         text: string;
         values: any[];
     };

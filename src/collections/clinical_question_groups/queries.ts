@@ -106,6 +106,7 @@ export const questionGroupToQuestionQueries = {
         });
         return {
             text: `UPDATE clinical_question_group_to_clinical_question SET ${setQueryPart} WHERE id = '${Id}' RETURNING *`,
+            // @ts-ignore
             values: Object.keys(data).map((key) => data[key])
         };
     },

@@ -121,7 +121,7 @@ declare const validationSchema: {
         body: {
             name: JOI.StringSchema;
             practice_id: JOI.StringSchema;
-            zip_code: JOI.NumberSchema;
+            zipcode: JOI.StringSchema;
             city: JOI.StringSchema;
             state: JOI.StringSchema;
             address_line_1: JOI.StringSchema;
@@ -168,7 +168,7 @@ declare const validationSchema: {
         body: {
             name: JOI.StringSchema;
             practice_id: JOI.StringSchema;
-            zip_code: JOI.NumberSchema;
+            zipcode: JOI.StringSchema;
             city: JOI.StringSchema;
             state: JOI.StringSchema;
             address_line_1: JOI.StringSchema;
@@ -210,7 +210,7 @@ declare const validationSchema: {
         headers: {};
         body: {};
         params: {
-            id: JOI.StringSchema;
+            id: JOI.NumberSchema;
         };
         query: {};
     };
@@ -218,7 +218,7 @@ declare const validationSchema: {
         headers: {};
         body: {};
         params: {
-            id: JOI.StringSchema;
+            id: JOI.NumberSchema;
         };
         query: {};
     };
@@ -230,7 +230,7 @@ declare const validationSchema: {
             description: JOI.StringSchema;
         };
         params: {
-            id: JOI.StringSchema;
+            id: JOI.NumberSchema;
         };
         query: {};
     };
@@ -261,7 +261,7 @@ declare const validationSchema: {
             address_line_2: JOI.StringSchema;
             city: JOI.StringSchema;
             state: JOI.StringSchema;
-            zip_code: JOI.StringSchema;
+            zipcode: JOI.StringSchema;
             fax: JOI.StringSchema;
             license_number: JOI.StringSchema;
             notes: JOI.StringSchema;
@@ -312,7 +312,7 @@ declare const validationSchema: {
             address_line_2: JOI.StringSchema;
             city: JOI.StringSchema;
             state: JOI.StringSchema;
-            zip_code: JOI.StringSchema;
+            zipcode: JOI.StringSchema;
             fax: JOI.StringSchema;
             license_number: JOI.StringSchema;
             notes: JOI.StringSchema;
@@ -608,12 +608,13 @@ declare const validationSchema: {
             description: JOI.StringSchema;
             payer_id: JOI.StringSchema;
             plan_category_id: JOI.StringSchema;
-            plan_type_id: JOI.StringSchema;
+            plan_type_id: JOI.NumberSchema;
             fax: JOI.StringSchema;
             submission_type: JOI.StringSchema;
             hcfa_template_id: JOI.StringSchema;
             address: JOI.ObjectSchema;
             fees: JOI.ObjectSchema;
+            insurance_billing_options: JOI.ObjectSchema;
         };
         params: {};
         query: {};
@@ -642,12 +643,13 @@ declare const validationSchema: {
             description: JOI.StringSchema;
             payer_id: JOI.StringSchema;
             plan_category_id: JOI.StringSchema;
-            plan_type_id: JOI.StringSchema;
+            plan_type_id: JOI.NumberSchema;
             fax: JOI.StringSchema;
             submission_type: JOI.StringSchema;
             hcfa_template_id: JOI.StringSchema;
             address: JOI.ObjectSchema;
             fees: JOI.ObjectSchema;
+            insurance_billing_options: JOI.ObjectSchema;
         };
         params: {
             id: JOI.StringSchema;
@@ -903,6 +905,8 @@ declare const validationSchema: {
             patient_responsibility: JOI.BooleanSchema;
             donot_print: JOI.BooleanSchema;
             revenue_code: JOI.StringSchema;
+            modifiers: JOI.ArraySchema;
+            icds: JOI.ArraySchema;
         };
         params: {};
         query: {};
@@ -946,9 +950,309 @@ declare const validationSchema: {
             patient_responsibility: JOI.BooleanSchema;
             donot_print: JOI.BooleanSchema;
             revenue_code: JOI.StringSchema;
+            modifiers: JOI.ArraySchema;
+            icds: JOI.ArraySchema;
         };
         params: {
             id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAPlanFees: {
+        headers: {};
+        body: {
+            plan_id: JOI.StringSchema;
+            cpt_id: JOI.NumberSchema;
+            fee: JOI.NumberSchema;
+            allowed: JOI.NumberSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPlanFees: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPlanFees: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPlanFees: {
+        headers: {};
+        body: {
+            plan_id: JOI.StringSchema;
+            cpt_id: JOI.NumberSchema;
+            fee: JOI.NumberSchema;
+            allowed: JOI.NumberSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAPracticeAppointmentReason: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            color_code: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeAppointmentReason: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    findPracticeAppointmentReasonsByPracticeId: {
+        headers: {};
+        body: {};
+        params: {
+            practice_id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeAppointmentReason: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeAppointmentReason: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            color_code: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAPracticeAppointmentStatus: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            color_code: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeAppointmentStatus: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    findPracticeAppointmentStatusesByPracticeId: {
+        headers: {};
+        body: {};
+        params: {
+            practice_id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeAppointmentStatus: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeAppointmentStatus: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+            color_code: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAPracticeGeneralItem: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeGeneralItem: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    findPracticeGeneralItems: {
+        headers: {};
+        body: {};
+        params: {
+            practice_id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeGeneralItem: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAPracticeGeneralItem: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAQuestionType: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAQuestionType: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteAQuestionType: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateAQuestionType: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAQuestion: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            question_type_id: JOI.NumberSchema;
+            options: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAQuestion: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAQuestion: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAQuestion: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            question_type_id: JOI.NumberSchema;
+            options: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAQuestionGroup: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            questions: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAQuestionGroup: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAQuestionGroup: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAQuestionGroup: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            questions: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
         };
         query: {};
     };

@@ -74,7 +74,7 @@ var validationSchema = {
             speciality: JOI.string().trim().optional().allow('', null),
             location: JOI.object().keys({
                 name: JOI.string().trim().required(),
-                zip_code: JOI.number().optional(),
+                zipcode: JOI.string().trim().optional().allow('', null),
                 city: JOI.string().trim().optional().allow('', null),
                 state: JOI.string().trim().optional().allow('', null),
                 address_line_1: JOI.string().trim().optional().allow('', null),
@@ -166,7 +166,7 @@ var validationSchema = {
             location: JOI.object().keys({
                 id: JOI.string().required(),
                 name: JOI.string().trim().required(),
-                zip_code: JOI.number().optional(),
+                zipcode: JOI.string().trim().optional().allow('', null),
                 city: JOI.string().trim().optional().allow('', null),
                 state: JOI.string().trim().optional().allow('', null),
                 address_line_1: JOI.string().trim().optional().allow('', null),
@@ -233,7 +233,7 @@ var validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             practice_id: JOI.string().trim().required(),
-            zip_code: JOI.number().optional(),
+            zipcode: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().required(),
             state: JOI.string().trim().required(),
             address_line_1: JOI.string().trim().optional().allow('', null),
@@ -289,7 +289,7 @@ var validationSchema = {
         body: {
             name: JOI.string().trim().required(),
             practice_id: JOI.string().trim().required(),
-            zip_code: JOI.number().optional(),
+            zipcode: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().required(),
             state: JOI.string().trim().required(),
             address_line_1: JOI.string().trim().optional().allow('', null),
@@ -340,7 +340,7 @@ var validationSchema = {
         headers: {},
         body: {},
         params: {
-            id: JOI.string().guid().required()
+            id: JOI.number().required()
         },
         query: {}
     },
@@ -348,7 +348,7 @@ var validationSchema = {
         headers: {},
         body: {},
         params: {
-            id: JOI.string().guid().required()
+            id: JOI.number().required()
         },
         query: {}
     },
@@ -360,7 +360,7 @@ var validationSchema = {
             description: JOI.string().trim().allow('', null)
         },
         params: {
-            id: JOI.string().guid().required()
+            id: JOI.number().required()
         },
         query: {}
     },
@@ -391,7 +391,7 @@ var validationSchema = {
             address_line_2: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().optional().allow('', null),
             state: JOI.string().trim().optional().allow('', null),
-            zip_code: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
             fax: JOI.string().trim().optional().allow('', null),
             license_number: JOI.string().trim().optional().allow('', null),
             notes: JOI.string().trim().optional().allow('', null),
@@ -442,7 +442,7 @@ var validationSchema = {
             address_line_2: JOI.string().trim().optional().allow('', null),
             city: JOI.string().trim().optional().allow('', null),
             state: JOI.string().trim().optional().allow('', null),
-            zip_code: JOI.string().trim().optional().allow('', null),
+            zipcode: JOI.string().trim().optional().allow('', null),
             fax: JOI.string().trim().optional().allow('', null),
             license_number: JOI.string().trim().optional().allow('', null),
             notes: JOI.string().trim().optional().allow('', null)
@@ -497,7 +497,7 @@ var validationSchema = {
                 })
             }),
             insurance_billing_options: JOI.object().keys({
-                insurance_id: JOI.string().trim().optional().allow('', null),
+                plan_id: JOI.string().uuid().optional().allow(null),
                 practice_location_id: JOI.string().trim().optional().allow('', null),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
@@ -568,7 +568,7 @@ var validationSchema = {
                 })
             }),
             insurance_billing_options: JOI.object().keys({
-                insurance_id: JOI.string().trim().optional().allow('', null),
+                plan_id: JOI.string().uuid().optional().allow(null),
                 practice_location_id: JOI.string().trim().optional().allow('', null),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
@@ -768,7 +768,7 @@ var validationSchema = {
             description: JOI.string().trim().optional().allow('', null),
             payer_id: JOI.string().trim().optional().allow('', null),
             plan_category_id: JOI.string().trim().optional().allow('', null),
-            plan_type_id: JOI.string().trim().optional().allow('', null),
+            plan_type_id: JOI.number().optional(),
             fax: JOI.string().trim().optional().allow('', null),
             submission_type: JOI.string().trim().optional().allow('', null),
             hcfa_template_id: JOI.string().trim().optional().allow('', null),
@@ -784,8 +784,15 @@ var validationSchema = {
             fees: JOI.object().keys({
                 cpt_id: JOI.string().trim().optional().allow('', null),
                 fee: JOI.number().optional(),
-                allowed: JOI.boolean().optional(),
+                allowed: JOI.number().optional(),
             }).optional(),
+            insurance_billing_options: JOI.object().keys({
+                provider_id: JOI.string().uuid().required(),
+                practice_location_id: JOI.string().uuid().optional(),
+                tax_id_type: JOI.string().trim().optional().allow('', null),
+                pay_to_address: JOI.string().trim().optional().allow('', null),
+                report_tax_id: JOI.number().optional()
+            })
         },
         params: {},
         query: {}
@@ -814,7 +821,7 @@ var validationSchema = {
             description: JOI.string().trim().optional().allow('', null),
             payer_id: JOI.string().trim().optional().allow('', null),
             plan_category_id: JOI.string().trim().optional().allow('', null),
-            plan_type_id: JOI.string().trim().optional().allow('', null),
+            plan_type_id: JOI.number().optional(),
             fax: JOI.string().trim().optional().allow('', null),
             submission_type: JOI.string().trim().optional().allow('', null),
             hcfa_template_id: JOI.string().trim().optional().allow('', null),
@@ -832,6 +839,14 @@ var validationSchema = {
                 fee: JOI.number().optional(),
                 allowed: JOI.boolean().optional(),
             }).optional(),
+            insurance_billing_options: JOI.object().keys({
+                id: JOI.number().optional(),
+                provider_id: JOI.string().uuid().required(),
+                practice_location_id: JOI.string().uuid().optional(),
+                tax_id_type: JOI.string().trim().optional().allow('', null),
+                pay_to_address: JOI.string().trim().optional().allow('', null),
+                report_tax_id: JOI.boolean().optional()
+            })
         },
         params: {
             id: JOI.string().guid().required()
@@ -1086,7 +1101,9 @@ var validationSchema = {
             clia: JOI.boolean().optional(),
             patient_responsibility: JOI.boolean().optional(),
             donot_print: JOI.boolean().optional(),
-            revenue_code: JOI.string().trim().optional().allow('', null)
+            revenue_code: JOI.string().trim().optional().allow('', null),
+            modifiers: JOI.array().optional(),
+            icds: JOI.array().optional(),
         },
         params: {},
         query: {}
@@ -1129,10 +1146,310 @@ var validationSchema = {
             clia: JOI.boolean().optional(),
             patient_responsibility: JOI.boolean().optional(),
             donot_print: JOI.boolean().optional(),
-            revenue_code: JOI.string().trim().optional().allow('', null)
+            revenue_code: JOI.string().trim().optional().allow('', null),
+            modifiers: JOI.array().optional(),
+            icds: JOI.array().optional(),
         },
         params: {
             id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAPlanFees: {
+        headers: {},
+        body: {
+            plan_id: JOI.string().uuid().required(),
+            cpt_id: JOI.number().optional(),
+            fee: JOI.number().optional(),
+            allowed: JOI.number().optional()
+        },
+        params: {},
+        query: {}
+    },
+    findAPlanFees: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPlanFees: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPlanFees: {
+        headers: {},
+        body: {
+            plan_id: JOI.string().uuid().required(),
+            cpt_id: JOI.number().optional(),
+            fee: JOI.number().optional(),
+            allowed: JOI.number().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAPracticeAppointmentReason: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeAppointmentReason: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    findPracticeAppointmentReasonsByPracticeId: {
+        headers: {},
+        body: {},
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticeAppointmentReason: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeAppointmentReason: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAPracticeAppointmentStatus: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeAppointmentStatus: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    findPracticeAppointmentStatusesByPracticeId: {
+        headers: {},
+        body: {},
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticeAppointmentStatus: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeAppointmentStatus: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            color_code: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAPracticeGeneralItem: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeGeneralItem: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    findPracticeGeneralItems: {
+        headers: {},
+        body: {},
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticeGeneralItem: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAPracticeGeneralItem: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAQuestionType: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAQuestionType: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteAQuestionType: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateAQuestionType: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAQuestion: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            question_type_id: JOI.number().required(),
+            options: JOI.array().optional()
+        },
+        params: {},
+        query: {}
+    },
+    findAQuestion: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAQuestion: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAQuestion: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            question_type_id: JOI.number().required(),
+            options: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAQuestionGroup: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            questions: JOI.array().optional()
+        },
+        params: {},
+        query: {}
+    },
+    findAQuestionGroup: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAQuestionGroup: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAQuestionGroup: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            questions: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
         },
         query: {}
     },

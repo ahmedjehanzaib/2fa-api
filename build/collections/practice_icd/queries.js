@@ -16,7 +16,7 @@ exports.practiceICDQueries = {
     },
     findById: function (Id) {
         return {
-            text: " SELECT * FROM practice_icd WHERE id = $1",
+            text: "SELECT pi.*,\n            p.\"name\" AS practice_name\n            FROM practice_icd pi\n            LEFT JOIN practices p\n            ON pi.practice_id = p.id WHERE pi.id = $1",
             values: [Id]
         };
     },
@@ -41,7 +41,7 @@ exports.practiceICDQueries = {
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM practice_icd",
+            text: "SELECT pi.*,\n            p.\"name\" AS practice_name\n            FROM practice_icd pi\n            LEFT JOIN practices p\n            ON pi.practice_id = p.id",
             values: []
         };
     },

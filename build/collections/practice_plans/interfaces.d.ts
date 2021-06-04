@@ -8,7 +8,7 @@ export interface IPracticePlanUpdatedData {
     description?: string;
     payer_id?: string;
     plan_category_id?: string;
-    plan_type_id?: string;
+    plan_type_id?: number;
     fax?: string;
     submission_type?: string;
     hcfa_template_id?: string;
@@ -20,7 +20,7 @@ export interface IPlanFeesUpdatedData {
     cpt_id: string;
     fee: number;
     plan_id?: string;
-    allowed: boolean;
+    allowed: number;
 }
 export interface IPlanAddress extends IPlanAddressUpdatedData {
 }
@@ -34,11 +34,22 @@ export interface IPlanAddressUpdatedData {
     work_phone?: string;
     fax?: string;
 }
+export interface IProviderInsuranceBillingOption {
+    [index: string]: any;
+    provider_id: string;
+    plan_id?: string;
+    practice_location_id?: string;
+    report_tax_id?: boolean;
+    tax_id_type?: string;
+    pay_to_address?: string;
+}
 export interface InsertData extends IPracticePlan {
     fees?: IPlanFees;
     address?: IPlanAddress;
+    insurance_billing_options?: IProviderInsuranceBillingOption;
 }
 export interface UpdateData extends IPracticePlanUpdatedData {
     fees?: IPlanFees;
     address?: IPlanAddress;
+    insurance_billing_options?: IProviderInsuranceBillingOption;
 }

@@ -16,7 +16,7 @@ exports.practiceModifierQueries = {
     },
     findById: function (Id) {
         return {
-            text: " SELECT * FROM practice_modifier WHERE id = $1",
+            text: "SELECT pm.*,\n            p.\"name\" AS practice_name\n            FROM practice_modifier pm\n            LEFT JOIN practices p\n            ON pm.practice_id = p.id WHERE pm.id = $1",
             values: [Id]
         };
     },
@@ -41,7 +41,7 @@ exports.practiceModifierQueries = {
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM practice_modifier",
+            text: "SELECT pm.*,\n            p.\"name\" AS practice_name\n            FROM practice_modifier pm\n            LEFT JOIN practices p\n            ON pm.practice_id = p.id",
             values: []
         };
     },

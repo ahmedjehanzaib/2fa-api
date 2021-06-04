@@ -16,7 +16,7 @@ exports.hcfaTemplatesQueries = {
     },
     findById: function (Id) {
         return {
-            text: " SELECT * FROM hcfa_templates WHERE id = $1",
+            text: " SELECT ht.*, \n            p.\"name\" AS practice_name\n            FROM hcfa_templates ht\n            LEFT JOIN practices p\n                   ON ht.practice_id = p.id\n            WHERE ht.id = $1",
             values: [Id]
         };
     },
@@ -41,7 +41,7 @@ exports.hcfaTemplatesQueries = {
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM hcfa_templates",
+            text: "SELECT ht.*, \n            p.\"name\" AS practice_name\n            FROM hcfa_templates ht\n            LEFT JOIN practices p\n            ON ht.practice_id = p.id",
             values: []
         };
     },

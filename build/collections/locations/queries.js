@@ -16,7 +16,7 @@ exports.locationQueries = {
     },
     findById: function (Id) {
         return {
-            text: " SELECT * FROM practice_locations WHERE id = $1",
+            text: " SELECT pl.*,\n            p.\"name\" AS practice_name\n            FROM practice_locations pl \n            LEFT JOIN practices p\n            ON pl.practice_id = p.id  WHERE pl.id = $1",
             values: [Id]
         };
     },
@@ -41,7 +41,7 @@ exports.locationQueries = {
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM practice_locations",
+            text: "SELECT pl.*,\n            p.\"name\" AS practice_name\n            FROM practice_locations pl \n            LEFT JOIN practices p\n                   ON pl.practice_id = p.id \n            ",
             values: []
         };
     },

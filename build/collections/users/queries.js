@@ -9,7 +9,6 @@ exports.userQueries = {
             indices.push("$" + (i + 1));
             return data[k];
         });
-        console.log({ data: data });
         return {
             text: "INSERT INTO users(" + columns + ")  VALUES (" + indices + ") RETURNING *",
             values: values
@@ -27,17 +26,17 @@ exports.userQueries = {
             values: [Id]
         };
     },
-    updateById: function (Id, locationData) {
+    updateById: function (Id, data) {
         var setQueryPart = "";
-        Object.keys(locationData).forEach(function (key, index) {
+        Object.keys(data).forEach(function (key, index) {
             setQueryPart += " " + key + "=$" + (index + 1);
-            if (Object.keys(locationData).length !== (index + 1)) {
+            if (Object.keys(data).length !== (index + 1)) {
                 setQueryPart += ",";
             }
         });
         return {
             text: "UPDATE users SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
-            values: Object.keys(locationData).map(function (key) { return locationData[key]; })
+            values: Object.keys(data).map(function (key) { return data[key]; })
         };
     },
     findAll: function () {
