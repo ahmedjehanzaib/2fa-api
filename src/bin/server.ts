@@ -21,7 +21,7 @@ import {
 	practiceProviderSpecialityRouters, practiceTemplateTypeRouters, practiceQualifierRouters, practiceRXStatusRouters,
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
-	questionRouters, questionTypeRouters, questionGroupRouters
+	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +115,8 @@ app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRo
 app.use(`${app.locals.BaseUri}/clinical/question_types`, questionTypeRouters());
 app.use(`${app.locals.BaseUri}/clinical/questions`, questionRouters());
 app.use(`${app.locals.BaseUri}/clinical/question_groups`, questionGroupRouters());
+app.use(`${app.locals.BaseUri}/clinical/sections`, sectionRouters());
+app.use(`${app.locals.BaseUri}/clinical/templates`, templateRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

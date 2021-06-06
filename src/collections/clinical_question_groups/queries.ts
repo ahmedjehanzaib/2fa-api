@@ -1,6 +1,7 @@
 import { IQuestionGroup, IQuestionGroupToQuestion } from './interfaces';
 
 export const questionGroupQueries = {
+    
     create: (data: IQuestionGroup) => {
         const columns = Object.keys(data)
 

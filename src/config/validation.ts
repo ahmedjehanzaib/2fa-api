@@ -1879,6 +1879,115 @@ const validationSchema = {
         query: {
         }
     },
+
+    createASection: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            question_groups: JOI.array().optional()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findASection: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteASection: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateASection: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            question_groups: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    createAClinicalTemplate: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            general_item_template_type_id: JOI.number().required(),
+            general_item_practice_provider_speciality: JOI.number().required(),
+            letter_head_picture: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAClinicalTemplate: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAClinicalTemplate: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAClinicalTemplate: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            general_item_template_type_id: JOI.number().required(),
+            general_item_practice_provider_speciality: JOI.number().required(),
+            letter_head_picture: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
 }
 
 export { validationSchema };
