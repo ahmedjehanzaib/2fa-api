@@ -14,8 +14,8 @@ export function cptFormCategoriesRouters(): Router {
 	// POST /api/v1/clinical/cpt_form_categories
 	router.post('/', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
-			
-			const validated = JOI.validate({ body: req.body }, validationSchema.createACPTOrderFormCategory);
+
+			const validated = JOI.validate({ body: req.body }, validationSchema.createAOrderFormCategory);
 
 			if (validated.error === null) {
 				const [data] = await categoriesFacade.create(req.body)
@@ -49,7 +49,7 @@ export function cptFormCategoriesRouters(): Router {
 	// GET /api/v1/clinical/cpt_form_categories:id
 	router.get('/:id', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
-			const validated = JOI.validate({ params: req.params }, validationSchema.findACPTOrderFormCategory);
+			const validated = JOI.validate({ params: req.params }, validationSchema.findAOrderFormCategory);
 			if (validated.error === null) {
 				const [data] = await categoriesFacade.findById(req.params.id);
 				if (!data) {
@@ -71,7 +71,7 @@ export function cptFormCategoriesRouters(): Router {
 	// DELETE /api/v1/clinical/cpt_form_categories:id
 	router.delete('/:id', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
-			const validated = JOI.validate({ params: req.params }, validationSchema.deleteACPTOrderFormCategory);
+			const validated = JOI.validate({ params: req.params }, validationSchema.deleteAOrderFormCategory);
 			if (validated.error === null) {
 				const [data] = await categoriesFacade.findById(req.params.id);
 				if (!data) {
@@ -94,7 +94,7 @@ export function cptFormCategoriesRouters(): Router {
 	// PUT /api/v1/clinical/cpt_form_categories:id
 	router.put('/:id', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
-			const validated = JOI.validate({ params: req.params, body: req.body }, validationSchema.updateACPTOrderFormCategory);
+			const validated = JOI.validate({ params: req.params, body: req.body }, validationSchema.updateAOrderFormCategory);
 			if (validated.error === null) {
 				const [data] = await categoriesFacade.findById(req.params.id);
 				if (!data) {

@@ -54,3 +54,4 @@ export * from './clinical_sections';
 export * from './clinical_templates';
 export * from './cpt_order_set_form';
 export * from './cpt_order_form_categories';
+export * from './icd_order_form_categories';

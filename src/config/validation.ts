@@ -2047,7 +2047,7 @@ const validationSchema = {
         }
     },
 
-    createACPTOrderFormCategory: {
+    createAOrderFormCategory: {
         headers: {
         },
         body: {
@@ -2060,32 +2060,32 @@ const validationSchema = {
         query: {
         }
     },
-    findACPTOrderFormCategory: {
+    findAOrderFormCategory: {
         headers: {
         },
         body: {
         },
         params: {
-            id: JOI.number().required()
+            id: [JOI.number().required(), JOI.string().guid().required()]
         },
         query: {
         }
     },
 
-    deleteACPTOrderFormCategory: {
+    deleteAOrderFormCategory: {
         headers: {
         },
         body: {
         },
         params: {
-            id: JOI.number().required()
+            id: [JOI.number().required(), JOI.string().guid().required()]
 
         },
         query: {
         }
     },
 
-    updateACPTOrderFormCategory: {
+    updateAOrderFormCategory: {
         headers: {
         },
         body: {
@@ -2094,7 +2094,7 @@ const validationSchema = {
             description: JOI.string().trim().optional().allow('', null)
         },
         params: {
-            id: JOI.number().required()
+            id: [JOI.number().required(), JOI.string().guid().required()]
 
         },
         query: {
