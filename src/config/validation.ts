@@ -1988,6 +1988,65 @@ const validationSchema = {
         query: {
         }
     },
+
+    createACPTOrderForm: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_cpts: JOI.array().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findACPTOrderForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    deleteACPTOrderForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+
+        },
+        query: {
+        }
+    },
+
+    updateACPTOrderForm: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_cpts: JOI.array().required()
+        },
+        params: {
+            id: JOI.number().required()
+
+        },
+        query: {
+        }
+    },
+
 }
 
 export { validationSchema };
