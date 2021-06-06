@@ -21,7 +21,7 @@ import {
 	practiceProviderSpecialityRouters, practiceTemplateTypeRouters, practiceQualifierRouters, practiceRXStatusRouters,
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
-	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters
+	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters, cptFormCategoriesRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +118,7 @@ app.use(`${app.locals.BaseUri}/clinical/question_groups`, questionGroupRouters()
 app.use(`${app.locals.BaseUri}/clinical/sections`, sectionRouters());
 app.use(`${app.locals.BaseUri}/clinical/templates`, templateRouters());
 app.use(`${app.locals.BaseUri}/clinical/cpt_order_forms`, CPTOrderFormRouters());
+app.use(`${app.locals.BaseUri}/clinical/cpt_order_form_categories`, cptFormCategoriesRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

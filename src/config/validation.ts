@@ -2047,6 +2047,60 @@ const validationSchema = {
         }
     },
 
+    createACPTOrderFormCategory: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findACPTOrderFormCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    deleteACPTOrderFormCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+
+        },
+        query: {
+        }
+    },
+
+    updateACPTOrderFormCategory: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+
+        },
+        query: {
+        }
+    },
+
 }
 
 export { validationSchema };
