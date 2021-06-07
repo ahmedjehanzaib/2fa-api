@@ -1941,7 +1941,8 @@ const validationSchema = {
             name: JOI.string().required(),
             general_item_template_type_id: JOI.number().required(),
             general_item_practice_provider_speciality: JOI.number().required(),
-            letter_head_picture: JOI.string().trim().optional().allow('', null)
+            letter_head_picture: JOI.string().trim().optional().allow('', null),
+            sections: JOI.array().required()
         },
         params: {
         },
@@ -1977,10 +1978,13 @@ const validationSchema = {
         headers: {
         },
         body: {
+            
             name: JOI.string().required(),
             general_item_template_type_id: JOI.number().required(),
             general_item_practice_provider_speciality: JOI.number().required(),
-            letter_head_picture: JOI.string().trim().optional().allow('', null)
+            letter_head_picture: JOI.string().trim().optional().allow('', null),
+            sections: JOI.array().required()
+
         },
         params: {
             id: JOI.string().guid().required()
@@ -2100,6 +2104,65 @@ const validationSchema = {
         query: {
         }
     },
+
+    createAICDOrderForm: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_icds: JOI.array().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findAICDOrderForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAICDderForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+
+        },
+        query: {
+        }
+    },
+
+    updateAICDOrderForm: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_icds: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+
+        },
+        query: {
+        }
+    },
+
 
 }
 

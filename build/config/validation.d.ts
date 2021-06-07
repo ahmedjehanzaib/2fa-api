@@ -1256,5 +1256,209 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createASection: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            question_groups: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findASection: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteASection: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateASection: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            question_groups: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAClinicalTemplate: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            general_item_template_type_id: JOI.NumberSchema;
+            general_item_practice_provider_speciality: JOI.NumberSchema;
+            letter_head_picture: JOI.StringSchema;
+            sections: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAClinicalTemplate: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAClinicalTemplate: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAClinicalTemplate: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            general_item_template_type_id: JOI.NumberSchema;
+            general_item_practice_provider_speciality: JOI.NumberSchema;
+            letter_head_picture: JOI.StringSchema;
+            sections: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createACPTOrderForm: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            practice_clinical_template_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            category_cpts: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findACPTOrderForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    deleteACPTOrderForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateACPTOrderForm: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            practice_clinical_template_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            category_cpts: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAOrderFormCategory: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAOrderFormCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: (JOI.StringSchema | JOI.NumberSchema)[];
+        };
+        query: {};
+    };
+    deleteAOrderFormCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: (JOI.StringSchema | JOI.NumberSchema)[];
+        };
+        query: {};
+    };
+    updateAOrderFormCategory: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: (JOI.StringSchema | JOI.NumberSchema)[];
+        };
+        query: {};
+    };
+    createAICDOrderForm: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            practice_clinical_template_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            category_icds: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAICDOrderForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAICDderForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAICDOrderForm: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            practice_clinical_template_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            category_icds: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };

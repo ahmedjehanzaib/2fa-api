@@ -1453,5 +1453,209 @@ var validationSchema = {
         },
         query: {}
     },
+    createASection: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            question_groups: JOI.array().optional()
+        },
+        params: {},
+        query: {}
+    },
+    findASection: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteASection: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateASection: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            question_groups: JOI.array().optional()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAClinicalTemplate: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            general_item_template_type_id: JOI.number().required(),
+            general_item_practice_provider_speciality: JOI.number().required(),
+            letter_head_picture: JOI.string().trim().optional().allow('', null),
+            sections: JOI.array().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAClinicalTemplate: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAClinicalTemplate: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAClinicalTemplate: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            general_item_template_type_id: JOI.number().required(),
+            general_item_practice_provider_speciality: JOI.number().required(),
+            letter_head_picture: JOI.string().trim().optional().allow('', null),
+            sections: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createACPTOrderForm: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_cpts: JOI.array().required()
+        },
+        params: {},
+        query: {}
+    },
+    findACPTOrderForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    deleteACPTOrderForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateACPTOrderForm: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_cpts: JOI.array().required()
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAOrderFormCategory: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAOrderFormCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: [JOI.number().required(), JOI.string().guid().required()]
+        },
+        query: {}
+    },
+    deleteAOrderFormCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: [JOI.number().required(), JOI.string().guid().required()]
+        },
+        query: {}
+    },
+    updateAOrderFormCategory: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: [JOI.number().required(), JOI.string().guid().required()]
+        },
+        query: {}
+    },
+    createAICDOrderForm: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_icds: JOI.array().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAICDOrderForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAICDderForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAICDOrderForm: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            practice_clinical_template_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            category_icds: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

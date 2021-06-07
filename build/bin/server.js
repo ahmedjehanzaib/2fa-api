@@ -76,6 +76,11 @@ exports.app.use(exports.app.locals.BaseUri + "/ndc_unit_of_measurements", collec
 exports.app.use(exports.app.locals.BaseUri + "/clinical/question_types", collections_1.questionTypeRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/questions", collections_1.questionRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/question_groups", collections_1.questionGroupRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/sections", collections_1.sectionRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/templates", collections_1.templateRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_forms", collections_1.CPTOrderFormRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_form_categories", collections_1.cptFormCategoriesRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/icd_order_form_categories", collections_1.ICDFormCategoriesRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

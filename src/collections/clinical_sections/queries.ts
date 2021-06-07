@@ -20,7 +20,7 @@ export const sectionQueries = {
 
     findById: (Id: string) => {
         return {
-            text: `SELECT cq.*, json_agg(cqo.clinical_question_group_id) as questions  FROM clinical_sections cq 
+            text: `SELECT cq.*, json_agg(cqo.clinical_question_group_id) as question_groups  FROM clinical_sections cq 
             left join clinical_sections_to_clinical_question_groups cqo 
             on cq.id = cqo.clinical_section_id WHERE cq.id = $1 group by cq.id`,
             values: [Id]
@@ -49,7 +49,7 @@ export const sectionQueries = {
     },
     findAll: () => {
         return {
-            text: `SELECT cq.*, json_agg(cqo.clinical_question_group_id) as questions  FROM clinical_sections cq 
+            text: `SELECT cq.*, json_agg(cqo.clinical_question_group_id) as question_groups  FROM clinical_sections cq 
             left join clinical_sections_to_clinical_question_groups cqo 
             on cq.id = cqo.clinical_section_id group by cq.id
             `,
