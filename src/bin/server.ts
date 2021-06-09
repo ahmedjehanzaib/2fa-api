@@ -22,7 +22,7 @@ import {
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
 	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters,
-	 cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters
+	 cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +123,7 @@ app.use(`${app.locals.BaseUri}/clinical/cpt_order_form_categories`, cptFormCateg
 app.use(`${app.locals.BaseUri}/clinical/icd_order_form_categories`, ICDFormCategoriesRouters());
 app.use(`${app.locals.BaseUri}/clinical/cpt_panel_groups`, CPTPanelGroupRouters());
 app.use(`${app.locals.BaseUri}/clinical/letter_categories`, letterCategoriesRouters());
+app.use(`${app.locals.BaseUri}/practice/patient_letters`, patientLetterRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

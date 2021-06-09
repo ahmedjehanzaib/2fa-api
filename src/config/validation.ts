@@ -1978,7 +1978,7 @@ const validationSchema = {
         headers: {
         },
         body: {
-            
+
             name: JOI.string().required(),
             general_item_template_type_id: JOI.number().required(),
             general_item_practice_provider_speciality: JOI.number().required(),
@@ -2279,6 +2279,65 @@ const validationSchema = {
         },
         params: {
             id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    createAPatientLetter: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            category_id: JOI.number().required(),
+            general_item_document: JOI.number().required(),
+            letter_text: JOI.string().trim().optional().allow('', null),
+            user_fields: JOI.array().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPatientLetter: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteAPatientLetter: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPatientLetter: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            category_id: JOI.number().required(),
+            general_item_document: JOI.number().required(),
+            letter_text: JOI.string().trim().optional().allow('', null),
+            user_fields: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
         },
         query: {
         }
