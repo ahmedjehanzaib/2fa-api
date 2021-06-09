@@ -97,8 +97,8 @@ export const patientLetterFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(patientLetterQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(patientLetterQueries.findAll(Id))
 
         return rows
     }

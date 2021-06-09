@@ -1,3 +1,4 @@
+import { ident } from 'pg-format';
 import { IPatientFields, IPatientLetter } from './interfaces';
 
 export const patientLetterQueries = {
@@ -46,12 +47,13 @@ export const patientLetterQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    findAll: () => {
+
+    findAll: (Id: string) => {
         return {
             text: `SELECT cq.*, json_agg(cqo.*) as user_fields  FROM practice_patient_letters cq 
             left join practice_patient_letter_fields cqo 
-            on cq.id = cqo.practice_patient_letter_id group by cq.id`,
-            values: []
+            on cq.id = cqo.practice_patient_letter_id WHERE cq.practice_id = $1 group by cq.id`,
+            values: [Id]
         }
     },
 }

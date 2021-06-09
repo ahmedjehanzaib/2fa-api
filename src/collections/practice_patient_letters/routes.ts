@@ -33,10 +33,10 @@ export function patientLetterRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const data = await patientLetterFacade.findAll();
+			const data = await patientLetterFacade.findAll(req.params.practiceId);
 
 			res.status(200).json({ data, error: null, message: 'Patient Letters fetched successfully!' });
 
