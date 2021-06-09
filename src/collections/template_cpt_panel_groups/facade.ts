@@ -77,7 +77,7 @@ export const CPTPanelGroupFacade = {
     },
 
     findById: async (Id: string) => {
-        
+
         const { rows } = await PG_CLIENT.query(CPTPanelGroupQueries.findById(Id));
         const { rows: cpts } = await PG_CLIENT.query(panelGroupCPTsQueries.findByGroupId(Id));
 
@@ -106,12 +106,16 @@ export const CPTPanelGroupFacade = {
 
             await PG_CLIENT.query('BEGIN')
 
-            const { rows: deleted } = await PG_CLIENT.query(panelGroupCPTsQueries.deleteByGroupId(Id))
+            const { rows: found } = await PG_CLIENT.query(panelGroupCPTsQueries.findByGroupId(Id))
 
-            const ids = deleted.map(({ template_cpt_panel_groups_cpt_id }) => template_cpt_panel_groups_cpt_id)
+            const ids = found.map(({ id }) => id).join(',')
 
             await PG_CLIENT.query(panelGroupCPTsICDs.deleteBygroupCPTIds(ids))
+
             await PG_CLIENT.query(panelGroupCPTsModifiers.deleteBygroupCPTIds(ids))
+
+            await PG_CLIENT.query(panelGroupCPTsQueries.deleteByGroupId(Id))
+
 
             const { rows } = await PG_CLIENT.query(CPTPanelGroupQueries.deleteById(Id));
 
@@ -131,7 +135,7 @@ export const CPTPanelGroupFacade = {
         const { cpt_groups } = data
 
         delete data.cpt_groups
-      
+
         try {
 
             await PG_CLIENT.query('BEGIN')
@@ -144,7 +148,6 @@ export const CPTPanelGroupFacade = {
             await PG_CLIENT.query(panelGroupCPTsICDs.deleteBygroupCPTIds(ids))
 
             await PG_CLIENT.query(panelGroupCPTsModifiers.deleteBygroupCPTIds(ids))
-
 
             await PG_CLIENT.query(panelGroupCPTsQueries.deleteByGroupId(Id))
 
