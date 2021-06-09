@@ -56,3 +56,4 @@ export * from './cpt_order_set_form';
 export * from './cpt_order_form_categories';
 export * from './icd_order_form_categories';
 export * from './template_cpt_panel_groups';
+export * from './clinical_letter_categories';

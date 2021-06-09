@@ -2220,6 +2220,71 @@ const validationSchema = {
     },
 
 
+    createALetterCategory: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findALetterCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    findAllLetterCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteALetterCategory: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+    updateALetterCategory: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {
+        }
+    },
+
+
 }
 
 export { validationSchema };
