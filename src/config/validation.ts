@@ -2163,6 +2163,62 @@ const validationSchema = {
         }
     },
 
+    createACPTPanelGroup: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            cpt_groups: JOI.array().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+    findACPTPanelGroup: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    deleteACPTPanelGroup: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+
+        },
+        query: {
+        }
+    },
+
+    updateACPTPanelGroup: {
+        headers: {
+        },
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            cpt_groups: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+
+        },
+        query: {
+        }
+    },
+
 
 }
 
