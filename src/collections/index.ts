@@ -59,3 +59,4 @@ export * from './template_cpt_panel_groups';
 export * from './clinical_letter_categories';
 export * from './practice_patient_letters';
 export * from './practice_macros';
+export * from './practice_patient_intake_forms';

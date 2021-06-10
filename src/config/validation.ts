@@ -2410,6 +2410,74 @@ const validationSchema = {
         }
     },
 
+    createAPatientIntakeForm: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            form_url: JOI.string().required()
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPatientIntakeForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    findAllPatientIntakeForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPatientIntakeForm: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPatientIntakeForm: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            form_url: JOI.string().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+
 
 }
 

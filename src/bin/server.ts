@@ -22,7 +22,7 @@ import {
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
 	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters,
-	 cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters, practiceMacrosRouters
+	cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters, practiceMacrosRouters, patientIntakeFormRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +125,7 @@ app.use(`${app.locals.BaseUri}/clinical/cpt_panel_groups`, CPTPanelGroupRouters(
 app.use(`${app.locals.BaseUri}/clinical/letter_categories`, letterCategoriesRouters());
 app.use(`${app.locals.BaseUri}/practice/patient_letters`, patientLetterRouters());
 app.use(`${app.locals.BaseUri}/practice/macros`, practiceMacrosRouters());
+app.use(`${app.locals.BaseUri}/practice/patient_intake_form`, patientIntakeFormRouters());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
