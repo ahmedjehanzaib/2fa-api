@@ -60,3 +60,4 @@ export * from './clinical_letter_categories';
 export * from './practice_patient_letters';
 export * from './practice_macros';
 export * from './practice_patient_intake_forms';
+export * from './practice_health_education';
