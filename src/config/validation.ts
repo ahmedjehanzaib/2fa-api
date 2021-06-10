@@ -2344,6 +2344,73 @@ const validationSchema = {
     },
 
 
+    createAPracticeMacros: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+        },
+        query: {
+        }
+    },
+
+    findAPracticeMacros: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    findAllPracticeMacros: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
+    deleteAPracticeMacros: {
+        headers: {
+        },
+        body: {
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+    updateAPracticeMacros: {
+        headers: {
+        },
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {
+        }
+    },
+
+
 }
 
 export { validationSchema };
