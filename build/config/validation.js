@@ -1657,5 +1657,271 @@ var validationSchema = {
         },
         query: {}
     },
+    createACPTPanelGroup: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            cpt_groups: JOI.array().required()
+        },
+        params: {},
+        query: {}
+    },
+    findACPTPanelGroup: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteACPTPanelGroup: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateACPTPanelGroup: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            description: JOI.string().trim().optional().allow('', null),
+            cpt_groups: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createALetterCategory: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findALetterCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    findAllLetterCategory: {
+        headers: {},
+        body: {},
+        params: {
+            practice_id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteALetterCategory: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    updateALetterCategory: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.number().required()
+        },
+        query: {}
+    },
+    createAPatientLetter: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            category_id: JOI.number().required(),
+            general_item_document: JOI.number().required(),
+            letter_text: JOI.string().trim().optional().allow('', null),
+            user_fields: JOI.array().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAPatientLetter: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPatientLetter: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPatientLetter: {
+        headers: {},
+        body: {
+            name: JOI.string().required(),
+            practice_id: JOI.string().uuid().required(),
+            category_id: JOI.number().required(),
+            general_item_document: JOI.number().required(),
+            letter_text: JOI.string().trim().optional().allow('', null),
+            user_fields: JOI.array().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAPracticeMacros: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {},
+        query: {}
+    },
+    findAPracticeMacros: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    findAllPracticeMacros: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPracticeMacros: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPracticeMacros: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            description: JOI.string().trim().optional().allow('', null)
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAPatientIntakeForm: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            form_url: JOI.string().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAPatientIntakeForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    findAllPatientIntakeForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAPatientIntakeForm: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAPatientIntakeForm: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            form_url: JOI.string().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    createAHealthEducation: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            pdf_url: JOI.string().required()
+        },
+        params: {},
+        query: {}
+    },
+    findAHealthEducation: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    findAllHealthEducation: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    deleteAHealthEducation: {
+        headers: {},
+        body: {},
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
+    updateAHealthEducation: {
+        headers: {},
+        body: {
+            practice_id: JOI.string().uuid().required(),
+            name: JOI.string().required(),
+            pdf_url: JOI.string().required()
+        },
+        params: {
+            id: JOI.string().guid().required()
+        },
+        query: {}
+    },
 };
 exports.validationSchema = validationSchema;

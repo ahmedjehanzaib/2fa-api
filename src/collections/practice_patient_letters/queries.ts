@@ -1,4 +1,3 @@
-import { ident } from 'pg-format';
 import { IPatientFields, IPatientLetter } from './interfaces';
 
 export const patientLetterQueries = {

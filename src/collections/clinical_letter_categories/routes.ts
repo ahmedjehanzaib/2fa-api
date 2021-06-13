@@ -32,7 +32,7 @@ export function letterCategoriesRouters(): Router {
 		}
 	});
 
-	router.get('/', async (req: Request, res: Response, _next: NextFunction) => {
+	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
 		try {
 
 			const data = await letterCategoriesFacade.findAll();

@@ -81,6 +81,12 @@ exports.app.use(exports.app.locals.BaseUri + "/clinical/templates", collections_
 exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_forms", collections_1.CPTOrderFormRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_form_categories", collections_1.cptFormCategoriesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/icd_order_form_categories", collections_1.ICDFormCategoriesRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_panel_groups", collections_1.CPTPanelGroupRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/letter_categories", collections_1.letterCategoriesRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice/patient_letters", collections_1.patientLetterRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice/macros", collections_1.practiceMacrosRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice/patient_intake_form", collections_1.patientIntakeFormRouters());
+exports.app.use(exports.app.locals.BaseUri + "/practice/health_education", collections_1.healthEducationRouters());
 var errorHandler = function (error, _req, res, _next) {
     log_1.log.error(error);
     if (error.name === 'UnauthorizedError')

@@ -1460,5 +1460,271 @@ declare const validationSchema: {
         };
         query: {};
     };
+    createACPTPanelGroup: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            cpt_groups: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findACPTPanelGroup: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteACPTPanelGroup: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateACPTPanelGroup: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            description: JOI.StringSchema;
+            cpt_groups: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createALetterCategory: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findALetterCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    findAllLetterCategory: {
+        headers: {};
+        body: {};
+        params: {
+            practice_id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteALetterCategory: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    updateALetterCategory: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.NumberSchema;
+        };
+        query: {};
+    };
+    createAPatientLetter: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            category_id: JOI.NumberSchema;
+            general_item_document: JOI.NumberSchema;
+            letter_text: JOI.StringSchema;
+            user_fields: JOI.ArraySchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPatientLetter: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPatientLetter: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPatientLetter: {
+        headers: {};
+        body: {
+            name: JOI.StringSchema;
+            practice_id: JOI.StringSchema;
+            category_id: JOI.NumberSchema;
+            general_item_document: JOI.NumberSchema;
+            letter_text: JOI.StringSchema;
+            user_fields: JOI.ArraySchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAPracticeMacros: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPracticeMacros: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    findAllPracticeMacros: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPracticeMacros: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPracticeMacros: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            description: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAPatientIntakeForm: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            form_url: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAPatientIntakeForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    findAllPatientIntakeForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAPatientIntakeForm: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAPatientIntakeForm: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            form_url: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    createAHealthEducation: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            pdf_url: JOI.StringSchema;
+        };
+        params: {};
+        query: {};
+    };
+    findAHealthEducation: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    findAllHealthEducation: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    deleteAHealthEducation: {
+        headers: {};
+        body: {};
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
+    updateAHealthEducation: {
+        headers: {};
+        body: {
+            practice_id: JOI.StringSchema;
+            name: JOI.StringSchema;
+            pdf_url: JOI.StringSchema;
+        };
+        params: {
+            id: JOI.StringSchema;
+        };
+        query: {};
+    };
 };
 export { validationSchema };
