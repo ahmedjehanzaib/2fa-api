@@ -1,7 +1,7 @@
 import { IClinicalTemplateICDOrderSetForm, IFormCategoriesICDs, IFormToCategories } from './interfaces';
 
 export const ICDOrderFormQueries = {
-    
+
     create: (data: IClinicalTemplateICDOrderSetForm) => {
         const columns = Object.keys(data)
 
@@ -82,8 +82,14 @@ export const ICDOrderSetFormCategoriesICDs = {
 
     findByCategoryId: (Id: string) => {
         return {
-            text: `SELECT * FROM icd_order_set_form_categories_icds WHERE cpt_order_set_form_category_id = $1`,
+            text: `SELECT * FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_id = $1`,
             values: [Id]
+        }
+    },
+    findByCategoryAndFormId: (categoryId: any, formId: any) => {
+        return {
+            text: `SELECT * FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_category_id = $1 and icd_order_set_form_id = $2`,
+            values: [categoryId, formId]
         }
     },
 
@@ -96,7 +102,7 @@ export const ICDOrderSetFormCategoriesICDs = {
 
     deleteByFormId: (Id: string) => {
         return {
-            text: `DELETE FROM icd_order_set_form_categories_icds WHERE template_icd_order_set_form_id = $1 RETURNING *`,
+            text: `DELETE FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_id = $1 RETURNING *`,
             values: [Id]
         };
     },

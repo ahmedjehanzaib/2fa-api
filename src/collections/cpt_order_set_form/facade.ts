@@ -32,11 +32,9 @@ export const CPTOrderFormFacade = {
                 }
 
                 for await (const cptId of cpts) {
-                    console.log({ cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId })
-
 
                     const { rows: inserted } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs
-                        .create({ id: uuidv4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId }))
+                        .create({ id: uuidv4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId, cpt_order_set_form_id: rows[0].id }))
 
                     category.cpts.push(inserted[0].practice_cpt_id as never)
 
@@ -70,7 +68,7 @@ export const CPTOrderFormFacade = {
 
         for (const { cpt_order_set_form_category_id } of categories) {
 
-            const { rows: cpts } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.findByCategoryId(cpt_order_set_form_category_id));
+            const { rows: cpts } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.findByCategoryAndFormId(cpt_order_set_form_category_id, Id));
 
             rows[0].category_cpts.push({ categoryId: cpt_order_set_form_category_id, cpts: cpts.map(({ practice_cpt_id }: any) => practice_cpt_id) })
 
@@ -100,7 +98,7 @@ export const CPTOrderFormFacade = {
 
     },
 
-    updateById: async (Id: string, data: IClinicalTemplateCPTOrderSetForm) => {
+    updateById: async (Id: any, data: IClinicalTemplateCPTOrderSetForm) => {
 
         const { category_cpts } = data
 
@@ -112,6 +110,7 @@ export const CPTOrderFormFacade = {
 
             const { rows } = await PG_CLIENT.query(CPTOrderFormQueries.updateById(Id, data))
 
+            await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.deleteByFormId(Id))
             await PG_CLIENT.query(cptOrderSetFormToCategories.deleteByFormId(Id))
 
 
@@ -128,10 +127,8 @@ export const CPTOrderFormFacade = {
 
                 for await (const cptId of cpts) {
 
-
-
                     const { rows: inserted } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs
-                        .create({ id: uuidv4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId }))
+                        .create({ id: uuidv4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId, cpt_order_set_form_id: Id }))
 
                     category.cpts.push(inserted[0].practice_cpt_id as never)
 
@@ -160,22 +157,22 @@ export const CPTOrderFormFacade = {
     findAll: async (Id: string) => {
         const { rows } = await PG_CLIENT.query(CPTOrderFormQueries.findAll(Id))
 
-        for (let i = 0; i < rows.length; i++) {
+        // for (let i = 0; i < rows.length; i++) {
 
-            const { rows: categories } = await PG_CLIENT.query(cptOrderSetFormToCategories.findByFormId(rows[i].id));
+        //     const { rows: categories } = await PG_CLIENT.query(cptOrderSetFormToCategories.findByFormId(rows[i].id));
 
-            rows[i].category_cpts = []
+        //     rows[i].category_cpts = []
 
-            for (const { cpt_order_set_form_category_id } of categories) {
+        //     for (const { cpt_order_set_form_category_id } of categories) {
 
-                const { rows: cpts } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.findByCategoryId(cpt_order_set_form_category_id));
+        //         const { rows: cpts } = await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.findByCategoryId(cpt_order_set_form_category_id));
 
-                rows[i].category_cpts.push({ categoryId: cpt_order_set_form_category_id, cpts: cpts.map(({ practice_cpt_id }: any) => practice_cpt_id) })
+        //         rows[i].category_cpts.push({ categoryId: cpt_order_set_form_category_id, cpts: cpts.map(({ practice_cpt_id }: any) => practice_cpt_id) })
 
 
-            }
+        //     }
 
-        }
+        // }
         return rows;
     }
 };

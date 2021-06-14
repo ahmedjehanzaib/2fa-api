@@ -1,7 +1,7 @@
 import { IClinicalTemplateCPTOrderSetForm, IFormCategoriesCPTs, IFormToCategories } from './interfaces';
 
 export const CPTOrderFormQueries = {
-    
+
     create: (data: IClinicalTemplateCPTOrderSetForm) => {
         const columns = Object.keys(data)
 
@@ -84,6 +84,13 @@ export const cptOrderSetFormCategoriesCPTs = {
         return {
             text: `SELECT * FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_category_id = $1`,
             values: [Id]
+        }
+    },
+
+    findByCategoryAndFormId: (categoryId: string, formId: string) => {
+        return {
+            text: `SELECT * FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_category_id = $1 and cpt_order_set_form_id = $2`,
+            values: [categoryId, formId]
         }
     },
 

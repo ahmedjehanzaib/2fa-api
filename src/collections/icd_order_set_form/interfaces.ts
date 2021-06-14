@@ -12,11 +12,13 @@ export interface IClinicalTemplateICDOrderSetForm {
 
 export interface IFormCategoriesICDs {
     id: string,
-    template_icd_order_set_form_id: string
+    icd_order_set_form_category_id: string,
+    icd_order_set_form_id: string,
     practice_icd_id: number
 }
 
 export interface IFormToCategories {
     template_icd_order_set_form_id: string
-    icd_order_set_form_categories_id: string
+    icd_order_set_form_categories_id: string,
+    
 }

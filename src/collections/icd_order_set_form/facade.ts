@@ -32,11 +32,9 @@ export const ICDOrderFormFacade = {
                 }
 
                 for await (const icdId of icds) {
-                    console.log({ template_icd_order_set_form_id: categoryId, practice_icd_id: icdId })
-
 
                     const { rows: inserted } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs
-                        .create({ id: uuidv4(), template_icd_order_set_form_id: categoryId, practice_icd_id: icdId }))
+                        .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: rows[0].id }))
 
                     category.cpts.push(inserted[0].practice_icd_id as never)
 
@@ -70,7 +68,7 @@ export const ICDOrderFormFacade = {
 
         for (const { template_icd_order_set_form_id } of categories) {
 
-            const { rows: icds } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryId(template_icd_order_set_form_id));
+            const { rows: icds } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(template_icd_order_set_form_id, Id));
 
             rows[0].category_icds.push({ categoryId: template_icd_order_set_form_id, icds: icds.map(({ practice_icd_id }: any) => practice_icd_id) })
 
@@ -111,6 +109,7 @@ export const ICDOrderFormFacade = {
             await PG_CLIENT.query('BEGIN')
 
             const { rows } = await PG_CLIENT.query(ICDOrderFormQueries.updateById(Id, data))
+            await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.deleteByFormId(Id))
 
             await PG_CLIENT.query(ICDOrderSetFormToCategories.deleteByFormId(Id))
 
@@ -131,7 +130,7 @@ export const ICDOrderFormFacade = {
 
 
                     const { rows: inserted } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs
-                        .create({ id: uuidv4(), template_icd_order_set_form_id: categoryId, practice_icd_id: icdId }))
+                        .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: Id  }))
 
                     category.cpts.push(inserted[0].practice_icd_id as never)
 
@@ -160,22 +159,22 @@ export const ICDOrderFormFacade = {
     findAll: async (Id: string) => {
         const { rows } = await PG_CLIENT.query(ICDOrderFormQueries.findAll(Id))
 
-        for (let i = 0; i < rows.length; i++) {
+        // for (let i = 0; i < rows.length; i++) {
 
-            const { rows: categories } = await PG_CLIENT.query(ICDOrderSetFormToCategories.findByFormId(rows[i].id));
+        //     const { rows: categories } = await PG_CLIENT.query(ICDOrderSetFormToCategories.findByFormId(rows[i].id));
 
-            rows[i].category_icds = []
+        //     rows[i].category_icds = []
 
-            for (const { template_icd_order_set_form_id } of categories) {
+        //     for (const { template_icd_order_set_form_id } of categories) {
 
-                const { rows: cpts } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryId(template_icd_order_set_form_id));
+        //         const { rows: cpts } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryId(template_icd_order_set_form_id));
 
-                rows[i].category_icds.push({ categoryId: template_icd_order_set_form_id, cpts: cpts.map(({ practice_icd_id }: any) => practice_icd_id) })
+        //         rows[i].category_icds.push({ categoryId: template_icd_order_set_form_id, cpts: cpts.map(({ practice_icd_id }: any) => practice_icd_id) })
 
 
-            }
+        //     }
 
-        }
+        // }
         return rows;
     }
 };
