@@ -1,6 +1,6 @@
-import { IClinicalTemplateCPTOrderSetForm, IFormCategoriesCPTs, IFormToCategories } from './interfaces';
-export declare const CPTOrderFormQueries: {
-    create: (data: IClinicalTemplateCPTOrderSetForm) => {
+import { IClinicalTemplateICDOrderSetForm, IFormCategoriesICDs, IFormToCategories } from './interfaces';
+export declare const ICDOrderFormQueries: {
+    create: (data: IClinicalTemplateICDOrderSetForm) => {
         text: string;
         values: any[];
     };
@@ -12,7 +12,7 @@ export declare const CPTOrderFormQueries: {
         text: string;
         values: string[];
     };
-    updateById: (Id: string, data: IClinicalTemplateCPTOrderSetForm) => {
+    updateById: (Id: string, data: IClinicalTemplateICDOrderSetForm) => {
         text: string;
         values: any[];
     };
@@ -21,8 +21,8 @@ export declare const CPTOrderFormQueries: {
         values: string[];
     };
 };
-export declare const cptOrderSetFormCategoriesCPTs: {
-    create: (data: IFormCategoriesCPTs) => {
+export declare const ICDOrderSetFormCategoriesICDs: {
+    create: (data: IFormCategoriesICDs) => {
         text: string;
         values: any[];
     };
@@ -34,9 +34,9 @@ export declare const cptOrderSetFormCategoriesCPTs: {
         text: string;
         values: string[];
     };
-    findByCategoryAndFormId: (categoryId: string, formId: string) => {
+    findByCategoryAndFormId: (categoryId: any, formId: any) => {
         text: string;
-        values: string[];
+        values: any[];
     };
     deleteById: (Id: string) => {
         text: string;
@@ -46,7 +46,7 @@ export declare const cptOrderSetFormCategoriesCPTs: {
         text: string;
         values: string[];
     };
-    updateById: (Id: string, data: IFormCategoriesCPTs) => {
+    updateById: (Id: string, data: IFormCategoriesICDs) => {
         text: string;
         values: any[];
     };
@@ -55,7 +55,7 @@ export declare const cptOrderSetFormCategoriesCPTs: {
         values: never[];
     };
 };
-export declare const cptOrderSetFormToCategories: {
+export declare const ICDOrderSetFormToCategories: {
     create: (data: IFormToCategories) => {
         text: string;
         values: any[];

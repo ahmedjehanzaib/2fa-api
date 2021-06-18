@@ -22,7 +22,8 @@ import {
 	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
 	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
 	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters,
-	cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters, practiceMacrosRouters, patientIntakeFormRouters, healthEducationRouters
+	cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters,
+	 practiceMacrosRouters, patientIntakeFormRouters, healthEducationRouters, ICDOrderFormRouters
 } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,6 +120,7 @@ app.use(`${app.locals.BaseUri}/clinical/question_groups`, questionGroupRouters()
 app.use(`${app.locals.BaseUri}/clinical/sections`, sectionRouters());
 app.use(`${app.locals.BaseUri}/clinical/templates`, templateRouters());
 app.use(`${app.locals.BaseUri}/clinical/cpt_order_forms`, CPTOrderFormRouters());
+app.use(`${app.locals.BaseUri}/clinical/icd_order_forms`, ICDOrderFormRouters());
 app.use(`${app.locals.BaseUri}/clinical/cpt_order_form_categories`, cptFormCategoriesRouters());
 app.use(`${app.locals.BaseUri}/clinical/icd_order_form_categories`, ICDFormCategoriesRouters());
 app.use(`${app.locals.BaseUri}/clinical/cpt_panel_groups`, CPTPanelGroupRouters());

@@ -79,6 +79,7 @@ exports.app.use(exports.app.locals.BaseUri + "/clinical/question_groups", collec
 exports.app.use(exports.app.locals.BaseUri + "/clinical/sections", collections_1.sectionRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/templates", collections_1.templateRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_forms", collections_1.CPTOrderFormRouters());
+exports.app.use(exports.app.locals.BaseUri + "/clinical/icd_order_forms", collections_1.ICDOrderFormRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_order_form_categories", collections_1.cptFormCategoriesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/icd_order_form_categories", collections_1.ICDFormCategoriesRouters());
 exports.app.use(exports.app.locals.BaseUri + "/clinical/cpt_panel_groups", collections_1.CPTPanelGroupRouters());

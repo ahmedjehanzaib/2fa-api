@@ -107,11 +107,11 @@ export const CPTOrderFormFacade = {
         try {
 
             await PG_CLIENT.query('BEGIN')
-
-            const { rows } = await PG_CLIENT.query(CPTOrderFormQueries.updateById(Id, data))
-
+            console.log('ello')
             await PG_CLIENT.query(cptOrderSetFormCategoriesCPTs.deleteByFormId(Id))
             await PG_CLIENT.query(cptOrderSetFormToCategories.deleteByFormId(Id))
+            const { rows } = await PG_CLIENT.query(CPTOrderFormQueries.updateById(Id, data))
+
 
 
             rows[0].category_cpts = []

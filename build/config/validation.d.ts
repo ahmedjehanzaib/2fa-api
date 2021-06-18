@@ -1438,7 +1438,7 @@ declare const validationSchema: {
         };
         query: {};
     };
-    deleteAICDderForm: {
+    deleteAICDOrderForm: {
         headers: {};
         body: {};
         params: {

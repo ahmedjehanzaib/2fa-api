@@ -1,57 +1,58 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CPTOrderFormFacade = void 0;
+exports.ICDOrderFormFacade = void 0;
 var tslib_1 = require("tslib");
 var uuid_1 = require("uuid");
 var queries_1 = require("./queries");
 var databases_1 = require("../../databases");
-exports.CPTOrderFormFacade = {
+exports.ICDOrderFormFacade = {
     create: function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var category_cpts, rows, category_cpts_1, category_cpts_1_1, cat, cpts, categoryId, category, cpts_1, cpts_1_1, cptId, inserted, e_1_1, e_2_1, err_1;
+        var category_icds, rows, category_icds_1, category_icds_1_1, cat, icds, categoryId, category, icds_1, icds_1_1, icdId, inserted, e_1_1, e_2_1, err_1;
         var e_2, _a;
         var e_1, _b;
         return tslib_1.__generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    category_cpts = data.category_cpts;
-                    delete data.category_cpts;
+                    category_icds = data.category_icds;
+                    delete data.category_icds;
                     _c.label = 1;
                 case 1:
                     _c.trys.push([1, 26, , 28]);
                     return [4, databases_1.PG_CLIENT.query('BEGIN')];
                 case 2:
                     _c.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.CPTOrderFormQueries.create(data))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.create(data))];
                 case 3:
                     rows = (_c.sent()).rows;
-                    rows[0].category_cpts = [];
+                    rows[0].category_icds = [];
                     _c.label = 4;
                 case 4:
                     _c.trys.push([4, 22, 23, 24]);
-                    category_cpts_1 = tslib_1.__values(category_cpts), category_cpts_1_1 = category_cpts_1.next();
+                    category_icds_1 = tslib_1.__values(category_icds), category_icds_1_1 = category_icds_1.next();
                     _c.label = 5;
                 case 5:
-                    if (!!category_cpts_1_1.done) return [3, 21];
-                    cat = category_cpts_1_1.value;
-                    cpts = cat.cpts, categoryId = cat.categoryId;
+                    if (!!category_icds_1_1.done) return [3, 21];
+                    cat = category_icds_1_1.value;
+                    icds = cat.icds, categoryId = cat.categoryId;
                     category = {
                         categoryId: categoryId,
-                        cpts: []
+                        icds: []
                     };
                     _c.label = 6;
                 case 6:
                     _c.trys.push([6, 12, 13, 18]);
-                    cpts_1 = (e_1 = void 0, tslib_1.__asyncValues(cpts));
+                    icds_1 = (e_1 = void 0, tslib_1.__asyncValues(icds));
                     _c.label = 7;
-                case 7: return [4, cpts_1.next()];
+                case 7: return [4, icds_1.next()];
                 case 8:
-                    if (!(cpts_1_1 = _c.sent(), !cpts_1_1.done)) return [3, 11];
-                    cptId = cpts_1_1.value;
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormCategoriesCPTs
-                            .create({ id: uuid_1.v4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId, cpt_order_set_form_id: rows[0].id }))];
+                    if (!(icds_1_1 = _c.sent(), !icds_1_1.done)) return [3, 11];
+                    icdId = icds_1_1.value;
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs
+                            .create({ id: uuid_1.v4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: rows[0].id }))];
                 case 9:
                     inserted = (_c.sent()).rows;
-                    category.cpts.push(inserted[0].practice_cpt_id);
+                    console.log(1);
+                    category.icds.push(inserted[0].practice_icd_id);
                     _c.label = 10;
                 case 10: return [3, 7];
                 case 11: return [3, 18];
@@ -61,8 +62,8 @@ exports.CPTOrderFormFacade = {
                     return [3, 18];
                 case 13:
                     _c.trys.push([13, , 16, 17]);
-                    if (!(cpts_1_1 && !cpts_1_1.done && (_b = cpts_1.return))) return [3, 15];
-                    return [4, _b.call(cpts_1)];
+                    if (!(icds_1_1 && !icds_1_1.done && (_b = icds_1.return))) return [3, 15];
+                    return [4, _b.call(icds_1)];
                 case 14:
                     _c.sent();
                     _c.label = 15;
@@ -71,14 +72,14 @@ exports.CPTOrderFormFacade = {
                     if (e_1) throw e_1.error;
                     return [7];
                 case 17: return [7];
-                case 18: return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormToCategories
-                        .create({ cpt_order_set_form_category_id: categoryId, template_cpt_order_set_form_id: rows[0].id }))];
+                case 18: return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories
+                        .create({ icd_order_set_form_categories_id: categoryId, template_icd_order_set_form_id: rows[0].id }))];
                 case 19:
                     _c.sent();
-                    rows[0].category_cpts.push(category);
+                    rows[0].category_icds.push(category);
                     _c.label = 20;
                 case 20:
-                    category_cpts_1_1 = category_cpts_1.next();
+                    category_icds_1_1 = category_icds_1.next();
                     return [3, 5];
                 case 21: return [3, 24];
                 case 22:
@@ -87,7 +88,7 @@ exports.CPTOrderFormFacade = {
                     return [3, 24];
                 case 23:
                     try {
-                        if (category_cpts_1_1 && !category_cpts_1_1.done && (_a = category_cpts_1.return)) _a.call(category_cpts_1);
+                        if (category_icds_1_1 && !category_icds_1_1.done && (_a = category_icds_1.return)) _a.call(category_icds_1);
                     }
                     finally { if (e_2) throw e_2.error; }
                     return [7];
@@ -106,17 +107,17 @@ exports.CPTOrderFormFacade = {
         });
     }); },
     findById: function (Id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var rows, categories, categories_1, categories_1_1, cpt_order_set_form_category_id, cpts, e_3_1;
+        var rows, categories, categories_1, categories_1_1, template_icd_order_set_form_id, icds, e_3_1;
         var e_3, _a;
         return tslib_1.__generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4, databases_1.PG_CLIENT.query(queries_1.CPTOrderFormQueries.findById(Id))];
+                case 0: return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.findById(Id))];
                 case 1:
                     rows = (_b.sent()).rows;
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormToCategories.findByFormId(Id))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories.findByFormId(Id))];
                 case 2:
                     categories = (_b.sent()).rows;
-                    rows[0].category_cpts = [];
+                    rows[0].category_icds = [];
                     _b.label = 3;
                 case 3:
                     _b.trys.push([3, 8, 9, 10]);
@@ -124,13 +125,13 @@ exports.CPTOrderFormFacade = {
                     _b.label = 4;
                 case 4:
                     if (!!categories_1_1.done) return [3, 7];
-                    cpt_order_set_form_category_id = categories_1_1.value.cpt_order_set_form_category_id;
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormCategoriesCPTs.findByCategoryAndFormId(cpt_order_set_form_category_id, Id))];
+                    template_icd_order_set_form_id = categories_1_1.value.template_icd_order_set_form_id;
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(template_icd_order_set_form_id, Id))];
                 case 5:
-                    cpts = (_b.sent()).rows;
-                    rows[0].category_cpts.push({ categoryId: cpt_order_set_form_category_id, cpts: cpts.map(function (_a) {
-                            var practice_cpt_id = _a.practice_cpt_id;
-                            return practice_cpt_id;
+                    icds = (_b.sent()).rows;
+                    rows[0].category_icds.push({ categoryId: template_icd_order_set_form_id, icds: icds.map(function (_a) {
+                            var practice_icd_id = _a.practice_icd_id;
+                            return practice_icd_id;
                         }) });
                     _b.label = 6;
                 case 6:
@@ -160,13 +161,13 @@ exports.CPTOrderFormFacade = {
                     return [4, databases_1.PG_CLIENT.query('BEGIN')];
                 case 1:
                     _a.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormCategoriesCPTs.deleteByFormId(Id))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.deleteByFormId(Id))];
                 case 2:
                     _a.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormToCategories.deleteByFormId(Id))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories.deleteByFormId(Id))];
                 case 3:
                     _a.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.CPTOrderFormQueries.deleteById(Id))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.deleteById(Id))];
                 case 4:
                     rows = (_a.sent()).rows;
                     return [4, databases_1.PG_CLIENT.query('COMMIT')];
@@ -184,40 +185,39 @@ exports.CPTOrderFormFacade = {
         });
     }); },
     updateById: function (Id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var category_cpts, rows, category_cpts_2, category_cpts_2_1, cat, cpts, categoryId, category, cpts_2, cpts_2_1, cptId, inserted, e_4_1, e_5_1, err_3;
+        var category_icds, rows, category_icds_2, category_icds_2_1, cat, icds, categoryId, category, icds_2, icds_2_1, icdId, inserted, e_4_1, e_5_1, err_3;
         var e_5, _a;
         var e_4, _b;
         return tslib_1.__generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    category_cpts = data.category_cpts;
-                    delete data.category_cpts;
+                    category_icds = data.category_icds;
+                    delete data.category_icds;
                     _c.label = 1;
                 case 1:
                     _c.trys.push([1, 28, , 30]);
                     return [4, databases_1.PG_CLIENT.query('BEGIN')];
                 case 2:
                     _c.sent();
-                    console.log('ello');
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormCategoriesCPTs.deleteByFormId(Id))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.updateById(Id, data))];
                 case 3:
-                    _c.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormToCategories.deleteByFormId(Id))];
+                    rows = (_c.sent()).rows;
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.deleteByFormId(Id))];
                 case 4:
                     _c.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.CPTOrderFormQueries.updateById(Id, data))];
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories.deleteByFormId(Id))];
                 case 5:
-                    rows = (_c.sent()).rows;
-                    rows[0].category_cpts = [];
+                    _c.sent();
+                    rows[0].category_icds = [];
                     _c.label = 6;
                 case 6:
                     _c.trys.push([6, 24, 25, 26]);
-                    category_cpts_2 = tslib_1.__values(category_cpts), category_cpts_2_1 = category_cpts_2.next();
+                    category_icds_2 = tslib_1.__values(category_icds), category_icds_2_1 = category_icds_2.next();
                     _c.label = 7;
                 case 7:
-                    if (!!category_cpts_2_1.done) return [3, 23];
-                    cat = category_cpts_2_1.value;
-                    cpts = cat.cpts, categoryId = cat.categoryId;
+                    if (!!category_icds_2_1.done) return [3, 23];
+                    cat = category_icds_2_1.value;
+                    icds = cat.icds, categoryId = cat.categoryId;
                     category = {
                         categoryId: categoryId,
                         cpts: []
@@ -225,17 +225,17 @@ exports.CPTOrderFormFacade = {
                     _c.label = 8;
                 case 8:
                     _c.trys.push([8, 14, 15, 20]);
-                    cpts_2 = (e_4 = void 0, tslib_1.__asyncValues(cpts));
+                    icds_2 = (e_4 = void 0, tslib_1.__asyncValues(icds));
                     _c.label = 9;
-                case 9: return [4, cpts_2.next()];
+                case 9: return [4, icds_2.next()];
                 case 10:
-                    if (!(cpts_2_1 = _c.sent(), !cpts_2_1.done)) return [3, 13];
-                    cptId = cpts_2_1.value;
-                    return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormCategoriesCPTs
-                            .create({ id: uuid_1.v4(), cpt_order_set_form_category_id: categoryId, practice_cpt_id: cptId, cpt_order_set_form_id: Id }))];
+                    if (!(icds_2_1 = _c.sent(), !icds_2_1.done)) return [3, 13];
+                    icdId = icds_2_1.value;
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs
+                            .create({ id: uuid_1.v4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: Id }))];
                 case 11:
                     inserted = (_c.sent()).rows;
-                    category.cpts.push(inserted[0].practice_cpt_id);
+                    category.cpts.push(inserted[0].practice_icd_id);
                     _c.label = 12;
                 case 12: return [3, 9];
                 case 13: return [3, 20];
@@ -245,8 +245,8 @@ exports.CPTOrderFormFacade = {
                     return [3, 20];
                 case 15:
                     _c.trys.push([15, , 18, 19]);
-                    if (!(cpts_2_1 && !cpts_2_1.done && (_b = cpts_2.return))) return [3, 17];
-                    return [4, _b.call(cpts_2)];
+                    if (!(icds_2_1 && !icds_2_1.done && (_b = icds_2.return))) return [3, 17];
+                    return [4, _b.call(icds_2)];
                 case 16:
                     _c.sent();
                     _c.label = 17;
@@ -255,14 +255,14 @@ exports.CPTOrderFormFacade = {
                     if (e_4) throw e_4.error;
                     return [7];
                 case 19: return [7];
-                case 20: return [4, databases_1.PG_CLIENT.query(queries_1.cptOrderSetFormToCategories
-                        .create({ cpt_order_set_form_category_id: categoryId, template_cpt_order_set_form_id: rows[0].id }))];
+                case 20: return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories
+                        .create({ icd_order_set_form_categories_id: categoryId, template_icd_order_set_form_id: rows[0].id }))];
                 case 21:
                     _c.sent();
-                    rows[0].category_cpts.push(category);
+                    rows[0].category_icds.push(category);
                     _c.label = 22;
                 case 22:
-                    category_cpts_2_1 = category_cpts_2.next();
+                    category_icds_2_1 = category_icds_2.next();
                     return [3, 7];
                 case 23: return [3, 26];
                 case 24:
@@ -271,7 +271,7 @@ exports.CPTOrderFormFacade = {
                     return [3, 26];
                 case 25:
                     try {
-                        if (category_cpts_2_1 && !category_cpts_2_1.done && (_a = category_cpts_2.return)) _a.call(category_cpts_2);
+                        if (category_icds_2_1 && !category_icds_2_1.done && (_a = category_icds_2.return)) _a.call(category_icds_2);
                     }
                     finally { if (e_5) throw e_5.error; }
                     return [7];
@@ -293,7 +293,7 @@ exports.CPTOrderFormFacade = {
         var rows;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, databases_1.PG_CLIENT.query(queries_1.CPTOrderFormQueries.findAll(Id))];
+                case 0: return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.findAll(Id))];
                 case 1:
                     rows = (_a.sent()).rows;
                     return [2, rows];

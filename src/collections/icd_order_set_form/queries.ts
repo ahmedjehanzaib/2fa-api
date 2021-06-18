@@ -67,6 +67,8 @@ export const ICDOrderSetFormCategoriesICDs = {
 
         })
 
+        console.log(data)
+
         return {
             text: `INSERT INTO icd_order_set_form_categories_icds(${columns})  VALUES (${indices}) RETURNING *`,
             values

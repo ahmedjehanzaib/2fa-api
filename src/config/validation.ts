@@ -2132,7 +2132,7 @@ const validationSchema = {
         }
     },
 
-    deleteAICDderForm: {
+    deleteAICDOrderForm: {
         headers: {
         },
         body: {

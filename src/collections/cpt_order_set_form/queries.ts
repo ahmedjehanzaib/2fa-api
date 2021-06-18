@@ -103,7 +103,7 @@ export const cptOrderSetFormCategoriesCPTs = {
 
     deleteByFormId: (Id: string) => {
         return {
-            text: `DELETE FROM cpt_order_set_form_categories_cpts WHERE template_cpt_order_set_form_id = $1 RETURNING *`,
+            text: `DELETE FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_id = $1 RETURNING *`,
             values: [Id]
         };
     },

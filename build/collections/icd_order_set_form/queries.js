@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cptOrderSetFormToCategories = exports.cptOrderSetFormCategoriesCPTs = exports.CPTOrderFormQueries = void 0;
-exports.CPTOrderFormQueries = {
+exports.ICDOrderSetFormToCategories = exports.ICDOrderSetFormCategoriesICDs = exports.ICDOrderFormQueries = void 0;
+exports.ICDOrderFormQueries = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -10,19 +10,19 @@ exports.CPTOrderFormQueries = {
             return data[k];
         });
         return {
-            text: "INSERT INTO clinical_template_cpt_order_set_form(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            text: "INSERT INTO template_icd_order_set_form(" + columns + ")  VALUES (" + indices + ") RETURNING *",
             values: values
         };
     },
     findById: function (Id) {
         return {
-            text: "SELECT * FROM clinical_template_cpt_order_set_form WHERE id = $1",
+            text: "SELECT * FROM template_icd_order_set_form WHERE id = $1",
             values: [Id]
         };
     },
     deleteById: function (Id) {
         return {
-            text: "DELETE FROM clinical_template_cpt_order_set_form WHERE id = $1 RETURNING *",
+            text: "DELETE FROM template_icd_order_set_form WHERE id = $1 RETURNING *",
             values: [Id]
         };
     },
@@ -35,18 +35,18 @@ exports.CPTOrderFormQueries = {
             }
         });
         return {
-            text: "UPDATE clinical_template_cpt_order_set_form SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
+            text: "UPDATE template_icd_order_set_form SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
             values: Object.keys(data).map(function (key) { return data[key]; })
         };
     },
     findAll: function (Id) {
         return {
-            text: "SELECT * FROM clinical_template_cpt_order_set_form WHERE practice_id = $1",
+            text: "SELECT * FROM template_icd_order_set_form WHERE practice_id = $1",
             values: [Id]
         };
     },
 };
-exports.cptOrderSetFormCategoriesCPTs = {
+exports.ICDOrderSetFormCategoriesICDs = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -54,38 +54,39 @@ exports.cptOrderSetFormCategoriesCPTs = {
             indices.push("$" + (i + 1));
             return data[k];
         });
+        console.log(data);
         return {
-            text: "INSERT INTO cpt_order_set_form_categories_cpts(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            text: "INSERT INTO icd_order_set_form_categories_icds(" + columns + ")  VALUES (" + indices + ") RETURNING *",
             values: values
         };
     },
     findById: function (Id) {
         return {
-            text: "SELECT * FROM cpt_order_set_form_categories_cpts WHERE id = $1",
+            text: "SELECT * FROM icd_order_set_form_categories_icds WHERE id = $1",
             values: [Id]
         };
     },
     findByCategoryId: function (Id) {
         return {
-            text: "SELECT * FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_category_id = $1",
+            text: "SELECT * FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_id = $1",
             values: [Id]
         };
     },
     findByCategoryAndFormId: function (categoryId, formId) {
         return {
-            text: "SELECT * FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_category_id = $1 and cpt_order_set_form_id = $2",
+            text: "SELECT * FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_category_id = $1 and icd_order_set_form_id = $2",
             values: [categoryId, formId]
         };
     },
     deleteById: function (Id) {
         return {
-            text: "DELETE FROM cpt_order_set_form_categories_cpts WHERE id = $1 RETURNING *",
+            text: "DELETE FROM icd_order_set_form_categories_icds WHERE id = $1 RETURNING *",
             values: [Id]
         };
     },
     deleteByFormId: function (Id) {
         return {
-            text: "DELETE FROM cpt_order_set_form_categories_cpts WHERE cpt_order_set_form_id = $1 RETURNING *",
+            text: "DELETE FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_id = $1 RETURNING *",
             values: [Id]
         };
     },
@@ -98,18 +99,18 @@ exports.cptOrderSetFormCategoriesCPTs = {
             }
         });
         return {
-            text: "UPDATE cpt_order_set_form_categories_cpts SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
+            text: "UPDATE icd_order_set_form_categories_icds SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
             values: Object.keys(data).map(function (key) { return data[key]; })
         };
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM cpt_order_set_form_categories_cpts",
+            text: "SELECT * FROM icd_order_set_form_categories_icds",
             values: []
         };
     },
 };
-exports.cptOrderSetFormToCategories = {
+exports.ICDOrderSetFormToCategories = {
     create: function (data) {
         var columns = Object.keys(data);
         var indices = [];
@@ -118,31 +119,31 @@ exports.cptOrderSetFormToCategories = {
             return data[k];
         });
         return {
-            text: "INSERT INTO cpt_order_set_form_to_categories(" + columns + ")  VALUES (" + indices + ") RETURNING *",
+            text: "INSERT INTO icd_order_set_form_to_categories(" + columns + ")  VALUES (" + indices + ") RETURNING *",
             values: values
         };
     },
     findById: function (Id) {
         return {
-            text: "SELECT * FROM cpt_order_set_form_to_categories WHERE id = $1",
+            text: "SELECT * FROM icd_order_set_form_to_categories WHERE id = $1",
             values: [Id]
         };
     },
     findByFormId: function (Id) {
         return {
-            text: "SELECT * FROM cpt_order_set_form_to_categories WHERE template_cpt_order_set_form_id = $1",
+            text: "SELECT * FROM icd_order_set_form_to_categories WHERE template_icd_order_set_form_id = $1",
             values: [Id]
         };
     },
     deleteById: function (Id) {
         return {
-            text: "DELETE FROM cpt_order_set_form_to_categories WHERE id = $1 RETURNING *",
+            text: "DELETE FROM icd_order_set_form_to_categories WHERE id = $1 RETURNING *",
             values: [Id]
         };
     },
     deleteByFormId: function (Id) {
         return {
-            text: "DELETE FROM cpt_order_set_form_to_categories WHERE template_cpt_order_set_form_id = $1 RETURNING *",
+            text: "DELETE FROM icd_order_set_form_to_categories WHERE template_icd_order_set_form_id = $1 RETURNING *",
             values: [Id]
         };
     },
@@ -155,13 +156,13 @@ exports.cptOrderSetFormToCategories = {
             }
         });
         return {
-            text: "UPDATE cpt_order_set_form_to_categories SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
+            text: "UPDATE icd_order_set_form_to_categories SET " + setQueryPart + " WHERE id = '" + Id + "' RETURNING *",
             values: Object.keys(data).map(function (key) { return data[key]; })
         };
     },
     findAll: function () {
         return {
-            text: "SELECT * FROM cpt_order_set_form_to_categories",
+            text: "SELECT * FROM icd_order_set_form_to_categories",
             values: []
         };
     },

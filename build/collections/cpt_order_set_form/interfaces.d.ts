@@ -13,6 +13,7 @@ export interface IFormCategoriesCPTs {
     id: string;
     cpt_order_set_form_category_id: string;
     practice_cpt_id: number;
+    cpt_order_set_form_id: number;
 }
 export interface IFormToCategories {
     template_cpt_order_set_form_id: string;
