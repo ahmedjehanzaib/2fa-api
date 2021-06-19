@@ -88,6 +88,7 @@ export const ICDOrderSetFormCategoriesICDs = {
             values: [Id]
         }
     },
+
     findByCategoryAndFormId: (categoryId: any, formId: any) => {
         return {
             text: `SELECT * FROM icd_order_set_form_categories_icds WHERE icd_order_set_form_category_id = $1 and icd_order_set_form_id = $2`,

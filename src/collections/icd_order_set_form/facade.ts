@@ -36,8 +36,8 @@ export const ICDOrderFormFacade = {
                     const { rows: inserted } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs
                         .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: rows[0].id }))
 
-                        console.log(1)
-                        
+                    console.log(1)
+
                     category.icds.push(inserted[0].practice_icd_id as never)
 
                 }
@@ -64,19 +64,24 @@ export const ICDOrderFormFacade = {
     },
 
     findById: async (Id: string) => {
+
         const { rows } = await PG_CLIENT.query(ICDOrderFormQueries.findById(Id));
         const { rows: categories } = await PG_CLIENT.query(ICDOrderSetFormToCategories.findByFormId(Id));
 
-        rows[0].category_icds = []
+        if (rows.length) {
 
-        for (const { template_icd_order_set_form_id } of categories) {
+            rows[0].category_icds = []
 
-            const { rows: icds } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(template_icd_order_set_form_id, Id));
+            for (const { icd_order_set_form_categories_id } of categories) {
 
-            rows[0].category_icds.push({ categoryId: template_icd_order_set_form_id, icds: icds.map(({ practice_icd_id }: any) => practice_icd_id) })
+                const { rows: icds } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(icd_order_set_form_categories_id, Id));
+
+                rows[0].category_icds.push({ categoryId: icd_order_set_form_categories_id, icds: icds.map(({ practice_icd_id }: any) => practice_icd_id) })
 
 
+            }
         }
+
 
         return rows;
     },
@@ -105,17 +110,17 @@ export const ICDOrderFormFacade = {
 
         const { category_icds } = data
 
+
         delete data.category_icds
 
         try {
 
             await PG_CLIENT.query('BEGIN')
 
-            const { rows } = await PG_CLIENT.query(ICDOrderFormQueries.updateById(Id, data))
             await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs.deleteByFormId(Id))
-
             await PG_CLIENT.query(ICDOrderSetFormToCategories.deleteByFormId(Id))
 
+            const { rows } = await PG_CLIENT.query(ICDOrderFormQueries.updateById(Id, data))
 
             rows[0].category_icds = []
 
@@ -125,17 +130,15 @@ export const ICDOrderFormFacade = {
 
                 const category = {
                     categoryId,
-                    cpts: []
+                    icds: []
                 }
 
                 for await (const icdId of icds) {
 
-
-
                     const { rows: inserted } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs
-                        .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: Id  }))
+                        .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: Id }))
 
-                    category.cpts.push(inserted[0].practice_icd_id as never)
+                    category.icds.push(inserted[0].practice_icd_id as never)
 
                 }
 
@@ -153,6 +156,8 @@ export const ICDOrderFormFacade = {
         }
         catch (err) {
             await PG_CLIENT.query('ROLLBACK')
+
+            console.log(err)
 
             throw err
         }
