@@ -32,15 +32,16 @@ export function planCategoriesRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const categories = await planCategoriesFacade.findAll();
-			if (!categories.length) {
+			const data = await planCategoriesFacade.findAll(req.params.practiceId);
+			
+			if (!data.length) {
 				log.warn({ message: 'plan categories do not exist!', statusCode: 404, detail: 'plan categories do not exist!', repo: 'aquila-api', path: '/api/v1/plan_categories' });
 				res.status(404).json({ data: null, error: true, message: 'plan categories do not exist!' });
 			} else {
-				res.status(200).json({ data: categories, error: null, message: 'plan categories fetched successfully!' });
+				res.status(200).json({ data, error: null, message: 'plan categories fetched successfully!' });
 			}
 
 		} catch (err) {

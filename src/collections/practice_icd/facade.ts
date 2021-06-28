@@ -30,8 +30,8 @@ export const practiceICDFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(practiceICDQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(practiceICDQueries.findAll(Id))
 
         return rows
     }

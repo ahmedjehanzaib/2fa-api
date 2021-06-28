@@ -49,14 +49,15 @@ export const hcfaTemplatesQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    findAll: () => {
+    findAll: (Id: string) => {
         return {
             text: `SELECT ht.*, 
             p."name" AS practice_name
             FROM hcfa_templates ht
             LEFT JOIN practices p
-            ON ht.practice_id = p.id`,
-            values: []
+            ON ht.practice_id = p.id
+            WHERE ht.practice_id = $1`,
+            values: [Id]
         }
     },
 }

@@ -28,16 +28,13 @@ export function practiceTypeOfServiceRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const TOSs = await practiceTypeOfServiceFacade.findAll();
-			if (!TOSs.length) {
-				log.warn({ message: 'Practice Types of Service do not exist!', statusCode: 404, detail: 'Practice Types of Service do not exist!', repo: 'aquila-api', path: '/api/v1/practice_type_of_service' });
-				res.status(404).json({ data: null, error: true, message: 'Practice Types of Service do not exist!' });
-			} else {
-				res.status(200).json({ data: TOSs, error: null, message: 'Practice Types of Service fetched successfully!' });
-			}
+			const data = await practiceTypeOfServiceFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data, error: null, message: 'Practice Types of Service fetched successfully!' });
+
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a Practice Type of Service s!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_type_of_service' });

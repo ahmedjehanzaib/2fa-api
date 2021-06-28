@@ -1,4 +1,4 @@
-import { IPracticeModifier  } from './interfaces';
+import { IPracticeModifier } from './interfaces';
 
 export const practiceModifierQueries = {
 
@@ -49,15 +49,16 @@ export const practiceModifierQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    
-    findAll: () => {
+
+    findAll: (Id: string) => {
         return {
             text: `SELECT pm.*,
             p."name" AS practice_name
             FROM practice_modifier pm
             LEFT JOIN practices p
-            ON pm.practice_id = p.id`,
-            values: []
+            ON pm.practice_id = p.id
+            WHERE pm.practice_id = $1`,
+            values: [Id]
         }
     },
 }

@@ -28,16 +28,13 @@ export function practicePlaceOfServiceRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const POSs = await practicePlaceOfServiceFacade.findAll();
-			if (!POSs.length) {
-				log.warn({ message: 'Practice Places of Service do not exist!', statusCode: 404, detail: 'Practice Places of Service do not exist!', repo: 'aquila-api', path: '/api/v1/practice_place_of_service' });
-				res.status(404).json({ data: null, error: true, message: 'Practice Places of Service do not exist!' });
-			} else {
-				res.status(200).json({ data: POSs, error: null, message: 'Practice Places of Service fetched successfully!' });
-			}
+			const POSs = await practicePlaceOfServiceFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data: POSs, error: null, message: 'Practice Places of Service fetched successfully!' });
+
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a Practice Place of Service s!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_place_of_service' });

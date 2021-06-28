@@ -141,8 +141,8 @@ export const practicePlanFacade = {
         }
 
     },
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(practicePlansQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(practicePlansQueries.findAll(Id))
 
         return rows
     }

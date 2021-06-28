@@ -69,7 +69,7 @@ export const practiceCPTQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    findAll: () => {
+    findAll: (practiceId: string) => {
         return {
             text: `SELECT
             pc.*,
@@ -94,8 +94,9 @@ export const practiceCPTQueries = {
                ON ppc.id = pc.procedure_category 
             LEFT JOIN
                ndc_unit_of_measurement nuom 
-               ON nuom.id = pc.ndc_unit_of_measurements`,
-            values: []
+               ON nuom.id = pc.ndc_unit_of_measurements
+               WHERE pc.practice_id = $1`,
+            values: [practiceId]
         }
     },
 }

@@ -30,8 +30,8 @@ export const practiceProcedureCategoryFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(practiceProcedureCategoryQueries.findAll())
+    findAll: async (practiceId: string) => {
+        const { rows } = await PG_CLIENT.query(practiceProcedureCategoryQueries.findAll(practiceId))
 
         return rows
     }

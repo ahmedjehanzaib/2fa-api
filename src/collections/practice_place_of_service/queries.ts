@@ -1,4 +1,4 @@
-import { IPracticePlaceOfService  } from './interfaces';
+import { IPracticePlaceOfService } from './interfaces';
 
 export const practicePlaceOfServiceQueries = {
 
@@ -49,15 +49,16 @@ export const practicePlaceOfServiceQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    
-    findAll: () => {
+
+    findAll: (practiceId: string) => {
         return {
             text: `SELECT ppos.*,
             p."name" AS practice_name
             FROM practice_place_of_service ppos
             LEFT JOIN practices p
-            ON ppos.practice_id = p.id`,
-            values: []
+            ON ppos.practice_id = p.id
+            WHERE ppos.practice_id = $1`,
+            values: [practiceId]
         }
     },
 }

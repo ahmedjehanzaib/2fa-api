@@ -64,7 +64,7 @@ export const practicePlansQueries = {
             values: Object.keys(locationData).map((key) => locationData[key])
         };
     },
-    findAll: () => {
+    findAll: (Id: string) => {
         return {
             text: `SELECT pp.*,
             p."name" AS practice_name,
@@ -82,8 +82,9 @@ export const practicePlansQueries = {
             left join plan_fees pf 
             on pp.id = pf.plan_id
             left join provider_insurance_billing_option pibo 
-            on pp.id = pibo.plan_id`,
-            values: []
+            on pp.id = pibo.plan_id
+            WHERE pp.practice_id = $1`,
+            values: [Id]
         }
     },
 }

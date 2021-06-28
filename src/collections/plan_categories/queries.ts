@@ -1,4 +1,4 @@
-import { IPlanCategories, IPlanCategoriesUpdatedData  } from './interfaces';
+import { IPlanCategories, IPlanCategoriesUpdatedData } from './interfaces';
 
 export const planCategoriesQueries = {
     create: (data: IPlanCategories) => {
@@ -48,15 +48,15 @@ export const planCategoriesQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    findAll: () => {
+    findAll: (Id: string) => {
         return {
             text: `SELECT ppc.*,
             p."name" AS practice_name
             FROM practice_plan_category ppc
             LEFT JOIN practices p
             ON ppc.practice_id = p.id
-            `,
-            values: []
+            WHERE ppc.practice_id = $1`,
+            values: [Id]
         }
     },
 }

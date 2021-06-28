@@ -50,14 +50,15 @@ export const practiceProcedureCategoryQueries = {
         };
     },
 
-    findAll: () => {
+    findAll: (practiceId: string) => {
         return {
             text: `SELECT ppc.*,
             p."name" AS practice_name
             FROM practice_procedure_category ppc
             LEFT JOIN practices p
-            ON ppc.practice_id = p.id`,
-            values: []
+            ON ppc.practice_id = p.id
+            WHERE ppc.practice_id = $1`,
+            values: [practiceId]
         }
     },
 }

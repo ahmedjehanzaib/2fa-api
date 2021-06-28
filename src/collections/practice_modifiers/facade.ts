@@ -30,8 +30,8 @@ export const practiceModifierFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(practiceModifierQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(practiceModifierQueries.findAll(Id))
 
         return rows
     }

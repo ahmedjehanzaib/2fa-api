@@ -1,4 +1,4 @@
-import { IPracticeICD  } from './interfaces';
+import { IPracticeICD } from './interfaces';
 
 export const practiceICDQueries = {
     create: (data: IPracticeICD) => {
@@ -48,14 +48,15 @@ export const practiceICDQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    findAll: () => {
+    findAll: (Id: string) => {
         return {
             text: `SELECT pi.*,
             p."name" AS practice_name
             FROM practice_icd pi
             LEFT JOIN practices p
-            ON pi.practice_id = p.id`,
-            values: []
+            ON pi.practice_id = p.id
+            WHERE pi.practice_id = $1`,
+            values: [Id]
         }
     },
 }

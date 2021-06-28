@@ -30,8 +30,8 @@ export const hcfaTemplatesFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(hcfaTemplatesQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(hcfaTemplatesQueries.findAll(Id))
 
         return rows
     }

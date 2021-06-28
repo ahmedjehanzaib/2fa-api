@@ -1,4 +1,4 @@
-import { IPracticetypeOfService  } from './interfaces';
+import { IPracticetypeOfService } from './interfaces';
 
 export const practiceTypeOfServiceQueries = {
 
@@ -49,15 +49,16 @@ export const practiceTypeOfServiceQueries = {
             values: Object.keys(data).map((key) => data[key])
         };
     },
-    
-    findAll: () => {
+
+    findAll: (practiceId: string) => {
         return {
             text: `SELECT ptos.*,
             p."name" AS practice_name
             FROM practice_type_of_service ptos
             LEFT JOIN practices p
-            ON ptos.practice_id = p.id`,
-            values: []
+            ON ptos.practice_id = p.id
+            WHERE ptos.practice_id = $1`,
+            values: [practiceId]
         }
     },
 }

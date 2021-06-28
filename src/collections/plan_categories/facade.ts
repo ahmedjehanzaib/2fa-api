@@ -30,8 +30,8 @@ export const planCategoriesFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(planCategoriesQueries.findAll())
+    findAll: async (Id: string) => {
+        const { rows } = await PG_CLIENT.query(planCategoriesQueries.findAll(Id))
 
         return rows
     }

@@ -28,16 +28,13 @@ export function practiceCPTRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const CPTs = await practiceCPTFacade.findAll();
-			if (!CPTs.length) {
-				log.warn({ message: 'Practice CPTs do not exist!', statusCode: 404, detail: 'Practice CPTs do not exist!', repo: 'aquila-api', path: '/api/v1/practice_cpt' });
-				res.status(404).json({ data: null, error: true, message: 'Practice CPTs do not exist!' });
-			} else {
-				res.status(200).json({ data: CPTs, error: null, message: 'Practice CPTs fetched successfully!' });
-			}
+			const data = await practiceCPTFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data, error: null, message: 'Practice CPTs fetched successfully!' });
+
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a Practice CPTs!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_cpt' });

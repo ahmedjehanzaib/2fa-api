@@ -28,16 +28,13 @@ export function practiceProcedureCategoriesRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const TOSs = await practiceProcedureCategoryFacade.findAll();
-			if (!TOSs.length) {
-				log.warn({ message: 'Practice Procedure Categories do not exist!', statusCode: 404, detail: 'Practice Procedure Categories do not exist!', repo: 'aquila-api', path: '/api/v1/practice_procedure_categories' });
-				res.status(404).json({ data: null, error: true, message: 'Practice Procedure Categories do not exist!' });
-			} else {
-				res.status(200).json({ data: TOSs, error: null, message: 'Practice Procedure Categories fetched successfully!' });
-			}
+			const data = await practiceProcedureCategoryFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data, error: null, message: 'Practice Procedure Categories fetched successfully!' });
+
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a Practice Procedure Categories!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_procedure_categories' });

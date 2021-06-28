@@ -118,8 +118,8 @@ export const practiceCPTFacade = {
 
     },
 
-    findAll: async () => {
-        const { rows } = await PG_CLIENT.query(practiceCPTQueries.findAll())
+    findAll: async (practiceId: string) => {
+        const { rows } = await PG_CLIENT.query(practiceCPTQueries.findAll(practiceId))
 
         return rows
     }

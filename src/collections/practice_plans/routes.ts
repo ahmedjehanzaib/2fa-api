@@ -31,16 +31,12 @@ export function practicePlanRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const plans = await practicePlanFacade.findAll();
-			if (!plans.length) {
-				log.warn({ message: 'Practice plans do not exist!', statusCode: 404, detail: 'Practice plans do not exist!', repo: 'aquila-api', path: '/api/v1/practice_plans' });
-				res.status(404).json({ data: null, error: true, message: 'Practice plans do not exist!' });
-			} else {
-				res.status(200).json({ data: plans, error: null, message: 'practice plans fetched successfully!' });
-			}
+			const data = await practicePlanFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data, error: null, message: 'practice plans fetched successfully!' });
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a practice plans!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_plans' });

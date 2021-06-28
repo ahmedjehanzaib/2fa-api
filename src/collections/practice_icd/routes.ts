@@ -28,16 +28,13 @@ export function practiceICDRouters(): Router {
 		}
 	});
 
-	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 
-			const icds = await practiceICDFacade.findAll();
-			if (!icds.length) {
-				log.warn({ message: 'Practice ICDs do not exist!', statusCode: 404, detail: 'Practice ICDs do not exist!', repo: 'aquila-api', path: '/api/v1/practice_icd' });
-				res.status(404).json({ data: null, error: true, message: 'Practice ICDs do not exist!' });
-			} else {
-				res.status(200).json({ data: icds, error: null, message: 'Practice ICDs fetched successfully!' });
-			}
+			const icds = await practiceICDFacade.findAll(req.params.practiceId);
+
+			res.status(200).json({ data: icds, error: null, message: 'Practice ICDs fetched successfully!' });
+
 
 		} catch (err) {
 			log.error({ message: 'Error in finding a Practice ICDs!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/practice_icd' });
