@@ -56,12 +56,12 @@ export const practicesQueries = {
         return {
             text: `SELECT p.*,
             c."name" AS client_name,
-            to_json(pl.*) as location
+            json_agg(pl.*) as location
             FROM practices p
             LEFT JOIN clients c
             ON p.client_id = c.id
             left join practice_locations pl 
-            on p.id = pl.practice_id`,
+            on p.id = pl.practice_id group by p.id, c.name`,
             values: []
         }
     }

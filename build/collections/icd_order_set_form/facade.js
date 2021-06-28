@@ -107,7 +107,7 @@ exports.ICDOrderFormFacade = {
         });
     }); },
     findById: function (Id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var rows, categories, categories_1, categories_1_1, template_icd_order_set_form_id, icds, e_3_1;
+        var rows, categories, categories_1, categories_1_1, icd_order_set_form_categories_id, icds, e_3_1;
         var e_3, _a;
         return tslib_1.__generator(this, function (_b) {
             switch (_b.label) {
@@ -117,6 +117,7 @@ exports.ICDOrderFormFacade = {
                     return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories.findByFormId(Id))];
                 case 2:
                     categories = (_b.sent()).rows;
+                    if (!rows.length) return [3, 10];
                     rows[0].category_icds = [];
                     _b.label = 3;
                 case 3:
@@ -125,11 +126,11 @@ exports.ICDOrderFormFacade = {
                     _b.label = 4;
                 case 4:
                     if (!!categories_1_1.done) return [3, 7];
-                    template_icd_order_set_form_id = categories_1_1.value.template_icd_order_set_form_id;
-                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(template_icd_order_set_form_id, Id))];
+                    icd_order_set_form_categories_id = categories_1_1.value.icd_order_set_form_categories_id;
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.findByCategoryAndFormId(icd_order_set_form_categories_id, Id))];
                 case 5:
                     icds = (_b.sent()).rows;
-                    rows[0].category_icds.push({ categoryId: template_icd_order_set_form_id, icds: icds.map(function (_a) {
+                    rows[0].category_icds.push({ categoryId: icd_order_set_form_categories_id, icds: icds.map(function (_a) {
                             var practice_icd_id = _a.practice_icd_id;
                             return practice_icd_id;
                         }) });
@@ -199,15 +200,15 @@ exports.ICDOrderFormFacade = {
                     return [4, databases_1.PG_CLIENT.query('BEGIN')];
                 case 2:
                     _c.sent();
-                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.updateById(Id, data))];
-                case 3:
-                    rows = (_c.sent()).rows;
                     return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormCategoriesICDs.deleteByFormId(Id))];
-                case 4:
+                case 3:
                     _c.sent();
                     return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderSetFormToCategories.deleteByFormId(Id))];
-                case 5:
+                case 4:
                     _c.sent();
+                    return [4, databases_1.PG_CLIENT.query(queries_1.ICDOrderFormQueries.updateById(Id, data))];
+                case 5:
+                    rows = (_c.sent()).rows;
                     rows[0].category_icds = [];
                     _c.label = 6;
                 case 6:
@@ -220,7 +221,7 @@ exports.ICDOrderFormFacade = {
                     icds = cat.icds, categoryId = cat.categoryId;
                     category = {
                         categoryId: categoryId,
-                        cpts: []
+                        icds: []
                     };
                     _c.label = 8;
                 case 8:
@@ -235,7 +236,7 @@ exports.ICDOrderFormFacade = {
                             .create({ id: uuid_1.v4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: Id }))];
                 case 11:
                     inserted = (_c.sent()).rows;
-                    category.cpts.push(inserted[0].practice_icd_id);
+                    category.icds.push(inserted[0].practice_icd_id);
                     _c.label = 12;
                 case 12: return [3, 9];
                 case 13: return [3, 20];
@@ -284,6 +285,7 @@ exports.ICDOrderFormFacade = {
                     return [4, databases_1.PG_CLIENT.query('ROLLBACK')];
                 case 29:
                     _c.sent();
+                    console.log(err_3);
                     throw err_3;
                 case 30: return [2];
             }

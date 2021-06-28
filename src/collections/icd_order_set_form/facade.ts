@@ -36,8 +36,6 @@ export const ICDOrderFormFacade = {
                     const { rows: inserted } = await PG_CLIENT.query(ICDOrderSetFormCategoriesICDs
                         .create({ id: uuidv4(), icd_order_set_form_category_id: categoryId, practice_icd_id: icdId, icd_order_set_form_id: rows[0].id }))
 
-                    console.log(1)
-
                     category.icds.push(inserted[0].practice_icd_id as never)
 
                 }
