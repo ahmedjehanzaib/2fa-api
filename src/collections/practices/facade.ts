@@ -125,10 +125,10 @@ const practicesFacade = {
 
         try {
             await PG_CLIENT.query('BEGIN')
-            const { rows } = await PG_CLIENT.query(practicesQueries.updatePracticeById(Id, data));
-            const { rows: loc } = await PG_CLIENT.query(locationQueries.updateById((location as any).id, location as any));
-            const { rows: options } = await PG_CLIENT.query(practiceStatementOptionsQueries.updateByPracticeId(Id, statement_options as any))
-            const { rows: messages } = await PG_CLIENT.query(practiceStatementMessagesQueries.updateByPracticeId(Id, statement_messages as any))
+            const { rows } = Object.keys(data).length ? await PG_CLIENT.query(practicesQueries.updatePracticeById(Id, data)) : { rows: [] };
+            const { rows: loc } = Object.keys(location as any).length ? await PG_CLIENT.query(locationQueries.updateById((location as any).id, location as any)) : { rows: [] };
+            const { rows: options } = Object.keys(statement_options as any).length ? await PG_CLIENT.query(practiceStatementOptionsQueries.updateByPracticeId(Id, statement_options as any)) : { rows: [] }
+            const { rows: messages } = Object.keys(statement_messages as any).length ? await PG_CLIENT.query(practiceStatementMessagesQueries.updateByPracticeId(Id, statement_messages as any)) : { rows: [] }
 
             rows[0].location = loc[0]
             rows[0].statement_options = options[0]

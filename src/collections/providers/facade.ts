@@ -80,7 +80,7 @@ const providersFacade = {
             await PG_CLIENT.query('BEGIN')
 
             const { rows } = await PG_CLIENT.query(providersQueries.updateProviderById(Id, data));
-            const { rows: insurance } = await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.updateByProviderId(Id, insurance_billing_options as any));
+            const { rows: insurance } = Object.keys(insurance_billing_options as any).length ? await PG_CLIENT.query(providerInsuranceBillingOptionsQueries.updateByProviderId(Id, insurance_billing_options as any)) : { rows: []};
 
             rows[0].insurance_billing_options = insurance[0]
 

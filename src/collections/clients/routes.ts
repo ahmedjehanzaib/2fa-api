@@ -21,7 +21,7 @@ export function clientsRouter(): Router {
                     id: uuidv4(),
                     name: req.body.name,
                     organization_name: req.body.organization_name,
-                    tax_id: req.body.tax_id,
+                    tax_id: req.body.tax_id ? req.body.tax_id : null,
                     address_line_1: req.body.address_line_1 ? req.body.address_line_1 : null,
                     address_line_2: req.body.address_line_2 ? req.body.address_line_2 : null,
                     city: req.body.city ? req.body.city : null,
