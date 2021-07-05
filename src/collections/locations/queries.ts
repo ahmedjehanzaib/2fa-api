@@ -107,3 +107,12 @@ export const locationPaymentAddressQueries = {
         };
     },
 }
+
+export const locationProviderInsuranceBillingOption = {
+    deleteProviderInsuranceBillingOptionByLocationId: (Id: string) => {
+        return {
+            text: `DELETE FROM provider_insurance_billing_option WHERE practice_location_id = $1 RETURNING *`,
+            values: [Id]
+        };
+    },
+}

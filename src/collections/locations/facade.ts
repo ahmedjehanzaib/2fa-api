@@ -1,4 +1,4 @@
-import { locationQueries, locationPaymentAddressQueries } from './queries';
+import { locationQueries, locationPaymentAddressQueries, locationProviderInsuranceBillingOption } from './queries';
 import { PG_CLIENT } from '../../databases';
 import { IInsertData, IUpdateData } from './interfaces';
 
@@ -47,6 +47,7 @@ const locationsFacade = {
         try {
             await PG_CLIENT.query('BEGIN')
             await PG_CLIENT.query(locationPaymentAddressQueries.deleteLocationById(locationId));
+            await PG_CLIENT.query(locationProviderInsuranceBillingOption.deleteProviderInsuranceBillingOptionByLocationId(locationId));
             const { rows } = await PG_CLIENT.query(locationQueries.deleteById(locationId));
             await PG_CLIENT.query('COMMIT')
 
