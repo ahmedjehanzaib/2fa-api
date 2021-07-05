@@ -33,15 +33,8 @@ export function planFeesRouters(): Router {
 
 	router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
 		try {
-
 			const fees = await planFeesFacade.findAll();
-			if (!fees.length) {
-				log.warn({ message: 'plan fees do not exist!', statusCode: 404, detail: 'plan fees do not exist!', repo: 'aquila-api', path: '/api/v1/plan_fees' });
-				res.status(404).json({ data: null, error: true, message: 'plan fees do not exist!' });
-			} else {
-				res.status(200).json({ data: fees, error: null, message: 'plan fees fetched successfully!' });
-			}
-
+			res.status(200).json({ data: fees, error: null, message: 'plan fees fetched successfully!' });
 		} catch (err) {
 			log.error({ message: 'Error in finding a plan fees!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/plan_fees' });
 			res.status(500).json({ data: null, error: err, message: 'Error in finding a plan fees!' });

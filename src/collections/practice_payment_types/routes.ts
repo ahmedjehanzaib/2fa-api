@@ -35,19 +35,9 @@ export function practicePaymentTypeRouters(): Router {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPracticeGeneralItems);
 
 			if (validated.error === null) {
-
 				const data = await practicePaymentTypeFacade.findByPracticeId(req.params.practice_id);
-
-				if (!data.length) {
-
-					log.warn({ message: 'practice payment types do not exist!', statusCode: 404, detail: 'practice payment types do not exist!', repo: 'aquila-api', path: '/api/v1/practice_payment_types/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice payment types do not exist!' });
-
-				} else {
-					res.status(200).json({ data, error: null, message: 'practice payment types fetched successfully!' });
-				}
+				res.status(200).json({ data, error: null, message: 'practice payment types fetched successfully!' });
 			} else {
-
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_payment_types/:id' });
 				res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
 			}

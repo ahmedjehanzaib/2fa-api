@@ -34,16 +34,8 @@ export function hcfaTemplatesRouters(): Router {
 
 	router.get('/bypractice/:practiceId', async (req: Request, res: Response, _next: NextFunction) => {
 		try {
-
 			const data = await hcfaTemplatesFacade.findAll(req.params.practiceId);
-
-			if (!data.length) {
-				log.warn({ message: 'HCFA Templates do not exist!', statusCode: 404, detail: 'HCFA Templates do not exist!', repo: 'aquila-api', path: '/api/v1/hcfa_templates' });
-				res.status(404).json({ data: null, error: true, message: 'HCFA Templates do not exist!' });
-			} else {
-				res.status(200).json({ data, error: null, message: 'HCFA Templates fetched successfully!' });
-			}
-
+			res.status(200).json({ data, error: null, message: 'HCFA Templates fetched successfully!' });
 		} catch (err) {
 			log.error({ message: 'Error in finding a HCFA Templates!', statusCode: 500, detail: err, repo: 'aquila-api', path: '/api/v1/hcfa_templates' });
 			res.status(500).json({ data: null, error: err, message: 'Error in finding a HCFA Templates!' });

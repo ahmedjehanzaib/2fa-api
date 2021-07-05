@@ -35,19 +35,9 @@ export function practiceSpecimenRouters(): Router {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPracticeGeneralItems);
 
 			if (validated.error === null) {
-
 				const data = await practiceSpecimenFacade.findByPracticeId(req.params.practice_id);
-
-				if (!data.length) {
-
-					log.warn({ message: 'practice specimen do not exist!', statusCode: 404, detail: 'practice specimen do not exist!', repo: 'aquila-api', path: '/api/v1/practice_specimen/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice specimenes do not exist!' });
-
-				} else {
-					res.status(200).json({ data, error: null, message: 'practice specimen fetched successfully!' });
-				}
+				res.status(200).json({ data, error: null, message: 'practice specimen fetched successfully!' });
 			} else {
-
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_specimen/:id' });
 				res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
 			}

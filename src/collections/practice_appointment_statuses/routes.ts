@@ -35,19 +35,9 @@ export function practiceAppointmentStatusRouters(): Router {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPracticeAppointmentStatusesByPracticeId);
 
 			if (validated.error === null) {
-
 				const statuss = await practiceAppointmentStatusFacade.findByPracticeId(req.params.practice_id);
-
-				if (!statuss.length) {
-
-					log.warn({ message: 'practice appointment statuses do not exist!', statusCode: 404, detail: 'practice appointment statuses do not exist!', repo: 'aquila-api', path: '/api/v1/practice_appointment_statuses/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice appointment statuses do not exist!' });
-
-				} else {
-					res.status(200).json({ data: statuss, error: null, message: 'practice appointment statuses fetched successfully!' });
-				}
+				res.status(200).json({ data: statuss, error: null, message: 'practice appointment statuses fetched successfully!' });
 			} else {
-				
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_appointment_statuses/:id' });
 				res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
 			}

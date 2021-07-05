@@ -35,19 +35,9 @@ export function practiceAppointmentReasonsRouters(): Router {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPracticeAppointmentReasonsByPracticeId);
 
 			if (validated.error === null) {
-
 				const reasons = await practiceAppointmentReasonsFacade.findByPracticeId(req.params.practice_id);
-
-				if (!reasons.length) {
-
-					log.warn({ message: 'practice appointment reasons do not exist!', statusCode: 404, detail: 'practice appointment reasons do not exist!', repo: 'aquila-api', path: '/api/v1/practice_appointment_reasons/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice appointment reasons do not exist!' });
-
-				} else {
-					res.status(200).json({ data: reasons, error: null, message: 'practice appointment reasons fetched successfully!' });
-				}
+				res.status(200).json({ data: reasons, error: null, message: 'practice appointment reasons fetched successfully!' });
 			} else {
-				
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_appointment_reasons/:id' });
 				res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
 			}

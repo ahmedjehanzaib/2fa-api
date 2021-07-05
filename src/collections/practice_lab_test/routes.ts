@@ -37,15 +37,7 @@ export function practiceLabTestRouters(): Router {
 			if (validated.error === null) {
 
 				const labTest = await practiceLabTestFacade.findByPracticeId(req.params.practice_id);
-
-				if (!labTest.length) {
-
-					log.warn({ message: 'practice lab tests do not exist!', statusCode: 404, detail: 'practice lab tests do not exist!', repo: 'aquila-api', path: '/api/v1/practice_lab_tests/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice lab testes do not exist!' });
-
-				} else {
-					res.status(200).json({ data: labTest, error: null, message: 'practice lab tests fetched successfully!' });
-				}
+				res.status(200).json({ data: labTest, error: null, message: 'practice lab tests fetched successfully!' });
 			} else {
 				
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_lab_tests/:id' });

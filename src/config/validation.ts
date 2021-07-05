@@ -938,8 +938,8 @@ const validationSchema = {
         },
         body: {
             practice_id: JOI.string().trim().required(),
-            name: JOI.string().trim().optional().allow('', null),
-            description: JOI.string().trim().optional().allow('', null),
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().required(),
             payer_id: JOI.string().trim().optional().allow('', null),
             plan_category_id: JOI.string().trim().optional().allow('', null),
             plan_type_id: JOI.number().optional(),
@@ -961,13 +961,12 @@ const validationSchema = {
                 allowed: JOI.number().optional(),
             }).optional(),
             insurance_billing_options: JOI.object().keys({
-                provider_id: JOI.string().uuid().required(),
+                provider_id: JOI.string().uuid().optional(),
                 practice_location_id: JOI.string().uuid().optional(),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
                 report_tax_id: JOI.number().optional()
-
-            })
+            }).optional()
 
         },
         params: {
@@ -1007,11 +1006,11 @@ const validationSchema = {
         },
         body: {
             practice_id: JOI.string().trim().required(),
-            name: JOI.string().trim().optional().allow('', null),
-            description: JOI.string().trim().optional().allow('', null),
+            name: JOI.string().trim().required(),
+            description: JOI.string().trim().required(),
             payer_id: JOI.string().trim().optional().allow('', null),
             plan_category_id: JOI.string().trim().optional().allow('', null),
-            plan_type_id: JOI.number().optional(),
+            plan_type_id: JOI.number().optional().allow(null),
             fax: JOI.string().trim().optional().allow('', null),
             submission_type: JOI.string().trim().optional().allow('', null),
             hcfa_template_id: JOI.string().trim().optional().allow('', null),
@@ -1023,21 +1022,20 @@ const validationSchema = {
                 zipcode: JOI.string().trim().optional().allow('', null),
                 work_phone: JOI.string().trim().optional().allow('', null),
                 fax: JOI.string().trim().optional().allow('', null),
-            }).optional(),
+            }).optional().allow(null),
             fees: JOI.object().keys({
                 cpt_id: JOI.string().trim().optional().allow('', null),
-                fee: JOI.number().optional(),
+                fee: JOI.number().optional().allow(null),
                 allowed: JOI.boolean().optional(),
-            }).optional(),
+            }).optional().allow(null),
             insurance_billing_options: JOI.object().keys({
                 id: JOI.number().optional(),
-                provider_id: JOI.string().uuid().required(),
-                practice_location_id: JOI.string().uuid().optional(),
+                provider_id: JOI.string().uuid().optional().allow('', null),
+                practice_location_id: JOI.string().uuid().optional().allow('', null),
                 tax_id_type: JOI.string().trim().optional().allow('', null),
                 pay_to_address: JOI.string().trim().optional().allow('', null),
-                report_tax_id: JOI.boolean().optional()
-
-            })
+                report_tax_id: JOI.boolean().optional().allow(null)
+            }).optional().allow(null)
         },
         params: {
             id: JOI.string().guid().required()
@@ -1045,13 +1043,13 @@ const validationSchema = {
         query: {
         }
     },
-    createAPracticeICD: {
+        createAPracticeICD: {
         headers: {
         },
         body: {
             practice_id: JOI.string().trim().required(),
             code: JOI.string().trim().required(),
-            description: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null),
             valid: JOI.boolean().optional()
         },
         params: {
@@ -1092,7 +1090,7 @@ const validationSchema = {
         body: {
             practice_id: JOI.string().trim().required(),
             code: JOI.string().trim().required(),
-            description: JOI.string().trim().required(),
+            description: JOI.string().trim().optional().allow('', null),
             valid: JOI.boolean().optional()
         },
         params: {
@@ -1108,7 +1106,7 @@ const validationSchema = {
         body: {
             practice_id: JOI.string().trim().required(),
             code: JOI.string().trim().required(),
-            description: JOI.string().trim().required()
+            description: JOI.string().trim().optional().allow('', null)
         },
         params: {
         },
@@ -1147,7 +1145,7 @@ const validationSchema = {
         body: {
             practice_id: JOI.string().trim().required(),
             code: JOI.string().trim().required(),
-            description: JOI.string().trim().required()
+            description: JOI.string().trim().optional().allow('', null)
         },
         params: {
             id: JOI.number().required()
@@ -1470,9 +1468,9 @@ const validationSchema = {
         },
         body: {
             plan_id: JOI.string().uuid().required(),
-            cpt_id: JOI.number().optional(),
-            fee: JOI.number().optional(),
-            allowed: JOI.number().optional()
+            cpt_id: JOI.number().required(),
+            fee: JOI.number().optional().allow(null),
+            allowed: JOI.number().optional().allow(null)
         },
         params: {
         },
@@ -1511,9 +1509,9 @@ const validationSchema = {
         },
         body: {
             plan_id: JOI.string().uuid().required(),
-            cpt_id: JOI.number().optional(),
-            fee: JOI.number().optional(),
-            allowed: JOI.number().optional()
+            cpt_id: JOI.number().required(),
+            fee: JOI.number().optional().allow(null),
+            allowed: JOI.number().optional().allow(null)
         },
         params: {
             id: JOI.string().guid().required()

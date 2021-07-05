@@ -6,10 +6,8 @@ import { IPracticeICD } from './interfaces';
 export const practiceICDFacade = {
 
     create: async (data: IPracticeICD) => {
-        const { rows } = await PG_CLIENT.query(practiceICDQueries.create(data))
-
+        const { rows } = await PG_CLIENT.query(practiceICDQueries.create(data));
         return rows;
-
     },
 
     findById: async (Id: string) => {

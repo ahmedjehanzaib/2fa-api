@@ -35,19 +35,9 @@ export function practiceDocumentRouters(): Router {
 			const validated = JOI.validate({ params: req.params }, validationSchema.findPracticeGeneralItems);
 
 			if (validated.error === null) {
-
 				const data = await practiceDocumentFacade.findByPracticeId(req.params.practice_id);
-
-				if (!data.length) {
-
-					log.warn({ message: 'practice documents do not exist!', statusCode: 404, detail: 'practice documents do not exist!', repo: 'aquila-api', path: '/api/v1/practice_documents/:practice_id' });
-					res.status(404).json({ data: null, error: true, message: 'practice documents do not exist!' });
-
-				} else {
-					res.status(200).json({ data, error: null, message: 'practice documents fetched successfully!' });
-				}
+				res.status(200).json({ data, error: null, message: 'practice documents fetched successfully!' });
 			} else {
-
 				log.warn({ message: validated.error.details[0].message, statusCode: 400, detail: validated.error.details[0], repo: 'aquila-api', path: '/api/v1/practice_documents/:id' });
 				res.status(400).json({ data: null, error: true, message: validated.error.details[0].message });
 			}
