@@ -6,25 +6,7 @@ import cors = require('cors')
 import { json } from 'body-parser';
 import { Server } from 'http';
 import { log } from '../log';
-import {
-	clientsRouter, practicesRouter, locationRouters, practiceRoleRouters,
-	referringProvidersRouter, providersRouter, userRouters, hcfaTemplatesRouters,
-	planCategoriesRouters, planTypesRouters, practicePlanRouters, practiceICDRouters,
-	practiceModifierRouters, practicePlaceOfServiceRouters, practiceTypeOfServiceRouters,
-	practiceProcedureCategoriesRouters, NDCUnitOfMeasurementRouters, practiceCPTRouters,
-	planFeesRouters, practiceAppointmentReasonsRouters, practiceAppointmentStatusRouters,
-	practiceRoomRouters, practiceLabTestRouters, practiceLaboratoryRouters, practiceSpecimenRouters,
-	practiceResultAlertRouters, practiceResultStatusRouters, practiceClassRouters,
-	practicePaymentTypeRouters, practicePatientReferralSourceRouters, practicePreferredCommunicationRouters,
-	practiceMartialStatusRouters, practicePharmacyRouters, practiceColorCodeRouters, practiceAlertTypeRouters,
-	practiceAuthorizationStatusRouters, practiceTaskTypeRouters, practiceCaseTypeRouters, practiceDocumentRouters,
-	practiceProviderSpecialityRouters, practiceTemplateTypeRouters, practiceQualifierRouters, practiceRXStatusRouters,
-	practiceClinicalVisitStatusRouters, practiceFinancialVisitStatusRouters, practiceGenderIdentityRouters,
-	practiceSexualOrientationRouters, practiceAccidentTypeRouters, practiceAccidentStateRouters,
-	questionRouters, questionTypeRouters, questionGroupRouters, sectionRouters, templateRouters, CPTOrderFormRouters,
-	cptFormCategoriesRouters, ICDFormCategoriesRouters, CPTPanelGroupRouters, letterCategoriesRouters, patientLetterRouters,
-	 practiceMacrosRouters, patientIntakeFormRouters, healthEducationRouters, ICDOrderFormRouters
-} from '../collections';
+import { twoFactorAuthenticationRouter } from '../collections';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -32,10 +14,10 @@ import {
  */
 //////////////////////////////////////////////////////////////////////////////////////////////////
 export const app: express.Express = express()
-app.locals.title = 'Aquila API'
+app.locals.title = 'Express Typescript Boilerplate'
 app.locals.email = 'ahmedjehanzaib1992@gmail.com'
-app.locals.issues = 'https://github.com/ahmedjehanzaib/aquila-api/issues'
-app.locals.BaseUri = process.env.AQUILA_BASE_URI || '/api/v1'
+app.locals.issues = 'https://github.com/ahmedjehanzaib/express-typescript-boilerplate/issues'
+app.locals.BaseUri = process.env.BASE_URI || '/api/v1'
 
 app.use((_req: express.Request, res: express.Response, next: express.NextFunction): void => {
 	res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
@@ -45,7 +27,6 @@ app.use((_req: express.Request, res: express.Response, next: express.NextFunctio
 	next()
 })
 app.use(cors())
-// app.use('*', accessLog)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -65,70 +46,7 @@ app.use(`${app.locals.BaseUri}/tests`, express.static('docs/tests/', { extension
  */
 /////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(json())
-app.use(`${app.locals.BaseUri}/clients`, clientsRouter());
-app.use(`${app.locals.BaseUri}/practices`, practicesRouter());
-app.use(`${app.locals.BaseUri}/locations`, locationRouters());
-app.use(`${app.locals.BaseUri}/practice_roles`, practiceRoleRouters());
-app.use(`${app.locals.BaseUri}/referring_providers`, referringProvidersRouter());
-app.use(`${app.locals.BaseUri}/providers`, providersRouter());
-app.use(`${app.locals.BaseUri}/users`, userRouters());
-app.use(`${app.locals.BaseUri}/hcfa_templates`, hcfaTemplatesRouters());
-app.use(`${app.locals.BaseUri}/plan_categories`, planCategoriesRouters());
-app.use(`${app.locals.BaseUri}/plan_types`, planTypesRouters());
-app.use(`${app.locals.BaseUri}/plan_fees`, planFeesRouters());
-app.use(`${app.locals.BaseUri}/practice_plans`, practicePlanRouters());
-app.use(`${app.locals.BaseUri}/practice_icd`, practiceICDRouters());
-app.use(`${app.locals.BaseUri}/practice_cpt`, practiceCPTRouters());
-app.use(`${app.locals.BaseUri}/practice_modifiers`, practiceModifierRouters());
-app.use(`${app.locals.BaseUri}/practice_place_of_service`, practicePlaceOfServiceRouters());
-app.use(`${app.locals.BaseUri}/practice_type_of_service`, practiceTypeOfServiceRouters());
-app.use(`${app.locals.BaseUri}/practice_procedure_categories`, practiceProcedureCategoriesRouters());
-app.use(`${app.locals.BaseUri}/practice_appointment_reasons`, practiceAppointmentReasonsRouters());
-app.use(`${app.locals.BaseUri}/practice_appointment_statuses`, practiceAppointmentStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_rooms`, practiceRoomRouters());
-app.use(`${app.locals.BaseUri}/practice_lab_tests`, practiceLabTestRouters());
-app.use(`${app.locals.BaseUri}/practice_laboratories`, practiceLaboratoryRouters());
-app.use(`${app.locals.BaseUri}/practice_specimen`, practiceSpecimenRouters());
-app.use(`${app.locals.BaseUri}/practice_result_alerts`, practiceResultAlertRouters());
-app.use(`${app.locals.BaseUri}/practice_result_statuses`, practiceResultStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_classes`, practiceClassRouters());
-app.use(`${app.locals.BaseUri}/practice_payment_types`, practicePaymentTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_patient_referral_sources`, practicePatientReferralSourceRouters());
-app.use(`${app.locals.BaseUri}/practice_preferred_communications`, practicePreferredCommunicationRouters());
-app.use(`${app.locals.BaseUri}/practice_martial_statuses`, practiceMartialStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_pharmacies`, practicePharmacyRouters());
-app.use(`${app.locals.BaseUri}/practice_color_codes`, practiceColorCodeRouters());
-app.use(`${app.locals.BaseUri}/practice_alert_types`, practiceAlertTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_authorization_statuses`, practiceAuthorizationStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_task_types`, practiceTaskTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_case_types`, practiceCaseTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_documents`, practiceDocumentRouters());
-app.use(`${app.locals.BaseUri}/practice_provider_specialities`, practiceProviderSpecialityRouters());
-app.use(`${app.locals.BaseUri}/practice_template_types`, practiceTemplateTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_qualifiers`, practiceQualifierRouters());
-app.use(`${app.locals.BaseUri}/practice_rx_statuses`, practiceRXStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_clinical_visit_statuses`, practiceClinicalVisitStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_financial_visit_statuses`, practiceFinancialVisitStatusRouters());
-app.use(`${app.locals.BaseUri}/practice_gender_indentities`, practiceGenderIdentityRouters());
-app.use(`${app.locals.BaseUri}/practice_sexual_orientations`, practiceSexualOrientationRouters());
-app.use(`${app.locals.BaseUri}/practice_accident_types`, practiceAccidentTypeRouters());
-app.use(`${app.locals.BaseUri}/practice_accident_states`, practiceAccidentStateRouters());
-app.use(`${app.locals.BaseUri}/ndc_unit_of_measurements`, NDCUnitOfMeasurementRouters());
-app.use(`${app.locals.BaseUri}/clinical/question_types`, questionTypeRouters());
-app.use(`${app.locals.BaseUri}/clinical/questions`, questionRouters());
-app.use(`${app.locals.BaseUri}/clinical/question_groups`, questionGroupRouters());
-app.use(`${app.locals.BaseUri}/clinical/sections`, sectionRouters());
-app.use(`${app.locals.BaseUri}/clinical/templates`, templateRouters());
-app.use(`${app.locals.BaseUri}/clinical/cpt_order_forms`, CPTOrderFormRouters());
-app.use(`${app.locals.BaseUri}/clinical/icd_order_forms`, ICDOrderFormRouters());
-app.use(`${app.locals.BaseUri}/clinical/cpt_order_form_categories`, cptFormCategoriesRouters());
-app.use(`${app.locals.BaseUri}/clinical/icd_order_form_categories`, ICDFormCategoriesRouters());
-app.use(`${app.locals.BaseUri}/clinical/cpt_panel_groups`, CPTPanelGroupRouters());
-app.use(`${app.locals.BaseUri}/clinical/letter_categories`, letterCategoriesRouters());
-app.use(`${app.locals.BaseUri}/practice/patient_letters`, patientLetterRouters());
-app.use(`${app.locals.BaseUri}/practice/macros`, practiceMacrosRouters());
-app.use(`${app.locals.BaseUri}/practice/patient_intake_form`, patientIntakeFormRouters());
-app.use(`${app.locals.BaseUri}/practice/health_education`, healthEducationRouters());
+app.use(`${app.locals.BaseUri}/two-factor-authentication`,  twoFactorAuthenticationRouter())
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**

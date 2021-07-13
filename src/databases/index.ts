@@ -1,5 +1,4 @@
 import { Pool } from 'pg';
-import fs = require('fs')
 
 import { log } from '../log'
 
@@ -10,10 +9,6 @@ const config = {
 	password: process.env.POSTGRES_PASSWORD,
 	host: process.env.POSTGRES_HOST,
 	port: Number(process.env.POSTGRES_PORT) || 5432,
-	ssl: {
-		rejectUnauthorized: false,
-		ca: fs.readFileSync(process.env.CA_CERT ? process.env.CA_CERT : '').toString(),
-	}
 };
 
 const PG_CLIENT = new Pool(config);

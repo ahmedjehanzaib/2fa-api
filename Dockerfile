@@ -8,9 +8,9 @@ FROM node:12-alpine
 # maintainer details
 LABEL author="ahmedjehanzaib1992@gmail.com"
 LABEL company=""
-LABEL issues="https://github.com/ahmedjehanzaib/aquila-api/issues"
+LABEL issues="https://github.com/ahmedjehanzaib/express-typescript-boilerplate/issues"
 LABEL majorVersion="1"
-LABEL name="aquila-api"
+LABEL name="express-typescript-boilerplate"
 
 # npm token argument so that is it not stored in the file
 ENV NPM_TOKEN ${NPM_TOKEN}
@@ -55,7 +55,6 @@ ENV POSTGRES_DATABASE ${POSTGRES_DATABASE}
 ENV POSTGRES_PASSWORD ${POSTGRES_PASSWORD}
 ENV POSTGRES_PORT ${POSTGRES_PORT}
 ENV POSTGRES_HOST ${POSTGRES_HOST}
-ENV CA_CERT ${CA_CERT}
 
 # expose microservice on selected port. Defaults to 3010
 EXPOSE 80

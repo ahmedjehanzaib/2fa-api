@@ -1,0 +1,3 @@
+const twoFactorAuthenticationQueries = {
+}
+export { twoFactorAuthenticationQueries };
